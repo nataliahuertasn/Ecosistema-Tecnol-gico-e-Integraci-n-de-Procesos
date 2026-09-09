@@ -275,7 +275,12 @@ window.ESM_CONTENIDO = {
           "Alerta sobre materiales críticos en riesgo"
         ],
         areas:       ["Compras y Almacén", "Comercio Exterior", "Ingeniería & Diseño"],
-        imagenes:    [],
+        imagenes: [
+          { archivo: "medios/imagenes/pa-compras-01-solicitudes.png",
+            titulo:  "Solicitudes de compra · ítems, responsables, fechas y estado a lo largo del ciclo: cotización, aprobación, compra, tránsito y recepción" },
+          { archivo: "medios/imagenes/pa-compras-02-indicadores.png",
+            titulo:  "Indicadores de compras · nivel de atención a las solicitudes y cumplimiento de entregas por mes" }
+        ],
         imagen:      "",
         video:       "",
         captura:     "",
