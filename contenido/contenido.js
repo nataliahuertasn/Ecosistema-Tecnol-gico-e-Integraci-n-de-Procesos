@@ -508,7 +508,10 @@ window.ESM_CONTENIDO = {
           descripcion: "Emisión de la facturación oficial y su integración con cartera, cumpliendo los requisitos de facturación electrónica.",
           beneficios: ["Facturación electrónica conforme a norma", "Integración directa con cartera", "Ciclo de cobro más corto"],
           areas: ["Financiero", "Comercial"],
-          imagenes: [],   /* pendiente por cargar */
+          imagenes: [
+            { archivo: "medios/imagenes/sap-facturacion-01-factura-nacional.jpg",
+              titulo:  "Factura de venta · posiciones, cantidad facturada, valor neto, material e impuestos, con el pagador y la fecha" }
+          ],
           imagen: "", video: "", captura: "", comentarios: ""
         },
         {
@@ -527,7 +530,10 @@ window.ESM_CONTENIDO = {
           descripcion: "Registro contable de la operación, cierre de período y generación de la información financiera oficial de la compañía.",
           beneficios: ["Cierres contables confiables", "Información financiera auditable", "Base para el control de costos"],
           areas: ["Financiero"],
-          imagenes: [],   /* pendiente por cargar */
+          imagenes: [
+            { archivo: "medios/imagenes/sap-contabilidad-01-documento-factura.png",
+              titulo:  "Documento de factura · registro contable de la factura del proveedor con impuestos, retención, condiciones de pago y su referencia al pedido de compra" }
+          ],
           imagen: "", video: "", captura: "", comentarios: ""
         },
         {
