@@ -26,7 +26,7 @@ window.ESM_CONTENIDO = {
      conservando el mismo nombre de archivo. Obliga a los navegadores a
      descargar la versión nueva en vez de mostrar la que tenían guardada.
      ---------------------------------------------------------------------- */
-  version: "2026-09-09",
+  version: "2026-09-09b",
 
   /* ----------------------------------------------------------------------
      1. MARCA
@@ -187,22 +187,22 @@ window.ESM_CONTENIDO = {
                Para agregar otra: copie un bloque { archivo, titulo } y ponga
                una coma al final del anterior. */
             imagenes: [
-              { archivo: "medios/imagenes/pa-gp-01-asignacion-ingenieria.png",
-                titulo:  "Asignación de pendientes · área de Ingeniería, con la carga horaria de cada ingeniero" },
+              { archivo: "medios/imagenes/pa-gp-01-asignacion-ingenieros.png",
+                titulo:  "Asignación de ingenieros · pendientes por asignar y carga horaria semanal de cada ingeniero" },
               { archivo: "medios/imagenes/pa-gp-02-main-board-proyectos.png",
-                titulo:  "Main Board de proyectos · saldo por facturar en COP y USD" },
+                titulo:  "Main Board de proyectos · precio, facturado y saldo por facturar de cada proyecto, en COP y USD" },
               { archivo: "medios/imagenes/pa-gp-03-detalle-proyecto.png",
-                titulo:  "Detalle del proyecto · cliente, account manager, project manager y colaboradores" },
-              { archivo: "medios/imagenes/pa-gp-04-gestion-compras.png",
-                titulo:  "Gestión de compras · solicitudes, ítems, responsables y estado" },
-              { archivo: "medios/imagenes/pa-gp-05-work-orders.png",
-                titulo:  "Generación de Work Orders · el sistema almacena los planos y los detalles de fabricación de cada pieza (PDF, DXF, STP) con su ruta de procesos" },
-              { archivo: "medios/imagenes/pa-gp-06-estado-work-orders.png",
-                titulo:  "Estado de las Work Orders en tiempo real · avance de producción y de calidad por proceso, enlazado con el área de Operaciones" },
-              { archivo: "medios/imagenes/pa-gp-07-indicadores-compras.png",
-                titulo:  "Indicadores de compras · nivel de atención y cumplimiento de entregas" },
-              { archivo: "medios/imagenes/pa-gp-08-modulo-contable.png",
-                titulo:  "Módulo contable · facturas con orden de compra y conciliación con SAP" }
+                titulo:  "Detalle del proyecto · cliente, account manager, project manager, precio de contrato, facturado y saldo por facturar" },
+              { archivo: "medios/imagenes/pa-gp-04-work-orders.png",
+                titulo:  "Work Orders del proyecto · órdenes de producción con su estado: enviadas, aprobadas o rechazadas" },
+              { archivo: "medios/imagenes/pa-gp-05-work-order-planos.png",
+                titulo:  "Detalle de la Work Order · ítems de producción con su ruta de procesos y los planos y archivos de fabricación de cada pieza (PDF, DXF, STP)" },
+              { archivo: "medios/imagenes/pa-gp-06-forecast.png",
+                titulo:  "Forecast de proyectos · saldo por facturar, facturado del mes y cumplimiento frente a lo proyectado" },
+              { archivo: "medios/imagenes/pa-gp-07-solicitudes-compra.png",
+                titulo:  "Solicitudes de compra · ítems, responsables, fechas y estado a lo largo del ciclo: cotización, aprobación, compra, tránsito y recepción" },
+              { archivo: "medios/imagenes/pa-gp-08-indicadores-compras.png",
+                titulo:  "Indicadores de compras · nivel de atención a las solicitudes y cumplimiento de entregas por mes" }
             ],
 
             imagen:      "",
