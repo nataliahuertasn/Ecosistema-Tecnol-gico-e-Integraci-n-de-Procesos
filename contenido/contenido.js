@@ -26,7 +26,7 @@ window.ESM_CONTENIDO = {
      conservando el mismo nombre de archivo. Obliga a los navegadores a
      descargar la versión nueva en vez de mostrar la que tenían guardada.
      ---------------------------------------------------------------------- */
-  version: "2026-09-09b",
+  version: "2026-09-09c",
 
   /* ----------------------------------------------------------------------
      1. MARCA
@@ -128,9 +128,19 @@ window.ESM_CONTENIDO = {
       categoria:   "Gestión de proyectos",
       resumen:     "Centraliza la gestión comercial, técnica y operativa: del lead a la entrega en obra, sobre una única fuente de información.",
 
-      /* Caja alta a la izquierda: punto de entrada de la cadena */
-      destacado: {
-        nombre:      "Ventas & Mercadeo",
+      /* ------------------------------------------------------------------
+         El tablero se arma con "elementos", de izquierda a derecha.
+         Cada elemento es de uno de estos dos tipos:
+           tipo: "caja"   -> caja alta suelta, ocupa todo el alto
+           tipo: "grupo"  -> barra transversal sobre su fila de procesos
+         "peso" define el ancho relativo (un grupo pesa por defecto tantos
+         puntos como procesos tenga).
+         ------------------------------------------------------------------ */
+      elementos: [
+
+      {
+        tipo:        "caja",
+        nombre:      "Mercadeo & Ventas",
         icono:       "comercial",
         descripcion: "Punto de entrada de la cadena de valor: generación de demanda, captura de la oportunidad comercial, cotización, negociación y cierre del negocio que da origen al proyecto.",
         beneficios: [
@@ -163,9 +173,8 @@ window.ESM_CONTENIDO = {
         comentarios: ""
       },
 
-      /* Grupos transversales: cada uno es una barra que cubre sus procesos */
-      grupos: [
-        {
+      {
+          tipo: "grupo",
           /* detalleConsolidado: todo el contenido del frente (fotos, videos y
              comentarios) se carga en la barra "transversal" de abajo.
              El detalle se abre al pasar el cursor sobre esa barra e incluye
@@ -198,11 +207,7 @@ window.ESM_CONTENIDO = {
               { archivo: "medios/imagenes/pa-gp-05-work-order-planos.png",
                 titulo:  "Detalle de la Work Order · ítems de producción con su ruta de procesos y los planos y archivos de fabricación de cada pieza (PDF, DXF, STP)" },
               { archivo: "medios/imagenes/pa-gp-06-forecast.png",
-                titulo:  "Forecast de proyectos · saldo por facturar, facturado del mes y cumplimiento frente a lo proyectado" },
-              { archivo: "medios/imagenes/pa-gp-07-solicitudes-compra.png",
-                titulo:  "Solicitudes de compra · ítems, responsables, fechas y estado a lo largo del ciclo: cotización, aprobación, compra, tránsito y recepción" },
-              { archivo: "medios/imagenes/pa-gp-08-indicadores-compras.png",
-                titulo:  "Indicadores de compras · nivel de atención a las solicitudes y cumplimiento de entregas por mes" }
+                titulo:  "Forecast de proyectos · saldo por facturar, facturado del mes y cumplimiento frente a lo proyectado" }
             ],
 
             imagen:      "",
@@ -242,15 +247,15 @@ window.ESM_CONTENIDO = {
               comentarios: ""
             },
             {
-              nombre:      "Compras",
-              icono:       "compras",
-              descripcion: "Planeación y gestión del abastecimiento de materiales derivada de la ingeniería aprobada, con seguimiento a los insumos críticos del proyecto.",
+              nombre:      "Project Management",
+              icono:       "proyectos",
+              descripcion: "Planeación, control y seguimiento del proyecto: hitos, tareas, avance y saldo por facturar frente a lo proyectado.",
               beneficios: [
-                "Requerimientos de material atados al proyecto",
-                "Alerta sobre materiales críticos en riesgo",
-                "Sincronización entre compras y programación"
+                "Hitos y tareas del proyecto en un solo tablero",
+                "Seguimiento del avance y del saldo por facturar",
+                "Alertas tempranas de desviación frente al plan"
               ],
-              areas:       ["Compras y Almacén", "Comercio Exterior", "Ingeniería & Diseño"],
+              areas:       ["Gestión de Proyectos", "Financiero"],
               imagen:      "",
               video:       "",
               captura:     "",
@@ -258,13 +263,33 @@ window.ESM_CONTENIDO = {
             }
           ]
         },
-        {
+
+      {
+        tipo:        "caja",
+        nombre:      "Compras",
+        icono:       "compras",
+        descripcion: "Abastecimiento de los materiales del proyecto derivado de la ingeniería aprobada: solicitudes, cotización, aprobación, compra, tránsito y recepción, con seguimiento a los insumos críticos.",
+        beneficios: [
+          "Requerimientos de material atados al proyecto",
+          "Ciclo de la solicitud trazable de punta a punta",
+          "Alerta sobre materiales críticos en riesgo"
+        ],
+        areas:       ["Compras y Almacén", "Comercio Exterior", "Ingeniería & Diseño"],
+        imagenes:    [],
+        imagen:      "",
+        video:       "",
+        captura:     "",
+        comentarios: ""
+      },
+
+      {
+          tipo: "grupo",
           detalleConsolidado: true,
 
           transversal: {
             nombre:      "Operaciones",
             icono:       "produccion",
-            descripcion: "Frente transversal que cubre Inventario, Producción & Fabricación, Logística e Instalación. Ejecuta el proyecto desde la reserva del material hasta el montaje en obra: el almacén controla existencias y reservas, las Work Orders almacenan los planos y los detalles de fabricación de cada pieza, y el calendario de contenedores organiza los despachos.",
+            descripcion: "Frente transversal que cubre Inventario, Fabricación y Logística. Ejecuta el proyecto desde la reserva del material hasta el despacho: el almacén controla existencias y reservas, las Work Orders almacenan los planos y los detalles de fabricación de cada pieza, y el calendario de contenedores organiza los envíos.",
             beneficios: [
               "Existencias y reservas de material controladas",
               "Planos y detalles de fabricación almacenados en el sistema",
@@ -303,7 +328,7 @@ window.ESM_CONTENIDO = {
               comentarios: ""
             },
             {
-              nombre:      "Producción & Fabricación",
+              nombre:      "Fabricación",
               icono:       "produccion",
               descripcion: "Programación y ejecución de la manufactura a partir de las Work Orders, que almacenan los planos y los detalles de fabricación de cada pieza. Cada proyecto reporta su avance contra el plan.",
               beneficios: [
@@ -334,24 +359,26 @@ window.ESM_CONTENIDO = {
             }
           ],
 
-          /* Barra inferior: cubre todo el ancho del grupo, debajo de las cajas */
-          transversalInferior: {
-            nombre:      "Instalación",
-            icono:       "instalacion",
-            descripcion: "Montaje en obra de los sistemas despachados, con control de avance e hitos de entrega al cliente. Cierra el ciclo del proyecto sobre las tres etapas de Operaciones.",
-            beneficios: [
-              "Control de hitos contractuales en obra",
-              "Avance de montaje visible por proyecto",
-              "Soporte documental para actas de entrega"
-            ],
-            areas:       ["Instalación", "Gestión de Proyectos", "SST"],
-            imagenes:    [],
-            imagen:      "",
-            video:       "",
-            captura:     "",
-            comentarios: ""
-          }
-        }
+      },
+
+      {
+        tipo:        "caja",
+        nombre:      "Instalación",
+        icono:       "instalacion",
+        descripcion: "Montaje en obra de los sistemas despachados, con control de avance e hitos de entrega al cliente. Cierra el ciclo del proyecto.",
+        beneficios: [
+          "Control de hitos contractuales en obra",
+          "Avance de montaje visible por proyecto",
+          "Soporte documental para actas de entrega"
+        ],
+        areas:       ["Instalación", "Gestión de Proyectos", "SST"],
+        imagenes:    [],
+        imagen:      "",
+        video:       "",
+        captura:     "",
+        comentarios: ""
+      }
+
       ]
     },
 

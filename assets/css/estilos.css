@@ -185,13 +185,11 @@ img{ max-width:100%; }
 .orbita-nodo:hover,
 .orbita-nodo:focus-visible{ transform:scale(1.07); }
 .orbita-nodo:focus{ outline:none; }
-.orbita-nodo:focus-visible .orbita-disco{ stroke:var(--tinta); stroke-width:2.5; }
-.orbita-nodo circle{ stroke-width:1.4; }
-.orbita-toque{ fill:transparent; stroke:none; }   /* área de clic algo mayor que el disco */
-.orbita-disco{ transition:filter var(--t-rapido); }
-.orbita-nodo:hover .orbita-disco{ filter:drop-shadow(0 6px 14px rgba(22,35,45,.28)); }
-.orbita-nodo text{ stroke:none; font-family:var(--fuente); font-size:14px; font-weight:700;
-  letter-spacing:.05em; text-anchor:middle; dominant-baseline:central; }
+/* Área de clic alrededor del logo, invisible salvo al pasar el cursor */
+.orbita-toque{ fill:transparent; stroke:none; transition:fill var(--t-rapido); }
+.orbita-nodo:hover .orbita-toque{ fill:rgba(22,35,45,.05); }
+.orbita-nodo:focus-visible .orbita-toque{ fill:rgba(22,35,45,.05);
+  stroke:var(--azul); stroke-width:1.5; }
 .orbita-logo{ opacity:.92; transition:opacity var(--t-rapido); }
 .orbita-nodo:hover .orbita-logo{ opacity:1; }
 .orbita-etiqueta{ fill:var(--tinta); stroke:none; font-family:var(--fuente); font-size:9.5px;
@@ -281,9 +279,8 @@ img{ max-width:100%; }
 .mapa[data-foco] .bloque.enfocado:hover{ background:#fff; }
 
 /* Tablero de procesos */
-.tablero{ display:flex; gap:clamp(8px,.85vw,13px); align-items:stretch; flex:1 1 auto; min-height:0; }
-/* Un sistema puede tener varios grupos transversales (ej. Gestión de Proyectos / Operaciones) */
-.grupos{ flex:1 1 auto; display:flex; gap:clamp(10px,1.1vw,18px); min-width:0; min-height:0; }
+/* El tablero alterna cajas altas sueltas y grupos (barra + cuadrícula) */
+.tablero{ display:flex; gap:clamp(10px,1.1vw,18px); align-items:stretch; flex:1 1 auto; min-height:0; }
 .grupo{ display:flex; flex-direction:column; gap:clamp(8px,.85vw,13px); min-width:0; min-height:0; }
 .procesos{ display:grid; gap:clamp(8px,.85vw,13px); flex:1 1 auto; min-height:0;
   grid-template-columns:repeat(var(--cols,3),minmax(0,1fr)); }
@@ -299,7 +296,7 @@ img{ max-width:100%; }
   transition:background var(--t-medio), color var(--t-medio), transform var(--t-rapido), box-shadow var(--t-rapido);
 }
 .caja:hover{ transform:translateY(-3px); box-shadow:var(--sombra-m); }
-.caja--destacada{ flex:0 0 23.5%; min-height:100%; }
+.caja--destacada{ min-width:0; min-height:0; }   /* el ancho lo fija "peso" */
 .caja--transversal{ border-radius:999px; min-height:0; padding:9px 12px; }
 .caja-lupa{ position:absolute; top:7px; right:9px; width:13px; height:13px; opacity:0;
   transition:opacity var(--t-rapido); }

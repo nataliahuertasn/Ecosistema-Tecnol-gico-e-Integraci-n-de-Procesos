@@ -70,22 +70,51 @@
   var SOFTWARES = lista(C.softwares);
   var escenario = $('#escenario');
 
-  /* Grupos del tablero. Un sistema puede definir:
-       - grupos: [ { transversal, procesos, columnas } , ... ]   (varios bloques)
-       - o bien  transversal + procesos                          (un solo bloque)  */
+  /* Elementos del tablero, de izquierda a derecha. Cada uno es:
+       - { tipo:"caja",  ...proceso }                         caja alta suelta
+       - { tipo:"grupo", transversal, procesos, columnas }    barra + cuadrícula
+
+     Un sistema puede definirlos de tres formas, de la más nueva a la más simple:
+       - elementos: [ ... ]                    (permite alternar cajas y grupos)
+       - destacado + grupos: [ ... ]
+       - transversal + procesos                (un solo grupo)                   */
+  function elementosDe(s) {
+    if (Array.isArray(s.elementos) && s.elementos.length) {
+      return s.elementos.map(function (e) {
+        return e && e.tipo === 'caja' ? e : (e && e.tipo ? e : mezclar(e, { tipo: 'grupo' }));
+      });
+    }
+    var r = [];
+    if (s.destacado) r.push(mezclar(s.destacado, { tipo: 'caja' }));
+    if (Array.isArray(s.grupos) && s.grupos.length) {
+      s.grupos.forEach(function (g) { r.push(mezclar(g, { tipo: 'grupo' })); });
+    } else {
+      r.push({ tipo: 'grupo', transversal: s.transversal || null,
+               procesos: lista(s.procesos), columnas: s.columnas });
+    }
+    return r;
+  }
+
+  function mezclar(origen, extra) {
+    var o = {}, k;
+    for (k in (origen || {})) { if (Object.prototype.hasOwnProperty.call(origen, k)) o[k] = origen[k]; }
+    for (k in extra) { if (Object.prototype.hasOwnProperty.call(extra, k)) o[k] = extra[k]; }
+    return o;
+  }
+
+  /* Compatibilidad: los grupos del tablero, sin las cajas sueltas */
   function gruposDe(s) {
-    if (Array.isArray(s.grupos) && s.grupos.length) return s.grupos;
-    return [{ transversal: s.transversal || null, procesos: lista(s.procesos), columnas: s.columnas }];
+    return elementosDe(s).filter(function (e) { return e.tipo !== 'caja'; });
   }
 
   /* Devuelve todos los procesos de un sistema, en el orden del tablero */
   function procesosDe(s) {
     var r = [];
-    if (s.destacado) r.push({ p: s.destacado, clave: 'destacado' });
-    gruposDe(s).forEach(function (g, gi) {
-      if (g.transversal) r.push({ p: g.transversal, clave: 'transversal-' + gi });
-      lista(g.procesos).forEach(function (p, i) { r.push({ p: p, clave: 'proceso-' + gi + '-' + i }); });
-      if (g.transversalInferior) r.push({ p: g.transversalInferior, clave: 'inferior-' + gi });
+    elementosDe(s).forEach(function (e, gi) {
+      if (e.tipo === 'caja') { r.push({ p: e, clave: 'caja-' + gi }); return; }
+      if (e.transversal) r.push({ p: e.transversal, clave: 'transversal-' + gi });
+      lista(e.procesos).forEach(function (p, i) { r.push({ p: p, clave: 'proceso-' + gi + '-' + i }); });
+      if (e.transversalInferior) r.push({ p: e.transversalInferior, clave: 'inferior-' + gi });
     });
     return r;
   }
@@ -126,15 +155,8 @@
     );
   }
 
-  /* Diagrama del ecosistema: núcleo ES-METALS + un nodo por cada sistema.
-     Usa el color corporativo de cada sistema definido en contenido.js  */
-  function textoSobre(hex) {
-    var h = String(hex || '').replace('#', '');
-    if (h.length !== 6) return '#fff';
-    var r = parseInt(h.slice(0, 2), 16), g = parseInt(h.slice(2, 4), 16), b = parseInt(h.slice(4, 6), 16);
-    return (0.299 * r + 0.587 * g + 0.114 * b) > 165 ? '#16232D' : '#FFFFFF';
-  }
-
+  /* Diagrama del ecosistema: núcleo ES-METALS y, en cada extremo, el logo de
+     un sistema. El flujo hacia cada uno usa su color corporativo.  */
   function orbitaSVG() {
     var cx = 200, cy = 200, R = 132, rn = 30, rc = 54;
     var n = Math.max(SOFTWARES.length, 1);
@@ -144,31 +166,29 @@
       // Sentido antihorario: el primer sistema arriba y los siguientes hacia la izquierda
       var a = (-90 - (360 / n) * i) * Math.PI / 180;
       var col = s.color || '#268DC2';
-      var x  = cx + R * Math.cos(a),            y  = cy + R * Math.sin(a);
-      var x1 = cx + (rc - 2) * Math.cos(a),     y1 = cy + (rc - 2) * Math.sin(a);
-      var x2 = cx + (R - rn - 3) * Math.cos(a), y2 = cy + (R - rn - 3) * Math.sin(a);
+      var x  = cx + R * Math.cos(a),        y  = cy + R * Math.sin(a);
+      var x1 = cx + (rc - 2) * Math.cos(a), y1 = cy + (rc - 2) * Math.sin(a);
+      var x2 = cx + (R - rn) * Math.cos(a), y2 = cy + (R - rn) * Math.sin(a);
 
       lineas +=
         '<line class="orbita-linea" x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '"/>' +
         '<line class="orbita-flujo" x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '"' +
           ' stroke="' + esc(col) + '" style="animation-delay:' + (i * 0.6) + 's"/>';
 
-      // Bajo cada nodo va el logo real del sistema, encajado en una caja fija
-      // para que todos pesen visualmente lo mismo pese a sus proporciones.
-      var lw = 124, lh = 28, ly = y + rn + 9;
+      // En cada extremo va el logo del sistema, encajado en una caja fija para
+      // que todos pesen visualmente lo mismo pese a sus distintas proporciones.
+      var lw = 150, lh = 34;
       var etiqueta = lleno(s.logo)
         ? '<image class="orbita-logo" href="' + esc(s.logo) + '" xlink:href="' + esc(s.logo) + '"' +
-            ' x="' + (x - lw / 2) + '" y="' + ly + '" width="' + lw + '" height="' + lh + '"' +
+            ' x="' + (x - lw / 2) + '" y="' + (y - lh / 2) + '" width="' + lw + '" height="' + lh + '"' +
             ' preserveAspectRatio="xMidYMid meet"><title>' + esc(s.nombre || '') + '</title></image>'
-        : '<text class="orbita-etiqueta" x="' + x + '" y="' + (ly + lh / 2) + '">' + esc(s.nombre || '') + '</text>';
+        : '<text class="orbita-etiqueta" x="' + x + '" y="' + y + '">' + esc(s.nombre || '') + '</text>';
 
       nodos +=
         '<g class="orbita-nodo" data-orbita-sw="' + esc(s.id) + '"' +
            ' tabindex="0" role="button" aria-label="Ver ' + esc(s.nombre || '') + '">' +
-          '<circle class="orbita-toque" cx="' + x + '" cy="' + y + '" r="' + (rn + 10) + '"/>' +
-          '<circle class="orbita-disco" cx="' + x + '" cy="' + y + '" r="' + rn + '"' +
-            ' fill="' + esc(col) + '" stroke="' + esc(col) + '"/>' +
-          '<text x="' + x + '" y="' + y + '" fill="' + textoSobre(col) + '">' + esc(s.sigla || '') + '</text>' +
+          '<rect class="orbita-toque" x="' + (x - lw / 2 - 8) + '" y="' + (y - lh / 2 - 10) + '"' +
+            ' width="' + (lw + 16) + '" height="' + (lh + 20) + '" rx="12"/>' +
           etiqueta +
         '</g>';
     });
@@ -239,21 +259,29 @@
   /* ¿El grupo concentra todo el contenido en su barra transversal? */
   function esConsolidado(g) { return !!(g && g.detalleConsolidado); }
 
-  /* Índice del grupo al que pertenece una clave
-     ('transversal-1', 'proceso-1-0', 'inferior-1') */
+  /* Índice del elemento al que pertenece una clave
+     ('caja-0', 'transversal-1', 'proceso-1-0', 'inferior-1') */
   function grupoDeClave(clave) {
-    var m = /^(?:transversal|proceso|inferior)-(\d+)/.exec(clave || '');
+    var m = /^(?:caja|transversal|proceso|inferior)-(\d+)/.exec(clave || '');
     return m ? parseInt(m[1], 10) : -1;
   }
 
   function bloqueHTML(s) {
-    var grupos = gruposDe(s);
-    var hayProcesos = grupos.some(function (g) { return lista(g.procesos).length; });
+    var elementos = elementosDe(s);
+    var hayContenido = elementos.some(function (e) {
+      return e.tipo === 'caja' || lista(e.procesos).length;
+    });
 
-    var gruposHTML = grupos.map(function (g, gi) {
-      var procesos = lista(g.procesos);
-      var cols = Math.max(1, +g.columnas || +s.columnas || procesos.length || 1);
-      var peso = +g.peso || procesos.length || 1;
+    var elementosHTML = elementos.map(function (e, gi) {
+      // Caja alta suelta: ocupa todo el alto del tablero
+      if (e.tipo === 'caja') {
+        return caja(s, 'caja-' + gi, e, 'caja--destacada',
+                    ' style="flex:' + (+e.peso || 1) + ' 1 0"');
+      }
+
+      var procesos = lista(e.procesos);
+      var cols = Math.max(1, +e.columnas || +s.columnas || procesos.length || 1);
+      var peso = +e.peso || procesos.length || 1;
 
       var rejilla = procesos.length
         ? '<div class="procesos" style="--cols:' + cols + '">' +
@@ -261,27 +289,22 @@
           '</div>'
         : '';
 
-      var extra = esConsolidado(g) ? ' data-consolidado="1"' : '';
+      var extra = esConsolidado(e) ? ' data-consolidado="1"' : '';
       return '<div class="grupo" style="flex:' + peso + ' 1 0">' +
-               (g.transversal
-                 ? caja(s, 'transversal-' + gi, g.transversal, 'caja--transversal', extra)
+               (e.transversal
+                 ? caja(s, 'transversal-' + gi, e.transversal, 'caja--transversal', extra)
                  : '') +
                rejilla +
-               (g.transversalInferior
-                 ? caja(s, 'inferior-' + gi, g.transversalInferior, 'caja--transversal')
+               (e.transversalInferior
+                 ? caja(s, 'inferior-' + gi, e.transversalInferior, 'caja--transversal')
                  : '') +
              '</div>';
     }).join('');
 
-    var cuerpo = hayProcesos
-      ? '<div class="grupos">' + gruposHTML + '</div>'
-      : '<div class="bloque-vacio">' + esc(s.vacio || 'Procesos por definir') + '</div>';
-
-    var tablero =
-      '<div class="tablero">' +
-        (s.destacado ? caja(s, 'destacado', s.destacado, 'caja--destacada') : '') +
-        cuerpo +
-      '</div>';
+    var tablero = hayContenido
+      ? '<div class="tablero">' + elementosHTML + '</div>'
+      : '<div class="tablero"><div class="bloque-vacio">' +
+          esc(s.vacio || 'Procesos por definir') + '</div></div>';
 
     var logo = lleno(s.logo)
       ? '<img src="' + esc(s.logo) + '" alt="' + esc(s.nombre) + '">'
@@ -604,10 +627,11 @@
   var detalleActual = -1;
 
   SOFTWARES.forEach(function (sw) {
-    if (sw.destacado) {
-      DETALLES.push({ sw: sw, tipo: 'proceso', clave: 'destacado', nombre: sw.destacado.nombre });
-    }
-    gruposDe(sw).forEach(function (g, gi) {
+    elementosDe(sw).forEach(function (g, gi) {
+      if (g.tipo === 'caja') {
+        DETALLES.push({ sw: sw, tipo: 'proceso', clave: 'caja-' + gi, nombre: g.nombre });
+        return;
+      }
       if (esConsolidado(g) && g.transversal) {
         DETALLES.push({ sw: sw, tipo: 'consolidado', gi: gi, nombre: g.transversal.nombre });
         return;
@@ -838,7 +862,7 @@
       if (!sw) return;
       var clave = cajaEl.dataset.clave;
       var gi = grupoDeClave(clave);
-      var grupo = gi >= 0 ? gruposDe(sw)[gi] : null;
+      var grupo = gi >= 0 ? elementosDe(sw)[gi] : null;
       var p = procesoPorClave(sw, clave);
       if (!p && !esConsolidado(grupo)) return;
 
@@ -891,8 +915,8 @@
   /* Detalle consolidado de un frente transversal: reúne el contenido de la
      barra y el de todos los procesos que cubre (descripciones e imágenes). */
   function abrirConsolidado(sw, gi) {
-    var g = gruposDe(sw)[gi];
-    if (!g || !g.transversal) return;
+    var g = elementosDe(sw)[gi];
+    if (!g || g.tipo === 'caja' || !g.transversal) return;
     var t = g.transversal;
     var procesos = lista(g.procesos).slice();
     if (g.transversalInferior) procesos.push(g.transversalInferior);
