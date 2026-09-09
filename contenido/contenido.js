@@ -428,21 +428,44 @@ window.ESM_CONTENIDO = {
       procesos: [
         {
           nombre: "R.H", icono: "rrhh",
-          descripcion: "Gestión del talento humano: selección, contratación, desarrollo, nómina y bienestar.",
-          beneficios: ["Información del personal centralizada", "Trazabilidad de los procesos de talento", "Soporte a la gestión de nómina"],
-          areas: ["Recursos Humanos"], imagen: "", video: "", captura: "", comentarios: ""
+          descripcion: "Gestión del talento humano: hoja de vida del empleado, documentos, dotación y evaluación de desempeño.",
+          beneficios: ["Información del personal centralizada", "Desempeño evaluado y con plan de acción", "Trazabilidad de los procesos de talento"],
+          areas: ["Recursos Humanos"],
+          imagenes: [
+            { archivo: "medios/imagenes/sigma-rh-01-ficha-empleado.png",
+              titulo:  "Ficha del empleado · información general, familiar, documentos y parámetros de dotación" },
+            { archivo: "medios/imagenes/sigma-rh-02-desempeno.png",
+              titulo:  "Desempeño · evaluación por colaborador con autoevaluación, líder y pares, y su plan de acción" }
+          ],
+          imagen: "", video: "", captura: "", comentarios: ""
         },
         {
           nombre: "T.I", icono: "ti",
-          descripcion: "Gestión de la infraestructura tecnológica, los sistemas de información y los servicios de soporte.",
-          beneficios: ["Solicitudes de soporte trazables", "Inventario tecnológico controlado", "Base para la continuidad operativa"],
-          areas: ["Tecnología (T.I.)"], imagen: "", video: "", captura: "", comentarios: ""
+          descripcion: "Gestión de los servicios de tecnología: mesa de servicio para el soporte del día a día y el ciclo de las solicitudes de desarrollo de software.",
+          beneficios: ["Solicitudes de soporte trazables y calificadas", "Desarrollos con flujo formal hasta producción", "Planeación visible de las solicitudes"],
+          areas: ["Tecnología (T.I.)"],
+          imagenes: [
+            { archivo: "medios/imagenes/sigma-ti-01-mesa-servicio.png",
+              titulo:  "Mesa de servicio · ticket con su tipo, prioridad, asignación, tiempos de atención y evidencia" },
+            { archivo: "medios/imagenes/sigma-ti-02-solicitud-desarrollo.png",
+              titulo:  "Solicitud de desarrollo · flujo desde la creación hasta producción: revisión técnica, definición ISO, desarrollo, pruebas UAT y despliegue" },
+            { archivo: "medios/imagenes/sigma-ti-03-cronograma-desarrollo.png",
+              titulo:  "Cronograma de desarrollo · backlog y planeación semanal de las solicitudes por área y por fase" }
+          ],
+          imagen: "", video: "", captura: "", comentarios: ""
         },
         {
           nombre: "Mantenimiento", icono: "mantenimiento",
-          descripcion: "Gestión del mantenimiento de máquinas e instalaciones para asegurar disponibilidad y confiabilidad.",
-          beneficios: ["Planes de mantenimiento programados", "Historial de intervenciones por equipo", "Menor tiempo de parada no planeada"],
-          areas: ["Mantenimiento", "Operaciones"], imagen: "", video: "", captura: "", comentarios: ""
+          descripcion: "Gestión del mantenimiento de máquinas e instalaciones para asegurar disponibilidad y confiabilidad, con mesa de servicio para maquinaria y para lo locativo.",
+          beneficios: ["Casos por activo, con causa raíz y evidencia", "Historial de intervenciones por equipo", "Menor tiempo de parada no planeada"],
+          areas: ["Mantenimiento", "Operaciones"],
+          imagenes: [
+            { archivo: "medios/imagenes/sigma-mantenimiento-01-maquinaria.png",
+              titulo:  "Mantenimiento de maquinaria · caso sobre un activo con sus hallazgos, prioridad, tiempos de atención y evidencia" },
+            { archivo: "medios/imagenes/sigma-mantenimiento-02-locativo.png",
+              titulo:  "Mantenimiento locativo · solicitudes sobre las instalaciones, con su seguimiento y la evidencia de la intervención" }
+          ],
+          imagen: "", video: "", captura: "", comentarios: ""
         },
         {
           nombre: "Comercio Exterior", icono: "comercio",
@@ -452,9 +475,16 @@ window.ESM_CONTENIDO = {
         },
         {
           nombre: "SST", icono: "sst",
-          descripcion: "Gestión de la seguridad y salud en el trabajo: prevención, inspecciones y atención de eventos.",
-          beneficios: ["Registro de inspecciones y hallazgos", "Trazabilidad de acciones correctivas", "Soporte al cumplimiento normativo"],
-          areas: ["SST", "Recursos Humanos"], imagen: "", video: "", captura: "", comentarios: ""
+          descripcion: "Gestión de la seguridad y salud en el trabajo, con el control de la entrega de elementos de protección personal y de dotación por empleado.",
+          beneficios: ["Entregas de EPP registradas por empleado", "Control de pérdidas y reposiciones", "Soporte al cumplimiento normativo"],
+          areas: ["SST", "Recursos Humanos"],
+          imagenes: [
+            { archivo: "medios/imagenes/sigma-sst-01-entrega-epp.png",
+              titulo:  "Entrega de elementos de protección personal · total entregado, dotación, pérdidas y reposiciones por empleado y área" },
+            { archivo: "medios/imagenes/sigma-sst-02-entrega-dotacion.png",
+              titulo:  "Entrega de dotación · prendas entregadas por empleado, con cantidad y responsable de la entrega" }
+          ],
+          imagen: "", video: "", captura: "", comentarios: ""
         },
         {
           nombre: "Gestión Ambiental", icono: "ambiental",
