@@ -1,0 +1,486 @@
+/* ==========================================================================
+   ES-METALS  ·  ECOSISTEMA TECNOLÓGICO
+   --------------------------------------------------------------------------
+   ESTE ES EL ÚNICO ARCHIVO QUE USTED NECESITA EDITAR.
+
+   La estructura y los colores reproducen el documento oficial
+   "CADENA DE VALOR ESM":
+        Project Agenda  ->  #EB9471   (coral)
+        ES-Sigma        ->  #F0CC8B   (arena)
+        SAP             ->  #00537B   (azul SAP)
+
+   Reglas simples:
+     1. El texto siempre va entre comillas dobles:  "así"
+     2. Los elementos de una lista se separan con coma:  "uno", "dos"
+     3. No borre las llaves { } ni los corchetes [ ]
+     4. Guarde el archivo y actualice el navegador (tecla F5)
+
+   Instrucciones detalladas en el archivo LEEME.md
+   ========================================================================== */
+
+window.ESM_CONTENIDO = {
+
+  /* ----------------------------------------------------------------------
+     1. MARCA
+     ---------------------------------------------------------------------- */
+  marca: {
+    empresa:         "ES-METALS",
+    razonSocial:     "ES-METALS S.A.S.",
+    grupo:           "Compañía del Grupo Tecnoglass",
+    logo:            "assets/img/logo-esmetals.png",
+    colorPrimario:   "#268DC2",
+    colorSecundario: "#C7C6C6"
+  },
+
+  /* ----------------------------------------------------------------------
+     2. PORTADA
+     ---------------------------------------------------------------------- */
+  portada: {
+    /* En todos estos campos: deje "" (o la lista vacía) para ocultar el elemento. */
+    etiqueta:    "Reunión Gerencial",
+    titulo:      "Ecosistema Tecnológico e Integración de Procesos",
+    subtitulo:   "Cadena de valor soportada por sistemas de información",
+    descripcion: "Cómo los sistemas de ES-METALS soportan la operación de extremo a extremo: procesos integrados, una sola fuente de información y decisiones sobre datos confiables.",
+    grupo:       "",   /* leyenda junto al logo */
+    conceptos:   [],   /* etiquetas bajo la descripción */
+    pie:         ""    /* línea inferior */
+  },
+
+  /* ----------------------------------------------------------------------
+     3. CADENA DE VALOR CORPORATIVA  ·  LÁMINA DESACTIVADA
+        Lámina de contexto previa al mapa de sistemas.
+        Está oculta. Ponga  activa: true  si desea volver a mostrarla.
+     ---------------------------------------------------------------------- */
+  cadenaCorporativa: {
+    activa:    false,
+    etiqueta:  "Punto de partida",
+    titulo:    "Cadena de Valor ES-METALS",
+    subtitulo: "El mapa de procesos sobre el que se despliega el ecosistema tecnológico.",
+    tituloPrimarias: "Procesos primarios",
+    tituloApoyo:     "Procesos de apoyo",
+    primarias: [
+      { nombre: "Ventas & Mercadeo",        icono: "comercial",   descripcion: "Generación de demanda, captura de la oportunidad comercial, cotización y cierre del negocio." },
+      { nombre: "Ingeniería",               icono: "ingenieria",  descripcion: "Ingeniería de detalle, planos de taller y gestión de aprobaciones técnicas." },
+      { nombre: "Diseño",                   icono: "ingenieria",  descripcion: "Diseño de los sistemas metálicos y de sus detalles constructivos." },
+      { nombre: "Compras",                  icono: "compras",     descripcion: "Abastecimiento de los materiales del proyecto derivado de la ingeniería aprobada." },
+      { nombre: "Inventario",               icono: "inventario",  descripcion: "Recepción, custodia y control de los materiales, con sus reservas." },
+      { nombre: "Producción & Fabricación", icono: "produccion",  descripcion: "Programación y ejecución de la manufactura de los sistemas metálicos." },
+      { nombre: "Logística",                icono: "comercio",    descripcion: "Programación de despachos en el calendario de contenedores." },
+      { nombre: "Instalación",              icono: "instalacion", descripcion: "Montaje en obra, con control de avance y entrega al cliente final." }
+    ],
+    apoyo: [
+      { nombre: "Financiero",          icono: "finanzas",      descripcion: "Contabilidad, costos, tesorería y control financiero." },
+      { nombre: "R.H",                 icono: "rrhh",          descripcion: "Selección, desarrollo, nómina y bienestar del talento humano." },
+      { nombre: "T.I",                 icono: "ti",            descripcion: "Infraestructura, sistemas de información, datos y ciberseguridad." },
+      { nombre: "Mantenimiento",       icono: "mantenimiento", descripcion: "Disponibilidad y confiabilidad de máquinas e instalaciones." },
+      { nombre: "Compras y Almacén",   icono: "compras",       descripcion: "Abastecimiento, negociación con proveedores y control de inventarios." },
+      { nombre: "Comercio Exterior",   icono: "comercio",      descripcion: "Importaciones, exportaciones y trámites aduaneros." },
+      { nombre: "SST",                 icono: "sst",           descripcion: "Seguridad y salud en el trabajo." },
+      { nombre: "Gestión Ambiental",   icono: "ambiental",     descripcion: "Cumplimiento ambiental y manejo responsable de residuos." }
+    ]
+  },
+
+  /* ----------------------------------------------------------------------
+     4. TEXTOS DEL MAPA DEL ECOSISTEMA
+     ---------------------------------------------------------------------- */
+  mapa: {
+    etiqueta:    "Vista general",
+    titulo:      "Ecosistema tecnológico ES-METALS",
+    subtitulo:   "Cada sistema soporta un tramo de la cadena de valor. Juntos garantizan trazabilidad de punta a punta.",
+    instruccion: "Pase el cursor sobre una barra transversal para ver su detalle  ·  seleccione un sistema para enfocarlo  ·  haga clic en cualquier proceso para ampliar"
+  },
+
+  /* ----------------------------------------------------------------------
+     5. SISTEMAS
+
+     banda   : 1 = franja superior (ancho completo)
+               2 = franja inferior (los sistemas se reparten el ancho)
+     peso    : ancho relativo dentro de la franja
+     columnas: número de columnas de la cuadrícula de procesos
+
+     destacado  : caja alta a la izquierda (opcional; puede ser null)
+     transversal: barra que cubre todas las columnas (opcional; puede ser null)
+     procesos   : las cajas de la cuadrícula
+
+     El ORDEN de esta lista es el orden de la presentación.
+     ---------------------------------------------------------------------- */
+  softwares: [
+
+    /* ==================== PROJECT AGENDA ==================== */
+    {
+      id:          "pa",
+      nombre:      "Project Agenda",
+      sigla:       "PA",
+      logo:        "assets/img/logo-project-agenda.png",
+      color:       "#EB9471",
+      colorSuave:  "#F6CFBF",
+      banda:       1,
+      peso:        1,
+      columnas:    3,
+      categoria:   "Gestión de proyectos",
+      resumen:     "Centraliza la gestión comercial, técnica y operativa: del lead a la entrega en obra, sobre una única fuente de información.",
+
+      /* Caja alta a la izquierda: punto de entrada de la cadena */
+      destacado: {
+        nombre:      "Ventas & Mercadeo",
+        icono:       "comercial",
+        descripcion: "Punto de entrada de la cadena de valor: generación de demanda, captura de la oportunidad comercial, cotización, negociación y cierre del negocio que da origen al proyecto.",
+        beneficios: [
+          "Leads, oportunidades y cotizaciones en un solo lugar",
+          "Visibilidad de las oportunidades comerciales en curso",
+          "Traspaso ordenado de la venta al proyecto"
+        ],
+        areas:       ["Comercial", "Mercadeo", "Gestión de Proyectos"],
+
+        /* Galería: se muestran en este mismo orden dentro del panel de detalle.
+           Para agregar otra, copie una línea y cambie el archivo y el título. */
+        imagenes: [
+          { archivo: "medios/imagenes/pa-ventas-01-leads.png",
+            titulo:  "Leads · bandeja de solicitudes y su estado de aprobación" },
+          { archivo: "medios/imagenes/pa-ventas-02-main-board.png",
+            titulo:  "Main Board · cotizaciones por etapa: Bidding, Approval y Follow Up" },
+          { archivo: "medios/imagenes/pa-ventas-03-estadisticas.png",
+            titulo:  "Estadísticas · adjudicadas, perdidas, nuevas cotizaciones y proyección de ventas" },
+          { archivo: "medios/imagenes/pa-ventas-04-adjudicado-por-asesor.png",
+            titulo:  "Adjudicado por Account Manager · distribución y valor por asesor" },
+          { archivo: "medios/imagenes/pa-ventas-05-galeria-comercial.png",
+            titulo:  "Herramientas comerciales · galería de proyectos e imágenes de referencia" }
+        ],
+
+        imagen:      "",
+        video:       "",
+        captura:     "",
+        comentarios: ""
+      },
+
+      /* Grupos transversales: cada uno es una barra que cubre sus procesos */
+      grupos: [
+        {
+          /* detalleConsolidado: todo el contenido del frente (fotos, videos y
+             comentarios) se carga en la barra "transversal" de abajo.
+             El detalle se abre al pasar el cursor sobre esa barra e incluye
+             además la descripción de cada proceso que cubre. */
+          detalleConsolidado: true,
+
+          transversal: {
+            nombre:      "Gestión de Proyectos",
+            icono:       "proyectos",
+            descripcion: "Frente transversal que cubre Ingeniería, Diseño y Compras. Planea, controla y hace seguimiento al proyecto durante todo su ciclo de vida, e integra la facturación y el seguimiento financiero de cada proyecto.",
+            beneficios: [
+              "Planeación y control unificados del proyecto",
+              "Seguimiento de hitos y compromisos con el cliente",
+              "Alertas tempranas de desviación en fechas"
+            ],
+            areas:       ["Gestión de Proyectos", "Ingeniería & Diseño", "Compras y Almacén", "Financiero"],
+
+            /* Imágenes de todo el frente, en orden de presentación.
+               Para agregar otra: copie un bloque { archivo, titulo } y ponga
+               una coma al final del anterior. */
+            imagenes: [
+              { archivo: "medios/imagenes/pa-gp-01-asignacion-ingenieria.png",
+                titulo:  "Asignación de pendientes · área de Ingeniería, con la carga horaria de cada ingeniero" },
+              { archivo: "medios/imagenes/pa-gp-02-main-board-proyectos.png",
+                titulo:  "Main Board de proyectos · saldo por facturar en COP y USD" },
+              { archivo: "medios/imagenes/pa-gp-03-detalle-proyecto.png",
+                titulo:  "Detalle del proyecto · cliente, account manager, project manager y colaboradores" },
+              { archivo: "medios/imagenes/pa-gp-04-gestion-compras.png",
+                titulo:  "Gestión de compras · solicitudes, ítems, responsables y estado" },
+              { archivo: "medios/imagenes/pa-gp-05-work-orders.png",
+                titulo:  "Generación de Work Orders · el sistema almacena los planos y los detalles de fabricación de cada pieza (PDF, DXF, STP) con su ruta de procesos" },
+              { archivo: "medios/imagenes/pa-gp-06-estado-work-orders.png",
+                titulo:  "Estado de las Work Orders en tiempo real · avance de producción y de calidad por proceso, enlazado con el área de Operaciones" },
+              { archivo: "medios/imagenes/pa-gp-07-indicadores-compras.png",
+                titulo:  "Indicadores de compras · nivel de atención y cumplimiento de entregas" },
+              { archivo: "medios/imagenes/pa-gp-08-modulo-contable.png",
+                titulo:  "Módulo contable · facturas con orden de compra y conciliación con SAP" }
+            ],
+
+            imagen:      "",
+            video:       "",
+            captura:     "",
+            comentarios: ""
+          },
+          procesos: [
+            {
+              nombre:      "Ingeniería",
+              icono:       "ingenieria",
+              descripcion: "Ingeniería de detalle y planos de taller, con asignación de pendientes por ingeniero y gestión de las aprobaciones técnicas con el cliente.",
+              beneficios: [
+                "Carga de trabajo visible por ingeniero",
+                "Control de versiones de planos y entregables",
+                "Seguimiento a las aprobaciones del cliente"
+              ],
+              areas:       ["Ingeniería & Diseño", "Gestión de Proyectos"],
+              imagen:      "",
+              video:       "",
+              captura:     "",
+              comentarios: ""
+            },
+            {
+              nombre:      "Diseño",
+              icono:       "ingenieria",
+              descripcion: "Desarrollo del diseño de los sistemas metálicos y de sus detalles constructivos, como base para la ingeniería de detalle y la fabricación.",
+              beneficios: [
+                "Diseño y sus revisiones en el mismo sistema",
+                "Menor reproceso por información desactualizada",
+                "Continuidad entre diseño, ingeniería y producción"
+              ],
+              areas:       ["Ingeniería & Diseño", "Gestión de Proyectos"],
+              imagen:      "",
+              video:       "",
+              captura:     "",
+              comentarios: ""
+            },
+            {
+              nombre:      "Compras",
+              icono:       "compras",
+              descripcion: "Planeación y gestión del abastecimiento de materiales derivada de la ingeniería aprobada, con seguimiento a los insumos críticos del proyecto.",
+              beneficios: [
+                "Requerimientos de material atados al proyecto",
+                "Alerta sobre materiales críticos en riesgo",
+                "Sincronización entre compras y programación"
+              ],
+              areas:       ["Compras y Almacén", "Comercio Exterior", "Ingeniería & Diseño"],
+              imagen:      "",
+              video:       "",
+              captura:     "",
+              comentarios: ""
+            }
+          ]
+        },
+        {
+          detalleConsolidado: true,
+
+          transversal: {
+            nombre:      "Operaciones",
+            icono:       "produccion",
+            descripcion: "Frente transversal que cubre Inventario, Producción & Fabricación, Logística e Instalación. Ejecuta el proyecto desde la reserva del material hasta el montaje en obra: el almacén controla existencias y reservas, las Work Orders almacenan los planos y los detalles de fabricación de cada pieza, y el calendario de contenedores organiza los despachos.",
+            beneficios: [
+              "Existencias y reservas de material controladas",
+              "Planos y detalles de fabricación almacenados en el sistema",
+              "Estado de las Work Orders en tiempo real",
+              "Despachos organizados en un calendario de contenedores"
+            ],
+            areas:       ["Operaciones", "Compras y Almacén", "Instalación", "Mantenimiento"],
+
+            /* Imágenes de todo el frente, en orden de presentación. */
+            imagenes: [
+              { archivo: "medios/imagenes/pa-op-01-almacen-inventario.png",
+                titulo:  "Módulo de almacén · gestión de inventario, disponibles y reservados, y solicitudes de reserva de material" },
+              { archivo: "medios/imagenes/pa-op-02-calendario-contenedores.png",
+                titulo:  "Calendario de contenedores · despachos de la semana con su packing list, work orders y país de destino" }
+            ],
+
+            imagen:      "",
+            video:       "",
+            captura:     "",
+            comentarios: ""
+          },
+          procesos: [
+            {
+              nombre:      "Inventario",
+              icono:       "inventario",
+              descripcion: "Recepción, custodia y control de los materiales, con visibilidad de lo disponible y lo reservado, y gestión de las solicitudes de reserva para producción.",
+              beneficios: [
+                "Disponible y reservado visibles por código",
+                "Solicitudes de reserva trazables",
+                "Menor riesgo de faltantes en planta"
+              ],
+              areas:       ["Compras y Almacén", "Operaciones"],
+              imagen:      "",
+              video:       "",
+              captura:     "",
+              comentarios: ""
+            },
+            {
+              nombre:      "Producción & Fabricación",
+              icono:       "produccion",
+              descripcion: "Programación y ejecución de la manufactura a partir de las Work Orders, que almacenan los planos y los detalles de fabricación de cada pieza. Cada proyecto reporta su avance contra el plan.",
+              beneficios: [
+                "Planos y detalles de fabricación en el mismo sistema",
+                "Avance real de producción por proyecto",
+                "Detección temprana de cuellos de botella"
+              ],
+              areas:       ["Operaciones", "Mantenimiento", "Gestión de Proyectos"],
+              imagen:      "",
+              video:       "",
+              captura:     "",
+              comentarios: ""
+            },
+            {
+              nombre:      "Logística",
+              icono:       "comercio",
+              descripcion: "Programación de los despachos en un calendario de contenedores, con su packing list, sus work orders y el país de destino.",
+              beneficios: [
+                "Despachos programados y visibles por semana",
+                "Contenedor trazable hasta la work order",
+                "Coordinación entre planta y destino"
+              ],
+              areas:       ["Instalación", "Comercio Exterior", "Gestión de Proyectos"],
+              imagen:      "",
+              video:       "",
+              captura:     "",
+              comentarios: ""
+            }
+          ],
+
+          /* Barra inferior: cubre todo el ancho del grupo, debajo de las cajas */
+          transversalInferior: {
+            nombre:      "Instalación",
+            icono:       "instalacion",
+            descripcion: "Montaje en obra de los sistemas despachados, con control de avance e hitos de entrega al cliente. Cierra el ciclo del proyecto sobre las tres etapas de Operaciones.",
+            beneficios: [
+              "Control de hitos contractuales en obra",
+              "Avance de montaje visible por proyecto",
+              "Soporte documental para actas de entrega"
+            ],
+            areas:       ["Instalación", "Gestión de Proyectos", "SST"],
+            imagenes:    [],
+            imagen:      "",
+            video:       "",
+            captura:     "",
+            comentarios: ""
+          }
+        }
+      ]
+    },
+
+    /* ==================== ES-SIGMA ==================== */
+    {
+      id:          "sigma",
+      nombre:      "ES-Sigma",
+      sigla:       "SG",
+      logo:        "assets/img/logo-es-sigma.png",
+      color:       "#F0CC8B",
+      colorSuave:  "#F8E8CB",
+      banda:       2,
+      peso:        2.05,
+      columnas:    4,
+      categoria:   "Procesos de apoyo",
+      resumen:     "Centraliza la gestión de los procesos de apoyo: administración, talento, tecnología y cumplimiento.",
+      descripcion: "ES-Sigma es el sistema que centraliza la gestión de los procesos de apoyo de la compañía. Integra las áreas transversales —financiera, talento humano, tecnología, abastecimiento, comercio exterior, seguridad y ambiental—, estandarizando su forma de trabajar y dejando registro de la información que soporta el cumplimiento y el control interno.",
+      valor: [
+        "Una única fuente de información para las áreas transversales",
+        "Procesos de apoyo estandarizados y trazables",
+        "Soporte al cumplimiento normativo y al control interno"
+      ],
+      indicadores: [
+        { valor: "8", etiqueta: "Procesos soportados" },
+        { valor: "8", etiqueta: "Áreas transversales" }
+      ],
+      destacado:   null,
+      transversal: null,
+      procesos: [
+        {
+          nombre: "Financiero", icono: "finanzas",
+          descripcion: "Gestión contable, de costos y de tesorería que soporta la información financiera de la operación.",
+          beneficios: ["Información financiera ordenada", "Control de costos por área", "Soporte a los cierres de período"],
+          areas: ["Financiero"], imagen: "", video: "", captura: "", comentarios: ""
+        },
+        {
+          nombre: "R.H", icono: "rrhh",
+          descripcion: "Gestión del talento humano: selección, contratación, desarrollo, nómina y bienestar.",
+          beneficios: ["Información del personal centralizada", "Trazabilidad de los procesos de talento", "Soporte a la gestión de nómina"],
+          areas: ["Recursos Humanos"], imagen: "", video: "", captura: "", comentarios: ""
+        },
+        {
+          nombre: "T.I", icono: "ti",
+          descripcion: "Gestión de la infraestructura tecnológica, los sistemas de información y los servicios de soporte.",
+          beneficios: ["Solicitudes de soporte trazables", "Inventario tecnológico controlado", "Base para la continuidad operativa"],
+          areas: ["Tecnología (T.I.)"], imagen: "", video: "", captura: "", comentarios: ""
+        },
+        {
+          nombre: "Mantenimiento", icono: "mantenimiento",
+          descripcion: "Gestión del mantenimiento de máquinas e instalaciones para asegurar disponibilidad y confiabilidad.",
+          beneficios: ["Planes de mantenimiento programados", "Historial de intervenciones por equipo", "Menor tiempo de parada no planeada"],
+          areas: ["Mantenimiento", "Operaciones"], imagen: "", video: "", captura: "", comentarios: ""
+        },
+        {
+          nombre: "Compras y Almacén", icono: "compras",
+          descripcion: "Abastecimiento, relación con proveedores y control de las existencias de materiales.",
+          beneficios: ["Solicitudes y aprobaciones trazables", "Control de existencias del almacén", "Historial de proveedores"],
+          areas: ["Compras y Almacén", "Financiero"], imagen: "", video: "", captura: "", comentarios: ""
+        },
+        {
+          nombre: "Comercio Exterior", icono: "comercio",
+          descripcion: "Gestión de importaciones, exportaciones y trámites aduaneros asociados a la operación.",
+          beneficios: ["Seguimiento a embarques y nacionalizaciones", "Documentación aduanera organizada", "Visibilidad de tiempos de tránsito"],
+          areas: ["Comercio Exterior", "Compras y Almacén"], imagen: "", video: "", captura: "", comentarios: ""
+        },
+        {
+          nombre: "SST", icono: "sst",
+          descripcion: "Gestión de la seguridad y salud en el trabajo: prevención, inspecciones y atención de eventos.",
+          beneficios: ["Registro de inspecciones y hallazgos", "Trazabilidad de acciones correctivas", "Soporte al cumplimiento normativo"],
+          areas: ["SST", "Recursos Humanos"], imagen: "", video: "", captura: "", comentarios: ""
+        },
+        {
+          nombre: "Gestión Ambiental", icono: "ambiental",
+          descripcion: "Gestión del cumplimiento ambiental y del manejo responsable de residuos de la operación.",
+          beneficios: ["Seguimiento a indicadores ambientales", "Control del manejo de residuos", "Soporte al cumplimiento normativo"],
+          areas: ["Gestión Ambiental", "Operaciones"], imagen: "", video: "", captura: "", comentarios: ""
+        }
+      ]
+    },
+
+    /* ==================== SAP ==================== */
+    {
+      id:          "sap",
+      nombre:      "SAP",
+      sigla:       "SAP",
+      logo:        "assets/img/logo-sap.png",
+      color:       "#00537B",
+      colorSuave:  "#8CB1C3",
+      banda:       2,
+      peso:        1,
+      columnas:    2,
+      categoria:   "ERP corporativo",
+      resumen:     "Alcance por definir dentro del mapa de la cadena de valor.",
+      descripcion: "SAP es el ERP corporativo del grupo. Su alcance dentro de este mapa de la cadena de valor aún no está detallado: complete la lista 'procesos' en contenido.js y las cajas aparecerán automáticamente en el mapa, con su propio detalle.",
+      valor: [
+        "Alcance por definir",
+        "Procesos por definir",
+        "Beneficios por definir"
+      ],
+      indicadores: [
+        { valor: "—", etiqueta: "Procesos por definir" }
+      ],
+      destacado:   null,
+      transversal: null,
+      vacio:       "Procesos por definir",
+      procesos: [
+        /* Ejemplo: descomente y edite para agregar procesos a SAP
+        {
+          nombre: "Compras", icono: "compras",
+          descripcion: "Descripción del proceso.",
+          beneficios: ["Beneficio 1", "Beneficio 2"],
+          areas: ["Compras y Almacén"],
+          imagen: "", video: "", captura: "", comentarios: ""
+        },
+        */
+      ]
+    }
+
+    /* Para AGREGAR un sistema nuevo:
+       ponga una coma después de la llave de cierre } anterior
+       y pegue aquí un bloque completo con un "id" diferente. */
+
+  ],
+
+  /* ----------------------------------------------------------------------
+     6. CIERRE
+     ---------------------------------------------------------------------- */
+  cierre: {
+    activa:   true,
+    etiqueta: "Conclusión",
+    titulo:   "Un ecosistema conectado, una operación más eficiente",
+    mensaje:  "La integración de los sistemas de información no es un proyecto de tecnología: es la forma en que ES-METALS asegura trazabilidad, control y velocidad en toda su cadena de valor.",
+    puntos: [
+      { titulo: "Integración",   texto: "Los sistemas dejan de ser islas y comparten una misma información." },
+      { titulo: "Trazabilidad",  texto: "Cada proyecto puede seguirse desde el mercado hasta la entrega." },
+      { titulo: "Eficiencia",    texto: "Menos reprocesos, menos correos y decisiones más rápidas." },
+      { titulo: "Escalabilidad", texto: "La plataforma soporta el crecimiento de la operación sin rehacerla." }
+    ],
+    pie: "Gracias  ·  ES-METALS S.A.S.  ·  Grupo Tecnoglass"
+  }
+
+};

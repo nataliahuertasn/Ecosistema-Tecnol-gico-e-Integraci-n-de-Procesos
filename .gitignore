@@ -1,0 +1,10 @@
+# Archivos temporales de Windows / OneDrive
+Thumbs.db
+ehthumbs.db
+desktop.ini
+~$*
+*.tmp
+
+# Archivos temporales de edición
+*.bak
+*.swp

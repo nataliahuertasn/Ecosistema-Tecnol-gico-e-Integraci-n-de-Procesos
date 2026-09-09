@@ -1,0 +1,3 @@
+Coloque aqui las imagenes y capturas de pantalla (.jpg / .png).
+Luego escriba el nombre del archivo en contenido/contenido.js
+Ejemplo:  imagen: "medios/imagenes/cotizacion.jpg"
