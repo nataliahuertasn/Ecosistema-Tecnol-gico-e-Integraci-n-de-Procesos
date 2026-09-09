@@ -478,6 +478,7 @@ window.ESM_CONTENIDO = {
       columnas:    3,
       categoria:   "ERP corporativo",
       resumen:     "Núcleo administrativo y financiero: abastecimiento, facturación, nómina, contabilidad y almacén.",
+      /* Orden de la cadena: Compras · Facturación · Nómina · Contabilidad · Almacén */
       descripcion: "SAP es el ERP corporativo del grupo. Es el sistema transaccional donde se registra y controla la operación administrativa y financiera, y constituye la fuente oficial de la información contable y del inventario valorizado de la compañía.",
       valor: [
         "Información financiera única y auditable",
@@ -495,30 +496,52 @@ window.ESM_CONTENIDO = {
           nombre: "Compras", icono: "compras",
           descripcion: "Registro de las órdenes de compra y de la relación con proveedores, con los controles de aprobación definidos por la compañía.",
           beneficios: ["Flujo de aprobación formal y trazable", "Historial de proveedores y precios", "Soporte a controles internos y auditoría"],
-          areas: ["Compras y Almacén", "Financiero"], imagen: "", video: "", captura: "", comentarios: ""
+          areas: ["Compras y Almacén", "Financiero"],
+          imagenes: [
+            { archivo: "medios/imagenes/sap-compras-01-orden-materiales.png",
+              titulo:  "Orden de materiales · proveedor, materiales, cantidades, precio y condiciones de entrega" }
+          ],
+          imagen: "", video: "", captura: "", comentarios: ""
         },
         {
           nombre: "Facturación", icono: "facturacion",
           descripcion: "Emisión de la facturación oficial y su integración con cartera, cumpliendo los requisitos de facturación electrónica.",
           beneficios: ["Facturación electrónica conforme a norma", "Integración directa con cartera", "Ciclo de cobro más corto"],
-          areas: ["Financiero", "Comercial"], imagen: "", video: "", captura: "", comentarios: ""
+          areas: ["Financiero", "Comercial"],
+          imagenes: [],   /* pendiente por cargar */
+          imagen: "", video: "", captura: "", comentarios: ""
         },
         {
-          nombre: "R.H", icono: "rrhh",
-          descripcion: "Administración de personal y liquidación de nómina, con su correspondiente registro contable.",
-          beneficios: ["Nómina liquidada y contabilizada", "Información laboral centralizada", "Soporte al cumplimiento legal"],
-          areas: ["Recursos Humanos", "Financiero"], imagen: "", video: "", captura: "", comentarios: ""
+          nombre: "Nómina", icono: "rrhh",
+          descripcion: "Administración de personal y liquidación de nómina sobre la estructura organizacional de la compañía, con su correspondiente registro contable.",
+          beneficios: ["Nómina liquidada y contabilizada", "Estructura organizacional y posiciones definidas", "Soporte al cumplimiento legal"],
+          areas: ["Recursos Humanos", "Financiero"],
+          imagenes: [
+            { archivo: "medios/imagenes/sap-nomina-01-estructura-organizacional.png",
+              titulo:  "Organización y ocupación · estructura de la compañía por unidad organizativa: Sales, Project Management, Engineering, Design, R&D, Operations, Infraestructure, Administration y Warehouse" }
+          ],
+          imagen: "", video: "", captura: "", comentarios: ""
         },
         {
           nombre: "Contabilidad", icono: "contabilidad",
           descripcion: "Registro contable de la operación, cierre de período y generación de la información financiera oficial de la compañía.",
           beneficios: ["Cierres contables confiables", "Información financiera auditable", "Base para el control de costos"],
-          areas: ["Financiero"], imagen: "", video: "", captura: "", comentarios: ""
+          areas: ["Financiero"],
+          imagenes: [],   /* pendiente por cargar */
+          imagen: "", video: "", captura: "", comentarios: ""
         },
         {
           nombre: "Almacén", icono: "almacen",
           descripcion: "Control de las existencias y de los movimientos de almacén, con la valorización del inventario de materia prima y producto terminado.",
           beneficios: ["Inventario valorizado en el ERP", "Movimientos de almacén registrados", "Base para el costeo de la operación"],
+          imagenes: [
+            { archivo: "medios/imagenes/sap-almacen-01-menu-transacciones.png",
+              titulo:  "Transacciones de almacén · movimiento de mercancías, resumen y listado de stocks, documentos de material y reservas" },
+            { archivo: "medios/imagenes/sap-almacen-02-stocks-por-material.png",
+              titulo:  "Stocks en almacén por material · consulta por material, centro, almacén y lote, con stocks especiales" },
+            { archivo: "medios/imagenes/sap-almacen-03-entrada-mercancias.png",
+              titulo:  "Entrada de mercancías · recepción contra el pedido, con traspasos, devoluciones y liberación de stock bloqueado" }
+          ],
           areas: ["Compras y Almacén", "Financiero"], imagen: "", video: "", captura: "", comentarios: ""
         }
       ]
