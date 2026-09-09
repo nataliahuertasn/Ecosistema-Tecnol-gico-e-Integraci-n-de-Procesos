@@ -462,17 +462,17 @@ window.ESM_CONTENIDO = {
       colorSuave:  "#8CB1C3",
       banda:       2,
       peso:        1,
-      columnas:    2,
+      columnas:    3,
       categoria:   "ERP corporativo",
-      resumen:     "Núcleo administrativo y financiero de la compañía: abastecimiento, facturación, contabilidad y nómina.",
-      descripcion: "SAP es el ERP corporativo del grupo. Es el sistema transaccional donde se registra y controla la operación administrativa y financiera, y constituye la fuente oficial de la información contable de la compañía.",
+      resumen:     "Núcleo administrativo y financiero: abastecimiento, facturación, nómina, contabilidad y almacén.",
+      descripcion: "SAP es el ERP corporativo del grupo. Es el sistema transaccional donde se registra y controla la operación administrativa y financiera, y constituye la fuente oficial de la información contable y del inventario valorizado de la compañía.",
       valor: [
         "Información financiera única y auditable",
         "Registro transaccional de la operación administrativa",
         "Soporte al control interno y a la auditoría"
       ],
       indicadores: [
-        { valor: "4",    etiqueta: "Procesos soportados" },
+        { valor: "5",    etiqueta: "Procesos soportados" },
         { valor: "24/7", etiqueta: "Disponibilidad" }
       ],
       destacado:   null,
@@ -491,16 +491,22 @@ window.ESM_CONTENIDO = {
           areas: ["Financiero", "Comercial"], imagen: "", video: "", captura: "", comentarios: ""
         },
         {
+          nombre: "R.H", icono: "rrhh",
+          descripcion: "Administración de personal y liquidación de nómina, con su correspondiente registro contable.",
+          beneficios: ["Nómina liquidada y contabilizada", "Información laboral centralizada", "Soporte al cumplimiento legal"],
+          areas: ["Recursos Humanos", "Financiero"], imagen: "", video: "", captura: "", comentarios: ""
+        },
+        {
           nombre: "Contabilidad", icono: "contabilidad",
           descripcion: "Registro contable de la operación, cierre de período y generación de la información financiera oficial de la compañía.",
           beneficios: ["Cierres contables confiables", "Información financiera auditable", "Base para el control de costos"],
           areas: ["Financiero"], imagen: "", video: "", captura: "", comentarios: ""
         },
         {
-          nombre: "R.H", icono: "rrhh",
-          descripcion: "Administración de personal y liquidación de nómina, con su correspondiente registro contable.",
-          beneficios: ["Nómina liquidada y contabilizada", "Información laboral centralizada", "Soporte al cumplimiento legal"],
-          areas: ["Recursos Humanos", "Financiero"], imagen: "", video: "", captura: "", comentarios: ""
+          nombre: "Almacén", icono: "almacen",
+          descripcion: "Control de las existencias y de los movimientos de almacén, con la valorización del inventario de materia prima y producto terminado.",
+          beneficios: ["Inventario valorizado en el ERP", "Movimientos de almacén registrados", "Base para el costeo de la operación"],
+          areas: ["Compras y Almacén", "Financiero"], imagen: "", video: "", captura: "", comentarios: ""
         }
       ]
     }

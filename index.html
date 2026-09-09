@@ -6,7 +6,16 @@
   <title>ES-METALS · Ecosistema Tecnológico</title>
   <meta name="description" content="Cadena de valor de ES-METALS soportada por sistemas de información.">
   <link rel="icon" href="assets/img/logo-esmetals-vertical.png">
-  <link rel="stylesheet" href="assets/css/estilos.css">
+
+  <!-- El diseño, el motor y el contenido se piden siempre frescos, para que un
+       cambio en contenido.js se vea de inmediato y no la versión guardada por el
+       navegador. Al abrir el archivo con doble clic (file://) se cargan normal. -->
+  <script>
+    window.ESM_FRESCO = (location.protocol === 'http:' || location.protocol === 'https:')
+      ? '?t=' + Date.now() : '';
+    document.write('<link rel="stylesheet" href="assets/css/estilos.css' + window.ESM_FRESCO + '">');
+  </script>
+  <noscript><link rel="stylesheet" href="assets/css/estilos.css"></noscript>
 </head>
 <body>
 
@@ -68,7 +77,18 @@
   <!-- Aviso si el contenido no carga -->
   <noscript><p style="color:#fff;padding:40px">Esta presentación requiere JavaScript habilitado.</p></noscript>
 
-  <script src="contenido/contenido.js"></script>
-  <script src="assets/js/app.js"></script>
+  <script>
+    /* Se escriben en este orden, igual que etiquetas normales, de modo que
+       contenido.js siempre se ejecuta antes que app.js. */
+    (function () {
+      var v = window.ESM_FRESCO || '';
+      document.write('<scr' + 'ipt src="contenido/contenido.js' + v + '"><\/scr' + 'ipt>');
+      document.write('<scr' + 'ipt src="assets/js/app.js' + v + '"><\/scr' + 'ipt>');
+    })();
+  </script>
+  <noscript>
+    <script src="contenido/contenido.js"></script>
+    <script src="assets/js/app.js"></script>
+  </noscript>
 </body>
 </html>
