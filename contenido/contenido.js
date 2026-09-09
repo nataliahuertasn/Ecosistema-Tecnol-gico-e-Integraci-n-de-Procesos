@@ -218,7 +218,7 @@ window.ESM_CONTENIDO = {
               "Abastecimiento atado al avance del proyecto",
               "Alertas tempranas de desviación en fechas"
             ],
-            areas:       ["Gestión de Proyectos", "Ingeniería & Diseño", "Compras y Almacén", "Financiero"],
+            areas:       ["Gestión de Proyectos", "Ingeniería & Diseño", "Compras"],
 
             /* Imágenes de todo el frente, en orden de presentación.
                Para agregar otra: copie un bloque { archivo, titulo } y ponga
