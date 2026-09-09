@@ -136,15 +136,17 @@ window.ESM_CONTENIDO = {
            Para agregar otra, copie una línea y cambie el archivo y el título. */
         imagenes: [
           { archivo: "medios/imagenes/pa-ventas-01-leads.png",
-            titulo:  "Leads · bandeja de solicitudes y su estado de aprobación" },
+            titulo:  "Leads · bandeja de solicitudes con su estado: nuevas, en espera, aprobadas, rechazadas o con modificación solicitada" },
           { archivo: "medios/imagenes/pa-ventas-02-main-board.png",
-            titulo:  "Main Board · cotizaciones por etapa: Bidding, Approval y Follow Up" },
-          { archivo: "medios/imagenes/pa-ventas-03-estadisticas.png",
-            titulo:  "Estadísticas · adjudicadas, perdidas, nuevas cotizaciones y proyección de ventas" },
-          { archivo: "medios/imagenes/pa-ventas-04-adjudicado-por-asesor.png",
+            titulo:  "Main Board · cotizaciones por etapa —Bidding, Approval y Follow Up— con su valor" },
+          { archivo: "medios/imagenes/pa-ventas-03-versiones-cotizacion.png",
+            titulo:  "Versiones de la cotización · histórico de cada versión con sus documentos de licitación, adjuntos, destinatarios, moneda y valor" },
+          { archivo: "medios/imagenes/pa-ventas-04-estadisticas.png",
+            titulo:  "Estadísticas · adjudicadas, perdidas, nuevas cotizaciones y proyección de ventas del año" },
+          { archivo: "medios/imagenes/pa-ventas-05-adjudicado-por-asesor.png",
             titulo:  "Adjudicado por Account Manager · distribución y valor por asesor" },
-          { archivo: "medios/imagenes/pa-ventas-05-galeria-comercial.png",
-            titulo:  "Herramientas comerciales · galería de proyectos e imágenes de referencia" }
+          { archivo: "medios/imagenes/pa-ventas-06-galeria-comercial.png",
+            titulo:  "Herramientas comerciales · galería de proyectos con etiquetas por tipo de sistema" }
         ],
 
         imagen:      "",
