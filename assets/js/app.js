@@ -157,6 +157,46 @@
 
   /* Diagrama del ecosistema: núcleo ES-METALS y, en cada extremo, el logo de
      un sistema. El flujo hacia cada uno usa su color corporativo.  */
+  var ORBITA_ALTO_LOGO = 34;    // altura común de todos los logos
+  var ORBITA_ANCHO_MAX = 250;   // tope de ancho, para los logos muy alargados
+
+  /* Los logos tienen proporciones muy distintas (el de Project Agenda es siete
+     veces más ancho que alto; el de SAP, dos). Para que ninguno se vea más
+     pequeño que otro se mide cada archivo y se les da la misma altura. */
+  function ajustarLogosOrbita(raiz) {
+    Array.prototype.forEach.call(raiz.querySelectorAll('.orbita-nodo'), function (nodo) {
+      var img = nodo.querySelector('image');
+      if (!img) return;
+      var cx = parseFloat(nodo.getAttribute('data-cx'));
+      var cy = parseFloat(nodo.getAttribute('data-cy'));
+      var ruta = img.getAttribute('href') || img.getAttribute('xlink:href');
+      if (!ruta || isNaN(cx)) return;
+
+      var medida = new Image();
+      medida.onload = function () {
+        if (!medida.naturalWidth || !medida.naturalHeight) return;
+        var prop = medida.naturalWidth / medida.naturalHeight;
+        var h = ORBITA_ALTO_LOGO;
+        var w = h * prop;
+        if (w > ORBITA_ANCHO_MAX) { w = ORBITA_ANCHO_MAX; h = w / prop; }
+
+        img.setAttribute('x', cx - w / 2);
+        img.setAttribute('y', cy - h / 2);
+        img.setAttribute('width', w);
+        img.setAttribute('height', h);
+
+        var toque = nodo.querySelector('.orbita-toque');
+        if (toque) {
+          toque.setAttribute('x', cx - w / 2 - 8);
+          toque.setAttribute('y', cy - h / 2 - 10);
+          toque.setAttribute('width', w + 16);
+          toque.setAttribute('height', h + 20);
+        }
+      };
+      medida.src = ruta;
+    });
+  }
+
   function orbitaSVG() {
     var cx = 200, cy = 200, R = 132, rn = 30, rc = 54;
     var n = Math.max(SOFTWARES.length, 1);
@@ -175,9 +215,10 @@
         '<line class="orbita-flujo" x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '"' +
           ' stroke="' + esc(col) + '" style="animation-delay:' + (i * 0.6) + 's"/>';
 
-      // En cada extremo va el logo del sistema, encajado en una caja fija para
-      // que todos pesen visualmente lo mismo pese a sus distintas proporciones.
-      var lw = 150, lh = 34;
+      // En cada extremo va el logo del sistema. El tamaño definitivo se calcula
+      // en ajustarLogosOrbita(), midiendo cada archivo para que todos queden a
+      // la misma altura pese a sus proporciones tan distintas.
+      var lw = 150, lh = ORBITA_ALTO_LOGO;
       var etiqueta = lleno(s.logo)
         ? '<image class="orbita-logo" href="' + esc(s.logo) + '" xlink:href="' + esc(s.logo) + '"' +
             ' x="' + (x - lw / 2) + '" y="' + (y - lh / 2) + '" width="' + lw + '" height="' + lh + '"' +
@@ -186,6 +227,7 @@
 
       nodos +=
         '<g class="orbita-nodo" data-orbita-sw="' + esc(s.id) + '"' +
+           ' data-cx="' + x + '" data-cy="' + y + '"' +
            ' tabindex="0" role="button" aria-label="Ver ' + esc(s.nombre || '') + '">' +
           '<rect class="orbita-toque" x="' + (x - lw / 2 - 8) + '" y="' + (y - lh / 2 - 10) + '"' +
             ' width="' + (lw + 16) + '" height="' + (lh + 20) + '" rx="12"/>' +
@@ -306,15 +348,22 @@
       : '<div class="tablero"><div class="bloque-vacio">' +
           esc(s.vacio || 'Procesos por definir') + '</div></div>';
 
-    var logo = lleno(s.logo)
+    var marca = lleno(s.logo)
       ? '<img src="' + esc(s.logo) + '" alt="' + esc(s.nombre) + '">'
       : '<span>' + esc(s.nombre) + '</span>';
+
+    // Si el sistema tiene ficha propia, su logo abre el detalle del sistema
+    var logo = s.detalle
+      ? '<button class="bloque-logo bloque-logo--activo" data-sistema="' + esc(s.id) + '"' +
+          ' title="Ver ' + esc(s.nombre) + '">' + marca +
+          '<span class="bloque-logo-mas">' + svg('lupa') + '</span></button>'
+      : '<div class="bloque-logo">' + marca + '</div>';
 
     return '<article class="bloque" data-id="' + esc(s.id) + '"' +
              ' style="--color:' + esc(s.color || '#268DC2') +
                     ';--color-suave:' + esc(s.colorSuave || s.color || '#C7C6C6') +
                     ';flex:' + (+s.peso || 1) + ' 1 0">' +
-             '<div class="bloque-logo">' + logo + '</div>' +
+             logo +
              tablero +
            '</article>';
   }
@@ -371,6 +420,7 @@
   var pasos = [];
 
   escenario.appendChild(laminaPortada());
+  ajustarLogosOrbita(escenario);
   pasos.push({ lamina: 'portada', nombre: 'Portada', color: marca.colorPrimario });
 
   if ((C.cadenaCorporativa || {}).activa !== false) {
@@ -627,6 +677,10 @@
   var detalleActual = -1;
 
   SOFTWARES.forEach(function (sw) {
+    // Ficha del sistema completo, si la tiene: primera parada de su recorrido
+    if (sw.detalle) {
+      DETALLES.push({ sw: sw, tipo: 'sistema', nombre: sw.nombre });
+    }
     elementosDe(sw).forEach(function (g, gi) {
       if (g.tipo === 'caja') {
         DETALLES.push({ sw: sw, tipo: 'proceso', clave: 'caja-' + gi, nombre: g.nombre });
@@ -652,9 +706,30 @@
     var idx = -1;
     DETALLES.forEach(function (d, i) {
       if (d.sw.id !== swId || d.tipo !== tipo) return;
+      if (tipo === 'sistema') { idx = i; return; }
       if (tipo === 'consolidado' ? d.gi === ref : d.clave === ref) idx = i;
     });
     return idx;
+  }
+
+  /* Ficha del sistema completo (los módulos del aplicativo) */
+  function abrirSistema(sw) {
+    var d = sw.detalle || {};
+    abrirPanel({
+      origen:      sw.categoria || 'Sistema',
+      titulo:      d.titulo || sw.nombre,
+      ruta:        d.ruta || sw.resumen || '',
+      descripcion: d.descripcion,
+      beneficios:  d.beneficios,
+      areas:       d.areas,
+      imagenes:    d.imagenes,
+      imagen:      d.imagen,
+      captura:     d.captura,
+      video:       d.video,
+      comentarios: d.comentarios,
+      multimedia:  true,
+      color:       sw.color
+    });
   }
 
   function abrirDetalle(i) {
@@ -670,8 +745,9 @@
       panelFijado = fijado;
     }
     detalleActual = i;
-    if (d.tipo === 'consolidado') abrirConsolidado(d.sw, d.gi);
-    else abrirProceso(d.sw, procesoPorClave(d.sw, d.clave), d.clave);
+    if (d.tipo === 'sistema')          abrirSistema(d.sw);
+    else if (d.tipo === 'consolidado') abrirConsolidado(d.sw, d.gi);
+    else                               abrirProceso(d.sw, procesoPorClave(d.sw, d.clave), d.clave);
   }
 
   function moverDetalle(paso) {
@@ -852,6 +928,27 @@
       var destinoSw = -1;
       pasos.forEach(function (paso, k) { if (paso.foco === idSw) destinoSw = k; });
       if (destinoSw >= 0) irA(destinoSw);
+      return;
+    }
+
+    // Clic en el logo del sistema: abre la ficha del aplicativo completo
+    var logoSw = ev.target.closest('[data-sistema]');
+    if (logoSw) {
+      ev.stopPropagation();
+      var swLogo = SOFTWARES.filter(function (s) { return s.id === logoSw.dataset.sistema; })[0];
+      if (!swLogo) return;
+      var iSw = indiceDetalle(swLogo.id, 'sistema');
+      if (iSw < 0) return;
+      panelFijado = true;
+      var destSw = -1;
+      pasos.forEach(function (paso, k) { if (paso.foco === swLogo.id) destSw = k; });
+      if (destSw >= 0 && destSw !== actual) {
+        irA(destSw);
+        panelFijado = true;
+        setTimeout(function () { abrirDetalle(iSw); }, 280);
+      } else {
+        abrirDetalle(iSw);
+      }
       return;
     }
 

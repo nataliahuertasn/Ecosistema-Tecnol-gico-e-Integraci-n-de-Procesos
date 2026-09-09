@@ -263,9 +263,23 @@ img{ max-width:100%; }
 }
 .bloque + .bloque{ border-left:1px solid var(--linea-med); border-radius:var(--r-m); }
 
-.bloque-logo{ height:clamp(22px,2.3vh,30px); display:flex; align-items:center; }
+.bloque-logo{ height:clamp(22px,2.3vh,30px); display:flex; align-items:center; gap:9px;
+  flex:0 0 auto; align-self:flex-start; }
 .bloque-logo img{ height:100%; width:auto; object-fit:contain; transition:opacity var(--t-medio),filter var(--t-medio); }
 .bloque-logo span{ font-size:15px; font-weight:700; letter-spacing:-.01em; color:var(--tinta); }
+
+/* Logo clicable: abre la ficha del aplicativo completo */
+.bloque-logo--activo{ border:0; background:transparent; padding:0; cursor:pointer;
+  font-family:inherit; border-radius:8px; transition:opacity var(--t-rapido); }
+.bloque-logo-mas{ display:grid; place-items:center; width:20px; height:20px; flex:0 0 auto;
+  border-radius:50%; background:var(--papel-2); border:1px solid var(--linea-med);
+  color:var(--tinta-tenue); opacity:0; transition:all var(--t-rapido); }
+.bloque-logo-mas svg{ width:11px; height:11px; }
+.bloque-logo--activo:hover .bloque-logo-mas,
+.bloque-logo--activo:focus-visible .bloque-logo-mas{ opacity:1; color:var(--acento,var(--azul));
+  border-color:var(--acento,var(--azul)); }
+.bloque-logo--activo:focus{ outline:none; }
+.bloque-logo--activo:focus-visible{ outline:2px solid var(--azul); outline-offset:4px; }
 
 /* Estados de enfoque (mismo comportamiento del documento original) */
 .mapa[data-foco] .bloque:not(.enfocado){ --tono:var(--color-suave); --tono-txt:rgba(255,255,255,.92); }

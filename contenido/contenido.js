@@ -129,6 +129,33 @@ window.ESM_CONTENIDO = {
       resumen:     "Centraliza la gestión comercial, técnica y operativa: del lead a la entrega en obra, sobre una única fuente de información.",
 
       /* ------------------------------------------------------------------
+         FICHA DEL APLICATIVO
+         Se abre al hacer clic en el logo del sistema dentro del mapa.
+         Quite este bloque completo si no quiere que el logo sea clicable.
+         ------------------------------------------------------------------ */
+      detalle: {
+        titulo:      "Project Agenda",
+        ruta:        "Módulos del aplicativo",
+        descripcion: "Project Agenda se organiza en seis módulos que cubren el ciclo completo del proyecto. Cada área trabaja en el suyo, sobre la misma información: lo que se registra en Sales alimenta a Engineering, Projects y Operations sin volver a capturarlo.",
+        beneficios: [
+          "Un módulo por área, sobre una misma base de datos",
+          "La información fluye entre módulos sin recaptura",
+          "Permisos y visibilidad según el rol de cada usuario"
+        ],
+        areas: [
+          "Sales", "Engineering", "Projects", "Operations", "Tasks", "Settings"
+        ],
+        imagenes: [
+          { archivo: "medios/imagenes/pa-modulos.png",
+            titulo:  "Módulos de Project Agenda · Sales, Engineering, Projects, Operations, Tasks y Settings" }
+        ],
+        imagen:      "",
+        video:       "",
+        captura:     "",
+        comentarios: ""
+      },
+
+      /* ------------------------------------------------------------------
          El tablero se arma con "elementos", de izquierda a derecha.
          Cada elemento es de uno de estos dos tipos:
            tipo: "caja"   -> caja alta suelta, ocupa todo el alto
@@ -305,10 +332,14 @@ window.ESM_CONTENIDO = {
 
             /* Imágenes de todo el frente, en orden de presentación. */
             imagenes: [
-              { archivo: "medios/imagenes/pa-op-01-almacen-inventario.png",
-                titulo:  "Módulo de almacén · gestión de inventario, disponibles y reservados, y solicitudes de reserva de material" },
-              { archivo: "medios/imagenes/pa-op-02-calendario-contenedores.png",
-                titulo:  "Calendario de contenedores · despachos de la semana con su packing list, work orders y país de destino" }
+              { archivo: "medios/imagenes/pa-op-01-stock-room.png",
+                titulo:  "Stock Room · existencias por código con lo disponible y lo reservado, y valor total del inventario" },
+              { archivo: "medios/imagenes/pa-op-02-avance-work-orders.jpg",
+                titulo:  "Avance de las Work Orders · progreso de producción y de calidad por proceso —punzonado, doblez, pretratamiento, pintura, corte, mecanizado— con el consolidado de la planta" },
+              { archivo: "medios/imagenes/pa-op-03-estadisticas-produccion.jpg",
+                titulo:  "Estadísticas de producción · work orders, kilogramos, part numbers y piezas ingresadas por día" },
+              { archivo: "medios/imagenes/pa-op-04-planeador-despachos.png",
+                titulo:  "Planeador de despachos · calendario semanal de contenedores con su packing list, work orders y país de destino" }
             ],
 
             imagen:      "",
