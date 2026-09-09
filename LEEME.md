@@ -262,6 +262,20 @@ indicando dónde va. Ese espacio **no se ve en modo presentación**.
 
 > Formatos recomendados: `.png` / `.jpg` para imágenes, `.mp4` para video.
 
+### Si reemplaza una imagen y sigue viendo la anterior
+
+Ocurre cuando el archivo nuevo conserva **el mismo nombre** que el anterior: el
+navegador muestra la copia que tenía guardada. Para evitarlo, actualice la fecha
+que está al principio de `contenido/contenido.js`:
+
+```js
+version: "2026-09-09",
+```
+
+Póngale la fecha del día en que hizo el cambio. Con eso, todos los que abran la
+presentación descargan las imágenes nuevas. También sirve una recarga forzada con
+`Ctrl + F5`, pero eso solo arregla su propio equipo.
+
 ---
 
 ## 6. Agregar un sistema nuevo

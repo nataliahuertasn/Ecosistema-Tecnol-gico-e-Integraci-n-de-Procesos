@@ -469,16 +469,24 @@
     }).filter(function (m) { return lleno(m.archivo); });
   }
 
+  /* Añade la versión de los medios a la ruta, para que al reemplazar una
+     imagen conservando su nombre el navegador no muestre la que tenía en caché. */
+  function conVersion(ruta) {
+    var v = lleno(C.version) ? C.version.trim() : '';
+    if (!v || !lleno(ruta) || /^(https?:)?\/\//i.test(ruta) || ruta.indexOf('?') >= 0) return ruta;
+    return ruta + '?v=' + encodeURIComponent(v);
+  }
+
   function figuraImagen(titulo, ruta, numero) {
     return '<figure class="medio">' +
              '<figcaption>' + (numero ? '<i>' + ('0' + numero).slice(-2) + '</i>' : '') + esc(titulo) + '</figcaption>' +
-             '<img class="ampliable" src="' + esc(ruta) + '" alt="' + esc(titulo) + '" loading="lazy">' +
+             '<img class="ampliable" src="' + esc(conVersion(ruta)) + '" alt="' + esc(titulo) + '" loading="lazy">' +
            '</figure>';
   }
 
   function figuraVideo(titulo, ruta) {
     return '<figure class="medio"><figcaption>' + esc(titulo) + '</figcaption>' +
-           '<video src="' + esc(ruta) + '" controls preload="metadata"></video></figure>';
+           '<video src="' + esc(conVersion(ruta)) + '" controls preload="metadata"></video></figure>';
   }
 
   function medioVacio(titulo, tipo) {

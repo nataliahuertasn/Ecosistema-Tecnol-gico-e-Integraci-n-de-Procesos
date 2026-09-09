@@ -21,6 +21,14 @@
 window.ESM_CONTENIDO = {
 
   /* ----------------------------------------------------------------------
+     0. VERSIÓN DE LOS MEDIOS
+     Cambie esta fecha cada vez que REEMPLACE una imagen o un video
+     conservando el mismo nombre de archivo. Obliga a los navegadores a
+     descargar la versión nueva en vez de mostrar la que tenían guardada.
+     ---------------------------------------------------------------------- */
+  version: "2026-09-09",
+
+  /* ----------------------------------------------------------------------
      1. MARCA
      ---------------------------------------------------------------------- */
   marca: {
