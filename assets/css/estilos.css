@@ -252,7 +252,6 @@ img{ max-width:100%; }
 .mapa-nota{ flex:0 0 auto; }
 
 .bloque{
-  --tono:      var(--color);
   --tono-txt:  #fff;
   position:relative; display:flex; flex-direction:column; gap:clamp(10px,1.4vh,16px);
   padding:clamp(12px,1.4vh,18px) clamp(12px,1.2vw,18px);
@@ -281,8 +280,11 @@ img{ max-width:100%; }
 .bloque-logo--activo:focus{ outline:none; }
 .bloque-logo--activo:focus-visible{ outline:2px solid var(--azul); outline-offset:4px; }
 
-/* Estados de enfoque (mismo comportamiento del documento original) */
-.mapa[data-foco] .bloque:not(.enfocado){ --tono:var(--color-suave); --tono-txt:rgba(255,255,255,.92); }
+/* Estados de enfoque (mismo comportamiento del documento original).
+   El tono se calcula en cada caja, para que una caja pueda traer su propio
+   color sin perder la atenuación cuando el sistema no está enfocado. */
+.mapa[data-foco] .bloque:not(.enfocado) .caja{ background:var(--color-suave); }
+.mapa[data-foco] .bloque:not(.enfocado){ --tono-txt:rgba(255,255,255,.92); }
 .mapa[data-foco] .bloque:not(.enfocado) .bloque-logo img{ opacity:.34; filter:grayscale(.55); }
 .mapa[data-foco] .bloque:not(.enfocado) .caja{ box-shadow:none; }
 .mapa[data-foco] .bloque.enfocado{
@@ -301,9 +303,10 @@ img{ max-width:100%; }
 
 /* Cajas de proceso (mismas formas del documento: rectángulo redondeado y píldora) */
 .caja{
+  /* el color sale de --color, que la caja puede traer propio (ver caja() en app.js) */
   position:relative; display:flex; align-items:center; justify-content:center; text-align:center;
   border:0; cursor:pointer; font-family:inherit; color:var(--tono-txt);
-  background:var(--tono); border-radius:var(--r-m);
+  background:var(--color); border-radius:var(--r-m);
   padding:10px; min-height:clamp(40px,6.1vh,52px);
   font-size:clamp(10px,.82vw,12.5px); font-weight:600; letter-spacing:.03em; text-transform:uppercase;
   line-height:1.25; box-shadow:var(--sombra-s);

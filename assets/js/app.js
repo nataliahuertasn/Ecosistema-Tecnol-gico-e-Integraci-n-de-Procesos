@@ -291,8 +291,20 @@
   /* ====================================================== MAPA (estructura
      del documento oficial: franjas + bloques por sistema) ================= */
   function caja(s, clave, p, clases, extra) {
+    // Una caja puede traer color propio (p.color / p.colorSuave); si no, usa el del sistema
+    var propio = '';
+    if (lleno(p.color)) {
+      propio = '--color:' + esc(p.color) +
+               ';--color-suave:' + esc(lleno(p.colorSuave) ? p.colorSuave : p.color) + ';';
+    }
+    var estilo = propio ? ' style="' + propio + '"' : '';
+    // si "extra" ya trae un style, se fusionan
+    if (propio && /style="/.test(extra || '')) {
+      estilo = '';
+      extra = (extra || '').replace('style="', 'style="' + propio);
+    }
     return '<button class="caja ' + (clases || '') + '" data-tipo="proceso"' +
-             ' data-sw="' + esc(s.id) + '" data-clave="' + esc(clave) + '"' + (extra || '') + '>' +
+             ' data-sw="' + esc(s.id) + '" data-clave="' + esc(clave) + '"' + estilo + (extra || '') + '>' +
              esc(p.nombre) +
              '<span class="caja-lupa">' + svg('lupa') + '</span>' +
            '</button>';

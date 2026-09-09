@@ -412,33 +412,62 @@ window.ESM_CONTENIDO = {
       peso:        2.05,
       columnas:    3,
       categoria:   "Procesos de apoyo",
-      resumen:     "Centraliza la gestión de los procesos de apoyo: talento, tecnología, mantenimiento y cumplimiento.",
-      descripcion: "ES-Sigma es el sistema que centraliza la gestión de los procesos de apoyo de la compañía. Integra las áreas transversales —talento humano, tecnología, mantenimiento, comercio exterior, seguridad y ambiental—, estandarizando su forma de trabajar y dejando registro de la información que soporta el cumplimiento y el control interno.",
+      resumen:     "Centraliza los procesos de apoyo: investigación y desarrollo, infraestructura y administración.",
+      descripcion: "ES-Sigma es el sistema que centraliza la gestión de los procesos de apoyo de la compañía. Cubre la investigación y el desarrollo de producto, la infraestructura —tecnología, mantenimiento y gestión ambiental— y la administración —talento humano, seguridad y calidad—, estandarizando su forma de trabajar y dejando registro de la información que soporta el cumplimiento y el control interno.",
       valor: [
         "Una única fuente de información para las áreas transversales",
         "Procesos de apoyo estandarizados y trazables",
         "Soporte al cumplimiento normativo y al control interno"
       ],
       indicadores: [
-        { valor: "6", etiqueta: "Procesos soportados" },
-        { valor: "6", etiqueta: "Áreas transversales" }
+        { valor: "7", etiqueta: "Procesos soportados" },
+        { valor: "2", etiqueta: "Frentes transversales" }
       ],
-      destacado:   null,
-      transversal: null,
-      procesos: [
-        {
-          nombre: "R.H", icono: "rrhh",
-          descripcion: "Gestión del talento humano: hoja de vida del empleado, documentos, dotación y evaluación de desempeño.",
-          beneficios: ["Información del personal centralizada", "Desempeño evaluado y con plan de acción", "Trazabilidad de los procesos de talento"],
-          areas: ["Recursos Humanos"],
-          imagenes: [
-            { archivo: "medios/imagenes/sigma-rh-01-ficha-empleado.png",
-              titulo:  "Ficha del empleado · información general, familiar, documentos y parámetros de dotación" },
-            { archivo: "medios/imagenes/sigma-rh-02-desempeno.png",
-              titulo:  "Desempeño · evaluación por colaborador con autoevaluación, líder y pares, y su plan de acción" }
+
+      /* Las barras y la caja de I+D llevan color propio (gris azulado);
+         las cajas de proceso mantienen el color del sistema. */
+      elementos: [
+
+      {
+        tipo:        "caja",
+        nombre:      "Investigación & Desarrollo",
+        icono:       "calidad",
+        color:       "#8FA6BA",
+        colorSuave:  "#CBD6DF",
+        descripcion: "Biblioteca técnica del producto: matrices de extrusión y elementos de fijación, con sus medidas, sistema al que pertenecen y los archivos de cada referencia (DWG, IPT, PDF y PNG).",
+        beneficios: [
+          "Catálogo técnico consultable por medidas y sistema",
+          "Planos y archivos de cada referencia en un solo lugar",
+          "Base común para ingeniería, diseño y producción"
+        ],
+        areas:       ["Investigación & Desarrollo", "Ingeniería & Diseño"],
+        imagenes: [
+          { archivo: "medios/imagenes/sigma-id-01-matrices-extrusion.png",
+            titulo:  "Biblioteca técnica · matrices de extrusión con su forma, categoría, medidas, sistema y archivos asociados" },
+          { archivo: "medios/imagenes/sigma-id-02-fijaciones.png",
+            titulo:  "Biblioteca técnica · elementos de fijación con su código, tipo de cabeza, diámetro, longitud y archivos" }
+        ],
+        imagen: "", video: "", captura: "", comentarios: ""
+      },
+
+      {
+        tipo: "grupo",
+        transversal: {
+          nombre:      "Infraestructura",
+          icono:       "ti",
+          color:       "#8FA6BA",
+          colorSuave:  "#CBD6DF",
+          descripcion: "Frente que agrupa los servicios que sostienen la operación físicamente y tecnológicamente: T.I, Mantenimiento y Gestión Ambiental.",
+          beneficios: [
+            "Solicitudes de servicio con un mismo flujo",
+            "Trazabilidad de la atención y su evidencia",
+            "Disponibilidad de equipos e instalaciones"
           ],
+          areas:       ["Tecnología (T.I.)", "Mantenimiento", "Gestión Ambiental"],
+          imagenes:    [],
           imagen: "", video: "", captura: "", comentarios: ""
         },
+        procesos: [
         {
           nombre: "T.I", icono: "ti",
           descripcion: "Gestión de los servicios de tecnología: mesa de servicio para el soporte del día a día y el ciclo de las solicitudes de desarrollo de software.",
@@ -468,10 +497,46 @@ window.ESM_CONTENIDO = {
           imagen: "", video: "", captura: "", comentarios: ""
         },
         {
-          nombre: "Comercio Exterior", icono: "comercio",
-          descripcion: "Gestión de importaciones, exportaciones y trámites aduaneros asociados a la operación.",
-          beneficios: ["Seguimiento a embarques y nacionalizaciones", "Documentación aduanera organizada", "Visibilidad de tiempos de tránsito"],
-          areas: ["Comercio Exterior", "Compras y Almacén"], imagen: "", video: "", captura: "", comentarios: ""
+          nombre: "Gestión Ambiental", icono: "ambiental",
+          descripcion: "Gestión del cumplimiento ambiental y del manejo responsable de residuos de la operación.",
+          beneficios: ["Seguimiento a indicadores ambientales", "Control del manejo de residuos", "Soporte al cumplimiento normativo"],
+          areas: ["Gestión Ambiental", "Operaciones"],
+          imagenes: [],
+          imagen: "", video: "", captura: "", comentarios: ""
+        }
+        ]
+      },
+
+      {
+        tipo: "grupo",
+        transversal: {
+          nombre:      "Administración",
+          icono:       "rrhh",
+          color:       "#8FA6BA",
+          colorSuave:  "#CBD6DF",
+          descripcion: "Frente que agrupa la gestión del personal y del cumplimiento: RRHH, SST y el Sistema de Gestión de Calidad.",
+          beneficios: [
+            "Información del personal y su desempeño en un solo lugar",
+            "Entregas de dotación y EPP controladas",
+            "Soporte documental para auditorías y certificaciones"
+          ],
+          areas:       ["Recursos Humanos", "SST", "Calidad"],
+          imagenes:    [],
+          imagen: "", video: "", captura: "", comentarios: ""
+        },
+        procesos: [
+        {
+          nombre: "RRHH", icono: "rrhh",
+          descripcion: "Gestión del talento humano: hoja de vida del empleado, documentos, dotación y evaluación de desempeño.",
+          beneficios: ["Información del personal centralizada", "Desempeño evaluado y con plan de acción", "Trazabilidad de los procesos de talento"],
+          areas: ["Recursos Humanos"],
+          imagenes: [
+            { archivo: "medios/imagenes/sigma-rh-01-ficha-empleado.png",
+              titulo:  "Ficha del empleado · información general, familiar, documentos y parámetros de dotación" },
+            { archivo: "medios/imagenes/sigma-rh-02-desempeno.png",
+              titulo:  "Desempeño · evaluación por colaborador con autoevaluación, líder y pares, y su plan de acción" }
+          ],
+          imagen: "", video: "", captura: "", comentarios: ""
         },
         {
           nombre: "SST", icono: "sst",
@@ -487,11 +552,16 @@ window.ESM_CONTENIDO = {
           imagen: "", video: "", captura: "", comentarios: ""
         },
         {
-          nombre: "Gestión Ambiental", icono: "ambiental",
-          descripcion: "Gestión del cumplimiento ambiental y del manejo responsable de residuos de la operación.",
-          beneficios: ["Seguimiento a indicadores ambientales", "Control del manejo de residuos", "Soporte al cumplimiento normativo"],
-          areas: ["Gestión Ambiental", "Operaciones"], imagen: "", video: "", captura: "", comentarios: ""
+          nombre: "SGC", icono: "calidad",
+          descripcion: "Sistema de Gestión de Calidad: documentación de los procesos, control de los documentos y registros que soportan las auditorías y las certificaciones de la compañía.",
+          beneficios: ["Documentación de procesos controlada y vigente", "Registros disponibles para auditoría", "Soporte a las certificaciones de la compañía"],
+          areas: ["Calidad"],
+          imagenes: [],
+          imagen: "", video: "", captura: "", comentarios: ""
         }
+        ]
+      }
+
       ]
     },
 
