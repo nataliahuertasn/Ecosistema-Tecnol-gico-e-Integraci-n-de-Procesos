@@ -211,10 +211,11 @@ window.ESM_CONTENIDO = {
           transversal: {
             nombre:      "Gestión de Proyectos",
             icono:       "proyectos",
-            descripcion: "Frente transversal que cubre Ingeniería, Diseño y Compras. Planea, controla y hace seguimiento al proyecto durante todo su ciclo de vida, e integra la facturación y el seguimiento financiero de cada proyecto.",
+            descripcion: "Frente transversal que cubre Ingeniería, Diseño y Compras. Planea, controla y hace seguimiento al proyecto durante todo su ciclo de vida —hitos, tareas y avance—, e integra el abastecimiento, la facturación y el seguimiento financiero de cada proyecto.",
             beneficios: [
               "Planeación y control unificados del proyecto",
               "Seguimiento de hitos y compromisos con el cliente",
+              "Abastecimiento atado al avance del proyecto",
               "Alertas tempranas de desviación en fechas"
             ],
             areas:       ["Gestión de Proyectos", "Ingeniería & Diseño", "Compras y Almacén", "Financiero"],
@@ -234,7 +235,11 @@ window.ESM_CONTENIDO = {
               { archivo: "medios/imagenes/pa-gp-05-work-order-planos.png",
                 titulo:  "Detalle de la Work Order · ítems de producción con su ruta de procesos y los planos y archivos de fabricación de cada pieza (PDF, DXF, STP)" },
               { archivo: "medios/imagenes/pa-gp-06-forecast.png",
-                titulo:  "Forecast de proyectos · saldo por facturar, facturado del mes y cumplimiento frente a lo proyectado" }
+                titulo:  "Forecast de proyectos · saldo por facturar, facturado del mes y cumplimiento frente a lo proyectado" },
+              { archivo: "medios/imagenes/pa-compras-01-solicitudes.png",
+                titulo:  "Solicitudes de compra · ítems, responsables, fechas y estado a lo largo del ciclo: cotización, aprobación, compra, tránsito y recepción" },
+              { archivo: "medios/imagenes/pa-compras-02-indicadores.png",
+                titulo:  "Indicadores de compras · nivel de atención a las solicitudes y cumplimiento de entregas por mes" }
             ],
 
             imagen:      "",
@@ -274,15 +279,15 @@ window.ESM_CONTENIDO = {
               comentarios: ""
             },
             {
-              nombre:      "Project Management",
-              icono:       "proyectos",
-              descripcion: "Planeación, control y seguimiento del proyecto: hitos, tareas, avance y saldo por facturar frente a lo proyectado.",
+              nombre:      "Compras",
+              icono:       "compras",
+              descripcion: "Abastecimiento de los materiales del proyecto derivado de la ingeniería aprobada: solicitudes, cotización, aprobación, compra, tránsito y recepción, con seguimiento a los insumos críticos.",
               beneficios: [
-                "Hitos y tareas del proyecto en un solo tablero",
-                "Seguimiento del avance y del saldo por facturar",
-                "Alertas tempranas de desviación frente al plan"
+                "Requerimientos de material atados al proyecto",
+                "Ciclo de la solicitud trazable de punta a punta",
+                "Alerta sobre materiales críticos en riesgo"
               ],
-              areas:       ["Gestión de Proyectos", "Financiero"],
+              areas:       ["Compras y Almacén", "Comercio Exterior", "Ingeniería & Diseño"],
               imagen:      "",
               video:       "",
               captura:     "",
@@ -292,36 +297,13 @@ window.ESM_CONTENIDO = {
         },
 
       {
-        tipo:        "caja",
-        nombre:      "Compras",
-        icono:       "compras",
-        descripcion: "Abastecimiento de los materiales del proyecto derivado de la ingeniería aprobada: solicitudes, cotización, aprobación, compra, tránsito y recepción, con seguimiento a los insumos críticos.",
-        beneficios: [
-          "Requerimientos de material atados al proyecto",
-          "Ciclo de la solicitud trazable de punta a punta",
-          "Alerta sobre materiales críticos en riesgo"
-        ],
-        areas:       ["Compras y Almacén", "Comercio Exterior", "Ingeniería & Diseño"],
-        imagenes: [
-          { archivo: "medios/imagenes/pa-compras-01-solicitudes.png",
-            titulo:  "Solicitudes de compra · ítems, responsables, fechas y estado a lo largo del ciclo: cotización, aprobación, compra, tránsito y recepción" },
-          { archivo: "medios/imagenes/pa-compras-02-indicadores.png",
-            titulo:  "Indicadores de compras · nivel de atención a las solicitudes y cumplimiento de entregas por mes" }
-        ],
-        imagen:      "",
-        video:       "",
-        captura:     "",
-        comentarios: ""
-      },
-
-      {
           tipo: "grupo",
           detalleConsolidado: true,
 
           transversal: {
             nombre:      "Operaciones",
             icono:       "produccion",
-            descripcion: "Frente transversal que cubre Inventario, Fabricación y Logística. Ejecuta el proyecto desde la reserva del material hasta el despacho: el almacén controla existencias y reservas, las Work Orders almacenan los planos y los detalles de fabricación de cada pieza, y el calendario de contenedores organiza los envíos.",
+            descripcion: "Frente transversal que cubre Almacén, Fabricación y Logística. Ejecuta el proyecto desde la reserva del material hasta el despacho: el almacén controla existencias y reservas, las Work Orders almacenan los planos y los detalles de fabricación de cada pieza, y el calendario de contenedores organiza los envíos.",
             beneficios: [
               "Existencias y reservas de material controladas",
               "Planos y detalles de fabricación almacenados en el sistema",
@@ -349,7 +331,7 @@ window.ESM_CONTENIDO = {
           },
           procesos: [
             {
-              nombre:      "Inventario",
+              nombre:      "Almacén",
               icono:       "inventario",
               descripcion: "Recepción, custodia y control de los materiales, con visibilidad de lo disponible y lo reservado, y gestión de las solicitudes de reserva para producción.",
               beneficios: [
