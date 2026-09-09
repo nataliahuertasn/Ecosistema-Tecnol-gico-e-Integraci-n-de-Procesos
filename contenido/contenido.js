@@ -355,28 +355,22 @@ window.ESM_CONTENIDO = {
       colorSuave:  "#F8E8CB",
       banda:       2,
       peso:        2.05,
-      columnas:    4,
+      columnas:    3,
       categoria:   "Procesos de apoyo",
-      resumen:     "Centraliza la gestión de los procesos de apoyo: administración, talento, tecnología y cumplimiento.",
-      descripcion: "ES-Sigma es el sistema que centraliza la gestión de los procesos de apoyo de la compañía. Integra las áreas transversales —financiera, talento humano, tecnología, abastecimiento, comercio exterior, seguridad y ambiental—, estandarizando su forma de trabajar y dejando registro de la información que soporta el cumplimiento y el control interno.",
+      resumen:     "Centraliza la gestión de los procesos de apoyo: talento, tecnología, mantenimiento y cumplimiento.",
+      descripcion: "ES-Sigma es el sistema que centraliza la gestión de los procesos de apoyo de la compañía. Integra las áreas transversales —talento humano, tecnología, mantenimiento, comercio exterior, seguridad y ambiental—, estandarizando su forma de trabajar y dejando registro de la información que soporta el cumplimiento y el control interno.",
       valor: [
         "Una única fuente de información para las áreas transversales",
         "Procesos de apoyo estandarizados y trazables",
         "Soporte al cumplimiento normativo y al control interno"
       ],
       indicadores: [
-        { valor: "8", etiqueta: "Procesos soportados" },
-        { valor: "8", etiqueta: "Áreas transversales" }
+        { valor: "6", etiqueta: "Procesos soportados" },
+        { valor: "6", etiqueta: "Áreas transversales" }
       ],
       destacado:   null,
       transversal: null,
       procesos: [
-        {
-          nombre: "Financiero", icono: "finanzas",
-          descripcion: "Gestión contable, de costos y de tesorería que soporta la información financiera de la operación.",
-          beneficios: ["Información financiera ordenada", "Control de costos por área", "Soporte a los cierres de período"],
-          areas: ["Financiero"], imagen: "", video: "", captura: "", comentarios: ""
-        },
         {
           nombre: "R.H", icono: "rrhh",
           descripcion: "Gestión del talento humano: selección, contratación, desarrollo, nómina y bienestar.",
@@ -394,12 +388,6 @@ window.ESM_CONTENIDO = {
           descripcion: "Gestión del mantenimiento de máquinas e instalaciones para asegurar disponibilidad y confiabilidad.",
           beneficios: ["Planes de mantenimiento programados", "Historial de intervenciones por equipo", "Menor tiempo de parada no planeada"],
           areas: ["Mantenimiento", "Operaciones"], imagen: "", video: "", captura: "", comentarios: ""
-        },
-        {
-          nombre: "Compras y Almacén", icono: "compras",
-          descripcion: "Abastecimiento, relación con proveedores y control de las existencias de materiales.",
-          beneficios: ["Solicitudes y aprobaciones trazables", "Control de existencias del almacén", "Historial de proveedores"],
-          areas: ["Compras y Almacén", "Financiero"], imagen: "", video: "", captura: "", comentarios: ""
         },
         {
           nombre: "Comercio Exterior", icono: "comercio",
@@ -434,29 +422,44 @@ window.ESM_CONTENIDO = {
       peso:        1,
       columnas:    2,
       categoria:   "ERP corporativo",
-      resumen:     "Alcance por definir dentro del mapa de la cadena de valor.",
-      descripcion: "SAP es el ERP corporativo del grupo. Su alcance dentro de este mapa de la cadena de valor aún no está detallado: complete la lista 'procesos' en contenido.js y las cajas aparecerán automáticamente en el mapa, con su propio detalle.",
+      resumen:     "Núcleo administrativo y financiero de la compañía: abastecimiento, facturación, contabilidad y nómina.",
+      descripcion: "SAP es el ERP corporativo del grupo. Es el sistema transaccional donde se registra y controla la operación administrativa y financiera, y constituye la fuente oficial de la información contable de la compañía.",
       valor: [
-        "Alcance por definir",
-        "Procesos por definir",
-        "Beneficios por definir"
+        "Información financiera única y auditable",
+        "Registro transaccional de la operación administrativa",
+        "Soporte al control interno y a la auditoría"
       ],
       indicadores: [
-        { valor: "—", etiqueta: "Procesos por definir" }
+        { valor: "4",    etiqueta: "Procesos soportados" },
+        { valor: "24/7", etiqueta: "Disponibilidad" }
       ],
       destacado:   null,
       transversal: null,
-      vacio:       "Procesos por definir",
       procesos: [
-        /* Ejemplo: descomente y edite para agregar procesos a SAP
         {
           nombre: "Compras", icono: "compras",
-          descripcion: "Descripción del proceso.",
-          beneficios: ["Beneficio 1", "Beneficio 2"],
-          areas: ["Compras y Almacén"],
-          imagen: "", video: "", captura: "", comentarios: ""
+          descripcion: "Registro de las órdenes de compra y de la relación con proveedores, con los controles de aprobación definidos por la compañía.",
+          beneficios: ["Flujo de aprobación formal y trazable", "Historial de proveedores y precios", "Soporte a controles internos y auditoría"],
+          areas: ["Compras y Almacén", "Financiero"], imagen: "", video: "", captura: "", comentarios: ""
         },
-        */
+        {
+          nombre: "Facturación", icono: "facturacion",
+          descripcion: "Emisión de la facturación oficial y su integración con cartera, cumpliendo los requisitos de facturación electrónica.",
+          beneficios: ["Facturación electrónica conforme a norma", "Integración directa con cartera", "Ciclo de cobro más corto"],
+          areas: ["Financiero", "Comercial"], imagen: "", video: "", captura: "", comentarios: ""
+        },
+        {
+          nombre: "Contabilidad", icono: "contabilidad",
+          descripcion: "Registro contable de la operación, cierre de período y generación de la información financiera oficial de la compañía.",
+          beneficios: ["Cierres contables confiables", "Información financiera auditable", "Base para el control de costos"],
+          areas: ["Financiero"], imagen: "", video: "", captura: "", comentarios: ""
+        },
+        {
+          nombre: "R.H", icono: "rrhh",
+          descripcion: "Administración de personal y liquidación de nómina, con su correspondiente registro contable.",
+          beneficios: ["Nómina liquidada y contabilizada", "Información laboral centralizada", "Soporte al cumplimiento legal"],
+          areas: ["Recursos Humanos", "Financiero"], imagen: "", video: "", captura: "", comentarios: ""
+        }
       ]
     }
 

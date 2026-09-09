@@ -141,7 +141,8 @@
     var lineas = '', nodos = '';
 
     SOFTWARES.forEach(function (s, i) {
-      var a = (-90 + (360 / n) * i) * Math.PI / 180;
+      // Sentido antihorario: el primer sistema arriba y los siguientes hacia la izquierda
+      var a = (-90 - (360 / n) * i) * Math.PI / 180;
       var col = s.color || '#268DC2';
       var x  = cx + R * Math.cos(a),            y  = cy + R * Math.sin(a);
       var x1 = cx + (rc - 2) * Math.cos(a),     y1 = cy + (rc - 2) * Math.sin(a);
@@ -152,11 +153,23 @@
         '<line class="orbita-flujo" x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '"' +
           ' stroke="' + esc(col) + '" style="animation-delay:' + (i * 0.6) + 's"/>';
 
+      // Bajo cada nodo va el logo real del sistema, encajado en una caja fija
+      // para que todos pesen visualmente lo mismo pese a sus proporciones.
+      var lw = 124, lh = 28, ly = y + rn + 9;
+      var etiqueta = lleno(s.logo)
+        ? '<image class="orbita-logo" href="' + esc(s.logo) + '" xlink:href="' + esc(s.logo) + '"' +
+            ' x="' + (x - lw / 2) + '" y="' + ly + '" width="' + lw + '" height="' + lh + '"' +
+            ' preserveAspectRatio="xMidYMid meet"><title>' + esc(s.nombre || '') + '</title></image>'
+        : '<text class="orbita-etiqueta" x="' + x + '" y="' + (ly + lh / 2) + '">' + esc(s.nombre || '') + '</text>';
+
       nodos +=
-        '<g class="orbita-nodo">' +
-          '<circle cx="' + x + '" cy="' + y + '" r="' + rn + '" fill="' + esc(col) + '" stroke="' + esc(col) + '"/>' +
+        '<g class="orbita-nodo" data-orbita-sw="' + esc(s.id) + '"' +
+           ' tabindex="0" role="button" aria-label="Ver ' + esc(s.nombre || '') + '">' +
+          '<circle class="orbita-toque" cx="' + x + '" cy="' + y + '" r="' + (rn + 10) + '"/>' +
+          '<circle class="orbita-disco" cx="' + x + '" cy="' + y + '" r="' + rn + '"' +
+            ' fill="' + esc(col) + '" stroke="' + esc(col) + '"/>' +
           '<text x="' + x + '" y="' + y + '" fill="' + textoSobre(col) + '">' + esc(s.sigla || '') + '</text>' +
-          '<text class="orbita-etiqueta" x="' + x + '" y="' + (y + rn + 21) + '">' + esc(s.nombre || '') + '</text>' +
+          etiqueta +
         '</g>';
     });
 
@@ -800,6 +813,16 @@
 
   /* ------------------------------------------------------ INTERACCIONES --- */
   escenario.addEventListener('click', function (ev) {
+    // Nodos del diagrama de la portada: llevan al sistema correspondiente
+    var nodo = ev.target.closest('[data-orbita-sw]');
+    if (nodo) {
+      var idSw = nodo.getAttribute('data-orbita-sw');
+      var destinoSw = -1;
+      pasos.forEach(function (paso, k) { if (paso.foco === idSw) destinoSw = k; });
+      if (destinoSw >= 0) irA(destinoSw);
+      return;
+    }
+
     var cajaEl = ev.target.closest('.caja');
     if (cajaEl) {
       ev.stopPropagation();
@@ -916,6 +939,15 @@
       color: sw.color
     });
   }
+
+  // Los nodos del diagrama también responden al teclado
+  escenario.addEventListener('keydown', function (ev) {
+    if (ev.key !== 'Enter' && ev.key !== ' ') return;
+    var nodo = ev.target.closest && ev.target.closest('[data-orbita-sw]');
+    if (!nodo) return;
+    ev.preventDefault();
+    nodo.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+  });
 
   /* ---------------------------------------------- PANTALLA / PRESENTACIÓN */
   function pantallaCompleta() {
