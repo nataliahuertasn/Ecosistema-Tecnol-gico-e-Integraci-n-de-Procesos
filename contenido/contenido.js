@@ -26,7 +26,7 @@ window.ESM_CONTENIDO = {
      conservando el mismo nombre de archivo. Obliga a los navegadores a
      descargar la versión nueva en vez de mostrar la que tenían guardada.
      ---------------------------------------------------------------------- */
-  version: "2026-09-10e",
+  version: "2026-09-10f",
 
   /* ----------------------------------------------------------------------
      1. MARCA
@@ -163,7 +163,8 @@ window.ESM_CONTENIDO = {
         { archivo: "medios/imagenes/pa-16.png"   },   /* 16     */
         { archivo: "medios/imagenes/pa-17.png"   },   /* 17     */
         { archivo: "medios/imagenes/pa-18.png"   },   /* 18     */
-        { archivo: "medios/imagenes/pa-19.png"   }    /* 19     */
+        { archivo: "medios/imagenes/pa-19.png"   },   /* 19     */
+        { archivo: "medios/imagenes/pa-20-daily-report.png" }   /* cierre · Daily Report de obra */
       ],
 
       /* ------------------------------------------------------------------
