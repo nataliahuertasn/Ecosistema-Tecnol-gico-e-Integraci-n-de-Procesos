@@ -45,10 +45,11 @@ window.ESM_CONTENIDO = {
      ---------------------------------------------------------------------- */
   portada: {
     /* En todos estos campos: deje "" (o la lista vacía) para ocultar el elemento. */
-    etiqueta:    "Reunión Gerencial",
-    titulo:      "Ecosistema Tecnológico e Integración de Procesos",
-    subtitulo:   "Cadena de valor soportada por sistemas de información",
-    descripcion: "Cómo los sistemas de ES-METALS soportan la operación de extremo a extremo: procesos integrados, una sola fuente de información y decisiones sobre datos confiables.",
+    etiqueta:    "Management Meeting",
+    titulo:      "Technology Ecosystem and Process Integration",
+    subtitulo:   "Value chain supported by information systems",
+    descripcion: "How ES-METALS systems support operations from end to end: integrated processes, a single source of information and decisions based on reliable data.",
+    nucleo:      "Ecosystem",   /* palabra dentro del círculo del diagrama */
     grupo:       "",   /* leyenda junto al logo */
     conceptos:   [],   /* etiquetas bajo la descripción */
     pie:         ""    /* línea inferior */
@@ -146,8 +147,8 @@ window.ESM_CONTENIDO = {
         { archivo: "medios/imagenes/pa-02.png"   },
         { archivo: "medios/imagenes/pa-03.png"   },
         { archivo: "medios/videos/pa-04.mp4"     },   /* 4 · video */
+        { archivo: "medios/imagenes/pa-05.png"   },   /* sigue al video: versiones de la cotización */
         { archivo: "medios/imagenes/pa-04-1.png" },   /* 4.1 */
-        { archivo: "medios/imagenes/pa-05.png"   },
         { archivo: "medios/imagenes/pa-06.png"   },
         { archivo: "medios/imagenes/pa-07.png"   },
         { archivo: "medios/imagenes/pa-08.png"   },

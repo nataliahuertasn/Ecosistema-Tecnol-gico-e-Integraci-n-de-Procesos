@@ -163,6 +163,33 @@
   /* Los logos tienen proporciones muy distintas (el de Project Agenda es siete
      veces más ancho que alto; el de SAP, dos). Para que ninguno se vea más
      pequeño que otro se mide cada archivo y se les da la misma altura. */
+  /* El logo del núcleo se mide igual que los demás. Sin medirlo, la caja del
+     SVG casi nunca coincide con la proporción del archivo y el logo queda
+     centrado y pequeño dentro de un espacio mucho mayor. */
+  function ajustarLogoNucleo(raiz) {
+    var img = raiz.querySelector('.orbita-nucleo-logo');
+    if (!img) return;
+    var cx  = parseFloat(img.getAttribute('data-cx'));
+    var cy  = parseFloat(img.getAttribute('data-cy'));
+    var alto = parseFloat(img.getAttribute('data-alto'));
+    var anchoMax = parseFloat(img.getAttribute('data-ancho'));
+    var ruta = img.getAttribute('href') || img.getAttribute('xlink:href');
+    if (!ruta || isNaN(cx)) return;
+
+    var medida = new Image();
+    medida.onload = function () {
+      if (!medida.naturalWidth || !medida.naturalHeight) return;
+      var prop = medida.naturalWidth / medida.naturalHeight;
+      var h = alto, w = h * prop;
+      if (w > anchoMax) { w = anchoMax; h = w / prop; }
+      img.setAttribute('x', cx - w / 2);
+      img.setAttribute('y', cy - h / 2);
+      img.setAttribute('width', w);
+      img.setAttribute('height', h);
+    };
+    medida.src = ruta;
+  }
+
   function ajustarLogosOrbita(raiz) {
     Array.prototype.forEach.call(raiz.querySelectorAll('.orbita-nodo'), function (nodo) {
       var img = nodo.querySelector('image');
@@ -198,7 +225,9 @@
   }
 
   function orbitaSVG() {
-    var cx = 200, cy = 200, R = 132, rn = 30, rc = 54;
+    // rc: radio del núcleo. Manda el tamaño del logo central de ES-METALS,
+    // que se dibuja dentro de él (ver más abajo).
+    var cx = 200, cy = 200, R = 150, rn = 30, rc = 84;
     var n = Math.max(SOFTWARES.length, 1);
     var lineas = '', nodos = '';
 
@@ -243,9 +272,13 @@
         '<circle class="orbita-pulso" cx="200" cy="200" r="' + rc + '"/>' +
         lineas +
         '<circle class="orbita-nucleo" cx="200" cy="200" r="' + rc + '"/>' +
-        '<image href="' + esc(marca.logo || '') + '" xlink:href="' + esc(marca.logo || '') + '"' +
-          ' x="156" y="186" width="88" height="22" preserveAspectRatio="xMidYMid meet"/>' +
-        '<text class="orbita-centro" x="200" y="224">Ecosistema</text>' +
+        '<image class="orbita-nucleo-logo"' +
+          ' href="' + esc(marca.logo || '') + '" xlink:href="' + esc(marca.logo || '') + '"' +
+          ' data-cx="' + cx + '" data-cy="' + (cy - 10) + '" data-alto="58" data-ancho="132"' +
+          ' x="' + (cx - 62) + '" y="' + (cy - 39) + '" width="124" height="58"' +
+          ' preserveAspectRatio="xMidYMid meet"/>' +
+        '<text class="orbita-centro" x="' + cx + '" y="' + (cy + 42) + '">' +
+          esc((C.portada || {}).nucleo || 'Ecosistema') + '</text>' +
         nodos +
       '</svg>';
   }
@@ -439,6 +472,7 @@
 
   escenario.appendChild(laminaPortada());
   ajustarLogosOrbita(escenario);
+  ajustarLogoNucleo(escenario);
   pasos.push({ lamina: 'portada', nombre: 'Portada', color: marca.colorPrimario });
 
   if ((C.cadenaCorporativa || {}).activa !== false) {
@@ -812,6 +846,33 @@
      El video se reproduce donde está: al hacer clic sobre él manda su propio
      control de reproducción. Aun así entra en la lista del visor, para que la
      numeración coincida con la del recorrido y se llegue a él con las flechas. */
+  /* Un clic sobre el cuerpo del video lo reproduce o lo pausa, como en
+     cualquier reproductor. Se respeta la franja inferior, que es donde el
+     navegador dibuja sus propios controles.
+
+     Va en fase de CAPTURA: los controles nativos del navegador detienen la
+     propagación del clic, así que un manejador normal nunca se enteraría. */
+  function clicEnVideo(ev) {
+    var video = ev.target && ev.target.closest && ev.target.closest('video');
+    if (!video) return;
+    var caja = video.getBoundingClientRect();
+    if (ev.clientY > caja.bottom - 48) return;         // barra de controles
+    if (video.paused) { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
+    else { video.pause(); }
+  }
+  recCuerpo.addEventListener('click', clicEnVideo, true);
+
+  /* Mientras el video no ha arrancado se dibuja encima un botón de reproducir
+     bien visible: el control propio del navegador queda en el borde inferior
+     de la pantalla y cuesta encontrarlo. */
+  function marcarVideo(ev) {
+    var lamina = ev.target && ev.target.closest && ev.target.closest('.recorrido-lamina');
+    if (lamina) lamina.classList.toggle('reproduciendo', !ev.target.paused);
+  }
+  recCuerpo.addEventListener('play',  marcarVideo, true);
+  recCuerpo.addEventListener('pause', marcarVideo, true);
+  recCuerpo.addEventListener('ended', marcarVideo, true);
+
   recCuerpo.addEventListener('click', function (ev) {
     var img = ev.target.closest('.recorrido-lamina img');
     if (!img) return;
@@ -969,12 +1030,15 @@
     visor.querySelector('img').removeAttribute('src');
   }
 
+  visor.addEventListener('click', clicEnVideo, true);
+
   visor.addEventListener('click', function (ev) {
     var punto = ev.target.closest('.visor-punto');
     if (punto) { visorIndice = +punto.dataset.i; alternarZoom(false); pintarVisor(); return; }
     if (ev.target.closest('.visor-nav--ant')) { moverVisor(-1); return; }
     if (ev.target.closest('.visor-nav--sig')) { moverVisor(1);  return; }
     if (ev.target.closest('.visor-cerrar'))   { cerrarVisor();  return; }
+    if (ev.target.tagName === 'VIDEO')        { return; }   // lo atiende clicEnVideo
     if (ev.target.tagName === 'IMG')          { alternarZoom(); return; }  // ampliar / ajustar
     if (ev.target.closest('figure'))          { return; }
     cerrarVisor();

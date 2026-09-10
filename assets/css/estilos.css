@@ -195,7 +195,7 @@ img{ max-width:100%; }
 .orbita-etiqueta{ fill:var(--tinta); stroke:none; font-family:var(--fuente); font-size:9.5px;
   font-weight:600; letter-spacing:.15em; text-anchor:middle; text-transform:uppercase;
   dominant-baseline:central; }
-.orbita-centro{ fill:var(--tinta-tenue); stroke:none; font-family:var(--fuente); font-size:8.5px;
+.orbita-centro{ fill:var(--tinta-tenue); stroke:none; font-family:var(--fuente); font-size:10px;
   letter-spacing:.2em; text-anchor:middle; text-transform:uppercase; }
 
 /* ------------------------------------------------- CADENA CORPORATIVA -- */
@@ -432,7 +432,7 @@ img{ max-width:100%; }
 .visor img,
 .visor video{ display:block; width:100vw; height:100vh; height:100dvh;
   object-fit:contain; cursor:zoom-in; }
-.visor video{ cursor:default; background:#000; }
+.visor video{ cursor:pointer; background:#000; }
 
 /* Ampliada al tamaño real de la captura, con desplazamiento libre */
 .visor.zoom{ padding:0; place-items:start; overflow:auto; cursor:default; }
@@ -441,25 +441,28 @@ img{ max-width:100%; }
   cursor:zoom-out; box-shadow:none; }
 .visor.zoom figcaption{ display:none; }
 .visor.zoom .visor-puntos{ display:none; }
-/* El pie no resta pantalla: flota sobre la imagen, arriba a la izquierda */
+/* El pie no resta pantalla: flota sobre la imagen, arriba a la izquierda.
+   Todos los controles del visor van en tonos blancos translúcidos: pesan
+   menos sobre la captura que un fondo oscuro. */
 .visor figcaption{ position:absolute; top:22px; left:24px; z-index:2;
-  color:rgba(255,255,255,.82); font-size:12px; letter-spacing:.14em;
+  color:var(--tinta); font-size:12px; letter-spacing:.14em;
   text-transform:uppercase; padding:9px 15px; border-radius:999px;
-  background:rgba(10,20,28,.55); border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.72); border:1px solid rgba(255,255,255,.85);
   backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
   display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
 .visor figcaption:has(.visor-pie:empty):has(.visor-contador:empty){ display:none; }
 .visor-pie:empty{ display:none; }
-.visor-contador{ color:rgba(255,255,255,.7); font-variant-numeric:tabular-nums; }
+.visor-contador{ color:var(--tinta-media); font-variant-numeric:tabular-nums; }
 .visor-contador:empty{ display:none; }
 
-/* Los controles flotan sobre la captura: fondo oscuro para que se lean
-   igual de bien sobre pantallas claras que sobre el fondo del visor. */
+/* Los controles flotan sobre la captura, en blanco translúcido: se ven sin
+   robarle presencia a la imagen. */
 .visor-cerrar,.visor-nav{ position:absolute; z-index:2; display:grid; place-items:center; cursor:pointer;
-  border:1px solid rgba(255,255,255,.22); background:rgba(10,20,28,.58); color:#fff;
+  border:1px solid rgba(255,255,255,.85); background:rgba(255,255,255,.72); color:var(--tinta-media);
   backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-  transition:background var(--t-rapido), border-color var(--t-rapido); }
-.visor-cerrar:hover,.visor-nav:hover{ background:rgba(10,20,28,.85); border-color:rgba(255,255,255,.5); }
+  box-shadow:0 6px 20px -14px rgba(22,35,45,.6);
+  transition:background var(--t-rapido), color var(--t-rapido); }
+.visor-cerrar:hover,.visor-nav:hover{ background:#fff; color:var(--tinta); }
 .visor-cerrar{ top:22px; right:24px; width:40px; height:40px; border-radius:10px; }
 .visor-cerrar svg{ width:16px; height:16px; }
 .visor-nav{ top:50%; transform:translateY(-50%); width:46px; height:46px; border-radius:50%; }
@@ -470,12 +473,13 @@ img{ max-width:100%; }
 .visor-puntos{ position:absolute; z-index:2; left:50%; bottom:clamp(14px,2.4vh,24px);
   transform:translateX(-50%); display:flex; gap:8px;
   padding:9px 14px; border-radius:999px;
-  background:rgba(10,20,28,.58); border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.72); border:1px solid rgba(255,255,255,.85);
+  box-shadow:0 6px 20px -14px rgba(22,35,45,.6);
   backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
 .visor-punto{ width:8px; height:8px; padding:0; border:0; border-radius:50%; cursor:pointer;
-  background:rgba(255,255,255,.32); transition:all var(--t-rapido); }
-.visor-punto:hover{ background:rgba(255,255,255,.6); }
-.visor-punto.activo{ width:24px; border-radius:4px; background:#fff; }
+  background:rgba(22,35,45,.26); transition:all var(--t-rapido); }
+.visor-punto:hover{ background:rgba(22,35,45,.5); }
+.visor-punto.activo{ width:24px; border-radius:4px; background:var(--tinta); }
 .medio-vacio{ border:1.5px dashed var(--linea-med); border-radius:var(--r-m);
   padding:24px 20px; text-align:center; background:var(--papel-2); }
 .medio-vacio svg{ width:22px; height:22px; color:var(--tinta-tenue); margin-bottom:9px; }
@@ -611,8 +615,22 @@ body.con-recorrido .controles{ opacity:0; pointer-events:none; }
   transition:filter var(--t-rapido);
 }
 /* El video se reproduce en su propia lámina: manda su control, no el zoom */
-.recorrido-lamina:has(video){ cursor:default; }
+.recorrido-lamina:has(video){ cursor:pointer; position:relative; }
 .recorrido-lamina video{ background:#000; }
+
+/* Botón de reproducir sobre el video, hasta que arranca. No intercepta el
+   clic: quien lo recibe es el video que tiene debajo. */
+.recorrido-lamina:has(video)::after{
+  content:""; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  width:96px; height:96px; border-radius:50%; pointer-events:none;
+  background:rgba(255,255,255,.86) url("data:image/svg+xml;charset=utf-8,\
+%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E\
+%3Cpath d='M9 6.5l9 5.5-9 5.5z' fill='%2316232D'/%3E%3C/svg%3E") center/40px 40px no-repeat;
+  box-shadow:0 14px 40px -18px rgba(0,0,0,.7);
+  transition:opacity var(--t-rapido), transform var(--t-rapido);
+}
+.recorrido-lamina:has(video):hover::after{ transform:translate(-50%,-50%) scale(1.06); }
+.recorrido-lamina.reproduciendo::after{ opacity:0; }
 .recorrido-lamina:hover img{ filter:brightness(1.02); }
 .recorrido-vacio{
   margin:auto; color:var(--tinta-tenue); font-size:13px;
