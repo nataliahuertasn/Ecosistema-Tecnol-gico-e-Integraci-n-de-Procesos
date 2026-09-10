@@ -39,6 +39,11 @@
 *,*::before,*::after{ box-sizing:border-box; }
 html,body{ height:100%; }
 
+/* El atributo hidden debe ganarle a cualquier display de este archivo.
+   Sin esto, la imagen vacía del visor se seguía dibujando sobre el video
+   y lo tapaba por completo. */
+[hidden]{ display:none !important; }
+
 body{
   margin:0;
   font-family:var(--fuente);
