@@ -26,7 +26,7 @@ window.ESM_CONTENIDO = {
      conservando el mismo nombre de archivo. Obliga a los navegadores a
      descargar la versión nueva en vez de mostrar la que tenían guardada.
      ---------------------------------------------------------------------- */
-  version: "2026-09-10c",
+  version: "2026-09-10d",
 
   /* ----------------------------------------------------------------------
      1. MARCA
@@ -143,27 +143,27 @@ window.ESM_CONTENIDO = {
          imágenes repartidas por cada área del tablero.
          ------------------------------------------------------------------ */
       recorrido: [
-        { archivo: "medios/imagenes/pa-01.png"   },   /*  1 · Leads                  */
-        { archivo: "medios/imagenes/pa-06.png"   },   /*  2 · Commercial Tools       */
-        { archivo: "medios/imagenes/pa-02.png"   },   /*  3 · Main Board             */
-        { archivo: "medios/imagenes/pa-04-1.png" },   /*  4 · Assign Engineer        */
-        { archivo: "medios/imagenes/pa-03.png"   },   /*  5 · Quote · Costs          */
-        { archivo: "medios/videos/pa-04.mp4",
-          portada: "medios/imagenes/pa-04-portada.jpg" },   /*  6 · video · Edit Item */
-        { archivo: "medios/imagenes/pa-05.png"   },   /*  7 · Quote · Versions       */
-        { archivo: "medios/imagenes/pa-07.png"   },   /*  8 · Statistics             */
-        { archivo: "medios/imagenes/pa-08.png"   },
-        { archivo: "medios/imagenes/pa-09.png"   },
-        { archivo: "medios/imagenes/pa-10.png"   },
-        { archivo: "medios/imagenes/pa-11.png"   },
-        { archivo: "medios/imagenes/pa-12.png"   },
-        { archivo: "medios/imagenes/pa-13.png"   },
-        { archivo: "medios/imagenes/pa-14.png"   },
-        { archivo: "medios/imagenes/pa-15.png"   },
-        { archivo: "medios/imagenes/pa-16.png"   },
-        { archivo: "medios/imagenes/pa-17.png"   },
-        { archivo: "medios/imagenes/pa-18.png"   },
-        { archivo: "medios/imagenes/pa-19.png"   }
+        { archivo: "medios/imagenes/pa-01.png"   },   /*  1     */
+        { archivo: "medios/imagenes/pa-02.png"   },   /*  2     */
+        { archivo: "medios/imagenes/pa-03.png"   },   /*  3     */
+        { archivo: "medios/imagenes/pa-04.png"   },   /*  4     */
+        { archivo: "medios/imagenes/pa-05.png"   },   /*  5     */
+        { archivo: "medios/videos/pa-06.mp4",
+          portada: "medios/imagenes/pa-06-portada.jpg" },   /*  6 · VIDEO */
+        { archivo: "medios/imagenes/pa-06-1.png" },   /*  6.1 · va justo después del video */
+        { archivo: "medios/imagenes/pa-07.png"   },   /*  7     */
+        { archivo: "medios/imagenes/pa-08.png"   },   /*  8     */
+        { archivo: "medios/imagenes/pa-09.png"   },   /*  9     */
+        { archivo: "medios/imagenes/pa-10.png"   },   /* 10     */
+        { archivo: "medios/imagenes/pa-11.png"   },   /* 11     */
+        { archivo: "medios/imagenes/pa-12.png"   },   /* 12     */
+        { archivo: "medios/imagenes/pa-13.png"   },   /* 13     */
+        { archivo: "medios/imagenes/pa-14.png"   },   /* 14     */
+        { archivo: "medios/imagenes/pa-15.png"   },   /* 15     */
+        { archivo: "medios/imagenes/pa-16.png"   },   /* 16     */
+        { archivo: "medios/imagenes/pa-17.png"   },   /* 17     */
+        { archivo: "medios/imagenes/pa-18.png"   },   /* 18     */
+        { archivo: "medios/imagenes/pa-19.png"   }    /* 19     */
       ],
 
       /* ------------------------------------------------------------------
