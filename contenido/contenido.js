@@ -26,7 +26,7 @@ window.ESM_CONTENIDO = {
      conservando el mismo nombre de archivo. Obliga a los navegadores a
      descargar la versión nueva en vez de mostrar la que tenían guardada.
      ---------------------------------------------------------------------- */
-  version: "2026-09-10a",
+  version: "2026-09-10b",
 
   /* ----------------------------------------------------------------------
      1. MARCA
@@ -147,8 +147,8 @@ window.ESM_CONTENIDO = {
         { archivo: "medios/imagenes/pa-02.png"   },
         { archivo: "medios/imagenes/pa-03.png"   },
         { archivo: "medios/videos/pa-04.mp4"     },   /* 4 · video */
-        { archivo: "medios/imagenes/pa-05.png"   },   /* sigue al video: versiones de la cotización */
-        { archivo: "medios/imagenes/pa-04-1.png" },   /* 4.1 */
+        { archivo: "medios/imagenes/pa-04-1.png" },   /* 4.1 · va justo después del video */
+        { archivo: "medios/imagenes/pa-05.png"   },
         { archivo: "medios/imagenes/pa-06.png"   },
         { archivo: "medios/imagenes/pa-07.png"   },
         { archivo: "medios/imagenes/pa-08.png"   },
