@@ -337,9 +337,15 @@
       var cols = Math.max(1, +e.columnas || +s.columnas || procesos.length || 1);
       var peso = +e.peso || procesos.length || 1;
 
+      // "ancho" deja que una caja ocupe varias columnas de la cuadrícula,
+      // para armar filas con distinto número de cajas (2 arriba, 3 abajo...)
       var rejilla = procesos.length
         ? '<div class="procesos" style="--cols:' + cols + '">' +
-            procesos.map(function (p, i) { return caja(s, 'proceso-' + gi + '-' + i, p); }).join('') +
+            procesos.map(function (p, i) {
+              var span = Math.max(1, Math.min(cols, +p.ancho || 1));
+              var extraCaja = span > 1 ? ' style="grid-column:span ' + span + '"' : '';
+              return caja(s, 'proceso-' + gi + '-' + i, p, '', extraCaja);
+            }).join('') +
           '</div>'
         : '';
 
@@ -685,7 +691,12 @@
      de la cadena de valor, a pantalla casi completa y con scroll vertical.
      El área es solo el punto de entrada; no abre una ficha propia.        */
 
-  /* Todas las capturas de un sistema, en el orden del tablero */
+  /* Todas las pantallas de un sistema, en el orden en que se muestran.
+
+     Si el sistema trae su propia lista "recorrido" en contenido.js, esa lista
+     manda: es el guion completo del recorrido, en el orden exacto en que se
+     escribió, y puede mezclar imágenes y videos. Si no la trae, el recorrido
+     se arma solo con las capturas repartidas por las áreas del tablero.     */
   function mediosDe(sw) {
     var out = [];
     function agregar(o) {
@@ -695,6 +706,17 @@
       if (lleno(o.captura)) out.push({ archivo: o.captura, tipo: 'imagen' });
       if (lleno(o.video))   out.push({ archivo: o.video,   tipo: 'video'  });
     }
+
+    if (sw && Array.isArray(sw.recorrido) && sw.recorrido.length) {
+      sw.recorrido.forEach(function (m) {
+        if (!m || !lleno(m.archivo)) return;
+        var tipo = m.tipo === 'video' || /\.(mp4|webm|ogv|mov)$/i.test(m.archivo)
+          ? 'video' : 'imagen';
+        out.push({ archivo: m.archivo, tipo: tipo });
+      });
+      return out;
+    }
+
     procesosDe(sw).forEach(function (t) { agregar(t.p); });
     return out;
   }
@@ -785,13 +807,23 @@
 
   /* Clic en una pantalla del recorrido: la abre a pantalla completa y desde
      ahí se pasa de una a otra como en una presentación (y se puede ampliar
-     al tamaño real de la captura). */
+     al tamaño real de la captura).
+
+     El video se reproduce donde está: al hacer clic sobre él manda su propio
+     control de reproducción. Aun así entra en la lista del visor, para que la
+     numeración coincida con la del recorrido y se llegue a él con las flechas. */
   recCuerpo.addEventListener('click', function (ev) {
     var img = ev.target.closest('.recorrido-lamina img');
     if (!img) return;
-    var todas = Array.prototype.slice.call(recCuerpo.querySelectorAll('.recorrido-lamina img'));
+    var todas = Array.prototype.slice.call(
+      recCuerpo.querySelectorAll('.recorrido-lamina img, .recorrido-lamina video')
+    );
     abrirVisor(todas.map(function (x) {
-      return { src: x.getAttribute('src'), titulo: '' };
+      return {
+        src: x.getAttribute('src'),
+        titulo: '',
+        tipo: x.tagName === 'VIDEO' ? 'video' : 'imagen'
+      };
     }), todas.indexOf(img));
   });
 
@@ -823,6 +855,7 @@
       '</button>' +
       '<figure>' +
         '<img alt="">' +
+        '<video controls preload="metadata" playsinline hidden></video>' +
         '<figcaption><span class="visor-pie"></span><span class="visor-contador"></span></figcaption>' +
       '</figure>' +
       '<div class="visor-puntos"></div>' +
@@ -843,9 +876,16 @@
     });
   }
 
-  /* Zoom: alterna entre ajustar a la pantalla y el tamaño real de la captura */
+  function esVideoVisor() {
+    var m = visorLista[visorIndice];
+    return !!(m && m.tipo === 'video');
+  }
+
+  /* Zoom: alterna entre ajustar a la pantalla y el tamaño real de la captura.
+     Un video no se amplía: siempre se ve ajustado a la pantalla. */
   function alternarZoom(forzar) {
     var activo = typeof forzar === 'boolean' ? forzar : !visor.classList.contains('zoom');
+    if (esVideoVisor()) activo = false;
     visor.classList.toggle('zoom', activo);
     if (activo) {
       var img = visor.querySelector('img');
@@ -860,9 +900,27 @@
   function pintarVisor() {
     var m = visorLista[visorIndice];
     if (!m) return;
-    var img = visor.querySelector('img');
-    img.src = m.src;
-    img.alt = m.titulo;
+    var img   = visor.querySelector('img');
+    var video = visor.querySelector('video');
+
+    // Un video se detiene y se descarga al salir de él, para no seguir bajando
+    // datos de fondo mientras se ven las demás pantallas.
+    video.pause();
+
+    if (m.tipo === 'video') {
+      img.hidden = true;
+      img.removeAttribute('src');
+      video.hidden = false;
+      if (video.getAttribute('src') !== m.src) video.setAttribute('src', m.src);
+    } else {
+      video.hidden = true;
+      video.removeAttribute('src');
+      video.load();
+      img.hidden = false;
+      img.src = m.src;
+      img.alt = m.titulo;
+    }
+
     visor.querySelector('.visor-pie').textContent = m.titulo;
     visor.querySelector('.visor-contador').textContent =
       visorLista.length > 1 ? (visorIndice + 1) + ' / ' + visorLista.length : '';
@@ -887,7 +945,7 @@
     pintarVisor();
   }
 
-  /* lista: [{src, titulo}] · indice: por cuál empieza */
+  /* lista: [{src, titulo, tipo}] · indice: por cuál empieza */
   function abrirVisor(lista, indice) {
     visorLista = lista || [];
     visorIndice = Math.max(0, indice || 0);
@@ -899,9 +957,15 @@
   }
 
   function cerrarVisor() {
+    var video = visor.querySelector('video');
+    video.pause();
+    video.removeAttribute('src');
+    video.load();
+    visorLista = [];
     visor.classList.remove('abierto');
     visor.setAttribute('aria-hidden', 'true');
-    alternarZoom(false);
+    visor.classList.remove('zoom');
+    visor.scrollTo(0, 0);
     visor.querySelector('img').removeAttribute('src');
   }
 

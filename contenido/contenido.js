@@ -26,7 +26,7 @@ window.ESM_CONTENIDO = {
      conservando el mismo nombre de archivo. Obliga a los navegadores a
      descargar la versión nueva en vez de mostrar la que tenían guardada.
      ---------------------------------------------------------------------- */
-  version: "2026-09-09c",
+  version: "2026-09-10a",
 
   /* ----------------------------------------------------------------------
      1. MARCA
@@ -129,6 +129,42 @@ window.ESM_CONTENIDO = {
       resumen:     "Centraliza la gestión comercial, técnica y operativa: del lead a la entrega en obra, sobre una única fuente de información.",
 
       /* ------------------------------------------------------------------
+         RECORRIDO DEL SISTEMA
+         Esta lista es el guion completo: al hacer clic en cualquier área del
+         mapa se muestran estas pantallas, una tras otra, EN ESTE ORDEN.
+
+         Para cambiar el orden, mueva las líneas. Para agregar una pantalla,
+         copie una línea y cambie el archivo. Para quitarla, bórrela.
+         Un video se reconoce solo por la extensión (.mp4) y se reproduce
+         dentro del recorrido con sus propios controles.
+
+         Si borra este bloque completo, el recorrido vuelve a armarse con las
+         imágenes repartidas por cada área del tablero.
+         ------------------------------------------------------------------ */
+      recorrido: [
+        { archivo: "medios/imagenes/pa-01.png"   },
+        { archivo: "medios/imagenes/pa-02.png"   },
+        { archivo: "medios/imagenes/pa-03.png"   },
+        { archivo: "medios/videos/pa-04.mp4"     },   /* 4 · video */
+        { archivo: "medios/imagenes/pa-04-1.png" },   /* 4.1 */
+        { archivo: "medios/imagenes/pa-05.png"   },
+        { archivo: "medios/imagenes/pa-06.png"   },
+        { archivo: "medios/imagenes/pa-07.png"   },
+        { archivo: "medios/imagenes/pa-08.png"   },
+        { archivo: "medios/imagenes/pa-09.png"   },
+        { archivo: "medios/imagenes/pa-10.png"   },
+        { archivo: "medios/imagenes/pa-11.png"   },
+        { archivo: "medios/imagenes/pa-12.png"   },
+        { archivo: "medios/imagenes/pa-13.png"   },
+        { archivo: "medios/imagenes/pa-14.png"   },
+        { archivo: "medios/imagenes/pa-15.png"   },
+        { archivo: "medios/imagenes/pa-16.png"   },
+        { archivo: "medios/imagenes/pa-17.png"   },
+        { archivo: "medios/imagenes/pa-18.png"   },
+        { archivo: "medios/imagenes/pa-19.png"   }
+      ],
+
+      /* ------------------------------------------------------------------
          FICHA DEL APLICATIVO
          Se abre al hacer clic en el logo del sistema dentro del mapa.
          Quite este bloque completo si no quiere que el logo sea clicable.
@@ -197,20 +233,7 @@ window.ESM_CONTENIDO = {
 
         /* Galería: se muestran en este mismo orden dentro del panel de detalle.
            Para agregar otra, copie una línea y cambie el archivo y el título. */
-        imagenes: [
-          { archivo: "medios/imagenes/pa-ventas-01-leads.png",
-            titulo:  "Leads · bandeja de solicitudes con su estado: nuevas, en espera, aprobadas, rechazadas o con modificación solicitada" },
-          { archivo: "medios/imagenes/pa-ventas-02-main-board.png",
-            titulo:  "Main Board · cotizaciones por etapa —Bidding, Approval y Follow Up— con su valor" },
-          { archivo: "medios/imagenes/pa-ventas-03-versiones-cotizacion.png",
-            titulo:  "Versiones de la cotización · histórico de cada versión con sus documentos de licitación, adjuntos, destinatarios, moneda y valor" },
-          { archivo: "medios/imagenes/pa-ventas-04-estadisticas.png",
-            titulo:  "Estadísticas · adjudicadas, perdidas, nuevas cotizaciones y proyección de ventas del año" },
-          { archivo: "medios/imagenes/pa-ventas-05-adjudicado-por-asesor.png",
-            titulo:  "Adjudicado por Account Manager · distribución y valor por asesor" },
-          { archivo: "medios/imagenes/pa-ventas-06-galeria-comercial.png",
-            titulo:  "Herramientas comerciales · galería de proyectos con etiquetas por tipo de sistema" }
-        ],
+        imagenes: [],
 
         imagen:      "",
         video:       "",
@@ -241,24 +264,7 @@ window.ESM_CONTENIDO = {
             /* Imágenes de todo el frente, en orden de presentación.
                Para agregar otra: copie un bloque { archivo, titulo } y ponga
                una coma al final del anterior. */
-            imagenes: [
-              { archivo: "medios/imagenes/pa-gp-01-asignacion-ingenieros.png",
-                titulo:  "Asignación de ingenieros · pendientes por asignar y carga horaria semanal de cada ingeniero" },
-              { archivo: "medios/imagenes/pa-gp-02-main-board-proyectos.png",
-                titulo:  "Main Board de proyectos · precio, facturado y saldo por facturar de cada proyecto, en COP y USD" },
-              { archivo: "medios/imagenes/pa-gp-03-detalle-proyecto.png",
-                titulo:  "Detalle del proyecto · cliente, account manager, project manager, precio de contrato, facturado y saldo por facturar" },
-              { archivo: "medios/imagenes/pa-gp-04-work-orders.png",
-                titulo:  "Work Orders del proyecto · órdenes de producción con su estado: enviadas, aprobadas o rechazadas" },
-              { archivo: "medios/imagenes/pa-gp-05-work-order-planos.png",
-                titulo:  "Detalle de la Work Order · ítems de producción con su ruta de procesos y los planos y archivos de fabricación de cada pieza (PDF, DXF, STP)" },
-              { archivo: "medios/imagenes/pa-gp-06-forecast.png",
-                titulo:  "Forecast de proyectos · saldo por facturar, facturado del mes y cumplimiento frente a lo proyectado" },
-              { archivo: "medios/imagenes/pa-compras-01-solicitudes.png",
-                titulo:  "Solicitudes de compra · ítems, responsables, fechas y estado a lo largo del ciclo: cotización, aprobación, compra, tránsito y recepción" },
-              { archivo: "medios/imagenes/pa-compras-02-indicadores.png",
-                titulo:  "Indicadores de compras · nivel de atención a las solicitudes y cumplimiento de entregas por mes" }
-            ],
+            imagenes: [],
 
             imagen:      "",
             video:       "",
@@ -331,16 +337,7 @@ window.ESM_CONTENIDO = {
             areas:       ["Operaciones", "Compras y Almacén", "Instalación", "Mantenimiento"],
 
             /* Imágenes de todo el frente, en orden de presentación. */
-            imagenes: [
-              { archivo: "medios/imagenes/pa-op-01-stock-room.png",
-                titulo:  "Stock Room · existencias por código con lo disponible y lo reservado, y valor total del inventario" },
-              { archivo: "medios/imagenes/pa-op-02-avance-work-orders.jpg",
-                titulo:  "Avance de las Work Orders · progreso de producción y de calidad por proceso —punzonado, doblez, pretratamiento, pintura, corte, mecanizado— con el consolidado de la planta" },
-              { archivo: "medios/imagenes/pa-op-03-estadisticas-produccion.jpg",
-                titulo:  "Estadísticas de producción · work orders, kilogramos, part numbers y piezas ingresadas por día" },
-              { archivo: "medios/imagenes/pa-op-04-planeador-despachos.png",
-                titulo:  "Planeador de despachos · calendario semanal de contenedores con su packing list, work orders y país de destino" }
-            ],
+            imagenes: [],
 
             imagen:      "",
             video:       "",
@@ -593,10 +590,13 @@ window.ESM_CONTENIDO = {
       colorSuave:  "#8CB1C3",
       banda:       2,
       peso:        1,
-      columnas:    3,
+      /* La cuadrícula tiene 6 columnas para poder repartir las cajas en dos
+         filas desiguales: arriba dos cajas de 3 columnas cada una y abajo
+         tres cajas de 2. El reparto lo define el "ancho" de cada proceso. */
+      columnas:    6,
       categoria:   "ERP corporativo",
-      resumen:     "Núcleo administrativo y financiero: abastecimiento, facturación, nómina, contabilidad y almacén.",
-      /* Orden de la cadena: Compras · Facturación · Nómina · Contabilidad · Almacén */
+      resumen:     "Núcleo administrativo y financiero: abastecimiento, almacén, facturación, nómina y contabilidad.",
+      /* Orden de la cadena: Compras · Almacén / Facturación · Nómina · Contabilidad */
       descripcion: "SAP es el ERP corporativo del grupo. Es el sistema transaccional donde se registra y controla la operación administrativa y financiera, y constituye la fuente oficial de la información contable y del inventario valorizado de la compañía.",
       valor: [
         "Información financiera única y auditable",
@@ -610,8 +610,10 @@ window.ESM_CONTENIDO = {
       destacado:   null,
       transversal: null,
       procesos: [
+
+        /* --- Fila superior: dos cajas anchas (ancho 3 de 6 columnas) --- */
         {
-          nombre: "Compras", icono: "compras",
+          nombre: "Compras", icono: "compras", ancho: 3,
           descripcion: "Registro de las órdenes de compra y de la relación con proveedores, con los controles de aprobación definidos por la compañía.",
           beneficios: ["Flujo de aprobación formal y trazable", "Historial de proveedores y precios", "Soporte a controles internos y auditoría"],
           areas: ["Compras y Almacén", "Financiero"],
@@ -622,7 +624,24 @@ window.ESM_CONTENIDO = {
           imagen: "", video: "", captura: "", comentarios: ""
         },
         {
-          nombre: "Facturación", icono: "facturacion",
+          nombre: "Almacén", icono: "almacen", ancho: 3,
+          descripcion: "Control de las existencias y de los movimientos de almacén, con la valorización del inventario de materia prima y producto terminado.",
+          beneficios: ["Inventario valorizado en el ERP", "Movimientos de almacén registrados", "Base para el costeo de la operación"],
+          areas: ["Compras y Almacén", "Financiero"],
+          imagenes: [
+            { archivo: "medios/imagenes/sap-almacen-01-menu-transacciones.png",
+              titulo:  "Transacciones de almacén · movimiento de mercancías, resumen y listado de stocks, documentos de material y reservas" },
+            { archivo: "medios/imagenes/sap-almacen-02-stocks-por-material.png",
+              titulo:  "Stocks en almacén por material · consulta por material, centro, almacén y lote, con stocks especiales" },
+            { archivo: "medios/imagenes/sap-almacen-03-entrada-mercancias.png",
+              titulo:  "Entrada de mercancías · recepción contra el pedido, con traspasos, devoluciones y liberación de stock bloqueado" }
+          ],
+          imagen: "", video: "", captura: "", comentarios: ""
+        },
+
+        /* --- Fila inferior: tres cajas (ancho 2 de 6 columnas) --- */
+        {
+          nombre: "Facturación", icono: "facturacion", ancho: 2,
           descripcion: "Emisión de la facturación oficial y su integración con cartera, cumpliendo los requisitos de facturación electrónica.",
           beneficios: ["Facturación electrónica conforme a norma", "Integración directa con cartera", "Ciclo de cobro más corto"],
           areas: ["Financiero", "Comercial"],
@@ -633,7 +652,7 @@ window.ESM_CONTENIDO = {
           imagen: "", video: "", captura: "", comentarios: ""
         },
         {
-          nombre: "Nómina", icono: "rrhh",
+          nombre: "Nómina", icono: "rrhh", ancho: 2,
           descripcion: "Administración de personal y liquidación de nómina sobre la estructura organizacional de la compañía, con su correspondiente registro contable.",
           beneficios: ["Nómina liquidada y contabilizada", "Estructura organizacional y posiciones definidas", "Soporte al cumplimiento legal"],
           areas: ["Recursos Humanos", "Financiero"],
@@ -644,7 +663,7 @@ window.ESM_CONTENIDO = {
           imagen: "", video: "", captura: "", comentarios: ""
         },
         {
-          nombre: "Contabilidad", icono: "contabilidad",
+          nombre: "Contabilidad", icono: "contabilidad", ancho: 2,
           descripcion: "Registro contable de la operación, cierre de período y generación de la información financiera oficial de la compañía.",
           beneficios: ["Cierres contables confiables", "Información financiera auditable", "Base para el control de costos"],
           areas: ["Financiero"],
@@ -653,20 +672,6 @@ window.ESM_CONTENIDO = {
               titulo:  "Documento de factura · registro contable de la factura del proveedor con impuestos, retención, condiciones de pago y su referencia al pedido de compra" }
           ],
           imagen: "", video: "", captura: "", comentarios: ""
-        },
-        {
-          nombre: "Almacén", icono: "almacen",
-          descripcion: "Control de las existencias y de los movimientos de almacén, con la valorización del inventario de materia prima y producto terminado.",
-          beneficios: ["Inventario valorizado en el ERP", "Movimientos de almacén registrados", "Base para el costeo de la operación"],
-          imagenes: [
-            { archivo: "medios/imagenes/sap-almacen-01-menu-transacciones.png",
-              titulo:  "Transacciones de almacén · movimiento de mercancías, resumen y listado de stocks, documentos de material y reservas" },
-            { archivo: "medios/imagenes/sap-almacen-02-stocks-por-material.png",
-              titulo:  "Stocks en almacén por material · consulta por material, centro, almacén y lote, con stocks especiales" },
-            { archivo: "medios/imagenes/sap-almacen-03-entrada-mercancias.png",
-              titulo:  "Entrada de mercancías · recepción contra el pedido, con traspasos, devoluciones y liberación de stock bloqueado" }
-          ],
-          areas: ["Compras y Almacén", "Financiero"], imagen: "", video: "", captura: "", comentarios: ""
         }
       ]
     }

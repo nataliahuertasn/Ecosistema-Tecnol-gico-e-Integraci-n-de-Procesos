@@ -429,8 +429,10 @@ img{ max-width:100%; }
   opacity:0; visibility:hidden; transition:opacity var(--t-medio), visibility var(--t-medio); }
 .visor.abierto{ opacity:1; visibility:visible; }
 .visor figure{ margin:0; max-width:none; max-height:none; display:block; cursor:default; }
-.visor img{ display:block; width:100vw; height:100vh; height:100dvh;
+.visor img,
+.visor video{ display:block; width:100vw; height:100vh; height:100dvh;
   object-fit:contain; cursor:zoom-in; }
+.visor video{ cursor:default; background:#000; }
 
 /* Ampliada al tamaño real de la captura, con desplazamiento libre */
 .visor.zoom{ padding:0; place-items:start; overflow:auto; cursor:default; }
@@ -608,6 +610,9 @@ body.con-recorrido .controles{ opacity:0; pointer-events:none; }
   display:block; width:100%; height:100%; object-fit:contain;
   transition:filter var(--t-rapido);
 }
+/* El video se reproduce en su propia lámina: manda su control, no el zoom */
+.recorrido-lamina:has(video){ cursor:default; }
+.recorrido-lamina video{ background:#000; }
 .recorrido-lamina:hover img{ filter:brightness(1.02); }
 .recorrido-vacio{
   margin:auto; color:var(--tinta-tenue); font-size:13px;
@@ -647,6 +652,8 @@ body.presentacion .medio-vacio{ display:none; }
   .grupos{ flex-direction:column; }
   .caja--destacada{ flex:1 1 auto; min-height:64px; }
   .procesos{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  /* En dos columnas los anchos de la cuadrícula original no aplican */
+  .procesos > .caja{ grid-column:auto !important; }
   .eslabon{ flex:1 1 100%; clip-path:none !important; padding-left:24px; }
   .controles-puntos{ display:none; }
 }

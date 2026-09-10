@@ -143,6 +143,25 @@ El ancho de cada grupo se reparte según cuántos procesos tenga. Si quiere forz
 agregue `peso: 2` dentro del grupo. Si quiere varias filas dentro de un grupo,
 agregue `columnas: 3`.
 
+#### Filas con distinto número de cajas
+
+`columnas` fija en cuántas partes se divide el ancho, y `ancho` dice cuántas de esas
+partes ocupa cada caja. Así se arma la cadena de SAP: dos cajas arriba y tres abajo,
+sobre una cuadrícula de seis columnas.
+
+```js
+columnas: 6,
+procesos: [
+  { nombre: "Compras",     ancho: 3, ... },   // 3 + 3 = 6  -> primera fila
+  { nombre: "Almacén",     ancho: 3, ... },
+  { nombre: "Facturación", ancho: 2, ... },   // 2 + 2 + 2  -> segunda fila
+  { nombre: "Nómina",      ancho: 2, ... },
+  { nombre: "Contabilidad",ancho: 2, ... }
+]
+```
+
+Si omite `ancho`, la caja ocupa una sola columna.
+
 #### Contenido centralizado en la barra transversal
 
 Con `detalleConsolidado: true` **todo el material del frente se carga en un solo
@@ -228,19 +247,45 @@ Al hacer clic en la caja del proceso se abre el panel lateral con toda esta info
 ## 5. Agregar imágenes y videos
 
 1. Copie el archivo dentro de `medios/imagenes/` o `medios/videos/`
-2. Escríbalo en el proceso correspondiente
+2. Escríbalo en la lista que corresponda
 
-### Varias imágenes en orden (recomendado)
+### El recorrido de un sistema (recomendado)
 
-Use la lista `imagenes`. **Se muestran en el mismo orden en que estén escritas**,
-numeradas 01, 02, 03… Es lo que se usa hoy en el proceso *Ventas* de Project Agenda:
+Es lo que se ve al hacer clic en cualquier área del mapa: todas las pantallas del
+sistema, una tras otra, a pantalla completa. Se define con la lista `recorrido`,
+**en el orden exacto en que se escriba**. Es lo que usa hoy Project Agenda:
+
+```js
+recorrido: [
+  { archivo: "medios/imagenes/pa-01.png" },
+  { archivo: "medios/imagenes/pa-02.png" },
+  { archivo: "medios/videos/pa-04.mp4"   },   // un video: se reproduce aquí mismo
+  { archivo: "medios/imagenes/pa-04-1.png" }
+],
+```
+
+- Para **reordenar**, mueva las líneas de lugar.
+- Para **agregar** una pantalla, copie una línea y cambie el archivo.
+- Para **quitarla**, bórrela (cuide las comas).
+- Un **video** se reconoce solo por la extensión `.mp4` y se muestra con sus
+  controles de reproducción, en su propia pantalla del recorrido.
+
+Si un sistema **no** tiene lista `recorrido` —hoy es el caso de ES-Sigma y de SAP—
+el recorrido se arma solo, encadenando las imágenes de cada área en el orden en que
+las áreas aparecen en la cadena de valor. Basta con reordenar las áreas para que las
+imágenes se reordenen con ellas.
+
+### Varias imágenes dentro de un área
+
+Use la lista `imagenes` del proceso. **Se muestran en el mismo orden en que estén
+escritas.** Es lo que se usa hoy en el proceso *Almacén* de SAP:
 
 ```js
 imagenes: [
-  { archivo: "medios/imagenes/pa-ventas-01-leads.png",
-    titulo:  "Leads · bandeja de solicitudes y su estado de aprobación" },
-  { archivo: "medios/imagenes/pa-ventas-02-main-board.png",
-    titulo:  "Main Board · cotizaciones por etapa" }
+  { archivo: "medios/imagenes/sap-almacen-01-menu-transacciones.png",
+    titulo:  "Transacciones de almacén · movimientos, stocks y reservas" },
+  { archivo: "medios/imagenes/sap-almacen-02-stocks-por-material.png",
+    titulo:  "Stocks en almacén por material" }
 ],
 ```
 
