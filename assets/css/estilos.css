@@ -425,31 +425,39 @@ img{ max-width:100%; }
 
 /* Visor a pantalla completa para las capturas */
 .visor{ position:fixed; inset:0; z-index:100; display:grid; place-items:center;
-  padding:12px; background:rgba(10,20,28,.94); cursor:zoom-out;
+  padding:0; background:rgba(10,20,28,.94); cursor:zoom-out;
   opacity:0; visibility:hidden; transition:opacity var(--t-medio), visibility var(--t-medio); }
 .visor.abierto{ opacity:1; visibility:visible; }
-.visor figure{ margin:0; max-width:100%; max-height:100%; display:flex;
-  flex-direction:column; gap:12px; align-items:center; cursor:default; }
-.visor img{ max-width:100%; max-height:calc(100vh - 96px); object-fit:contain; display:block;
-  background:#fff; box-shadow:0 40px 90px -40px rgba(0,0,0,.8); cursor:zoom-in; }
+.visor figure{ margin:0; max-width:none; max-height:none; display:block; cursor:default; }
+.visor img{ display:block; width:100vw; height:100vh; height:100dvh;
+  object-fit:contain; cursor:zoom-in; }
 
 /* Ampliada al tamaño real de la captura, con desplazamiento libre */
 .visor.zoom{ padding:0; place-items:start; overflow:auto; cursor:default; }
 .visor.zoom figure{ max-width:none; max-height:none; display:block; }
-.visor.zoom img{ max-width:none; max-height:none; width:auto; cursor:zoom-out; box-shadow:none; }
+.visor.zoom img{ width:auto; height:auto; max-width:none; max-height:none;
+  cursor:zoom-out; box-shadow:none; }
 .visor.zoom figcaption{ display:none; }
 .visor.zoom .visor-puntos{ display:none; }
-.visor figcaption{ color:rgba(255,255,255,.82); font-size:12px; letter-spacing:.14em;
-  text-transform:uppercase; text-align:center;
-  display:flex; align-items:center; gap:16px; justify-content:center; flex-wrap:wrap; }
-.visor-contador{ color:rgba(255,255,255,.55); font-variant-numeric:tabular-nums;
-  border-left:1px solid rgba(255,255,255,.25); padding-left:16px; }
-.visor-contador:empty{ border:0; padding:0; }
+/* El pie no resta pantalla: flota sobre la imagen, arriba a la izquierda */
+.visor figcaption{ position:absolute; top:22px; left:24px; z-index:2;
+  color:rgba(255,255,255,.82); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; padding:9px 15px; border-radius:999px;
+  background:rgba(10,20,28,.55); border:1px solid rgba(255,255,255,.16);
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+.visor figcaption:has(.visor-pie:empty):has(.visor-contador:empty){ display:none; }
+.visor-pie:empty{ display:none; }
+.visor-contador{ color:rgba(255,255,255,.7); font-variant-numeric:tabular-nums; }
+.visor-contador:empty{ display:none; }
 
-.visor-cerrar,.visor-nav{ position:absolute; display:grid; place-items:center; cursor:pointer;
-  border:1px solid rgba(255,255,255,.28); background:rgba(255,255,255,.10); color:#fff;
+/* Los controles flotan sobre la captura: fondo oscuro para que se lean
+   igual de bien sobre pantallas claras que sobre el fondo del visor. */
+.visor-cerrar,.visor-nav{ position:absolute; z-index:2; display:grid; place-items:center; cursor:pointer;
+  border:1px solid rgba(255,255,255,.22); background:rgba(10,20,28,.58); color:#fff;
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
   transition:background var(--t-rapido), border-color var(--t-rapido); }
-.visor-cerrar:hover,.visor-nav:hover{ background:rgba(255,255,255,.22); border-color:rgba(255,255,255,.5); }
+.visor-cerrar:hover,.visor-nav:hover{ background:rgba(10,20,28,.85); border-color:rgba(255,255,255,.5); }
 .visor-cerrar{ top:22px; right:24px; width:40px; height:40px; border-radius:10px; }
 .visor-cerrar svg{ width:16px; height:16px; }
 .visor-nav{ top:50%; transform:translateY(-50%); width:46px; height:46px; border-radius:50%; }
@@ -457,8 +465,11 @@ img{ max-width:100%; }
 .visor-nav--ant{ left:clamp(10px,2vw,28px); }
 .visor-nav--sig{ right:clamp(10px,2vw,28px); }
 
-.visor-puntos{ position:absolute; left:50%; bottom:clamp(16px,3vh,30px); transform:translateX(-50%);
-  display:flex; gap:8px; }
+.visor-puntos{ position:absolute; z-index:2; left:50%; bottom:clamp(14px,2.4vh,24px);
+  transform:translateX(-50%); display:flex; gap:8px;
+  padding:9px 14px; border-radius:999px;
+  background:rgba(10,20,28,.58); border:1px solid rgba(255,255,255,.16);
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
 .visor-punto{ width:8px; height:8px; padding:0; border:0; border-radius:50%; cursor:pointer;
   background:rgba(255,255,255,.32); transition:all var(--t-rapido); }
 .visor-punto:hover{ background:rgba(255,255,255,.6); }
@@ -530,29 +541,41 @@ body.en-portada .barra-marca{ opacity:0; pointer-events:none; transition:opacity
 .recorrido.abierto{ opacity:1; visibility:visible; transform:none; }
 body.con-recorrido .controles{ opacity:0; pointer-events:none; }
 
-/* Barra mínima: logo, contador y la X */
+/* Barra mínima: flota sobre las capturas para no restarles pantalla.
+   Logo, contador y X van en pastillas translúcidas sobre el fondo. */
 .recorrido-barra{
-  flex:0 0 auto; position:relative; z-index:2;
-  display:flex; align-items:center; gap:18px;
-  padding:10px clamp(14px,2vw,26px);
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--linea);
+  position:absolute; top:0; left:0; right:0; z-index:3;
+  display:flex; align-items:center; gap:14px;
+  padding:12px clamp(12px,1.6vw,20px);
+  pointer-events:none;
 }
+.recorrido-barra > *{ pointer-events:auto; }
 .recorrido-barra::before{
   content:""; position:absolute; inset:0 0 auto 0; height:3px; background:var(--acento);
 }
-.recorrido-marca{ display:flex; align-items:center; min-width:0; }
-.recorrido-marca img{ height:22px; width:auto; display:block; }
-.recorrido-marca b{ font-size:14px; font-weight:600; color:var(--tinta); }
+.recorrido-marca{
+  display:flex; align-items:center; min-width:0;
+  padding:6px 12px; border-radius:999px;
+  background:rgba(255,255,255,.82); border:1px solid rgba(255,255,255,.9);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  box-shadow:0 6px 20px -14px rgba(22,35,45,.6);
+}
+.recorrido-marca img{ height:20px; width:auto; display:block; }
+.recorrido-marca b{ font-size:13.5px; font-weight:600; color:var(--tinta); }
 .recorrido-contador{
-  margin-left:auto; font-size:11.5px; letter-spacing:.12em; color:var(--tinta-tenue);
+  margin-left:auto; font-size:11.5px; letter-spacing:.12em; color:var(--tinta-media);
   font-variant-numeric:tabular-nums; white-space:nowrap;
+  padding:7px 13px; border-radius:999px;
+  background:rgba(255,255,255,.82); border:1px solid rgba(255,255,255,.9);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  box-shadow:0 6px 20px -14px rgba(22,35,45,.6);
 }
 .recorrido-cerrar{
   flex:0 0 auto; width:38px; height:38px; display:grid; place-items:center; cursor:pointer;
-  border-radius:10px; border:1px solid var(--linea-med); background:#fff;
+  border-radius:50%; border:1px solid rgba(255,255,255,.9); background:rgba(255,255,255,.86);
   color:var(--tinta-media); transition:all var(--t-rapido);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  box-shadow:0 6px 20px -14px rgba(22,35,45,.6);
 }
 .recorrido-cerrar svg{ width:17px; height:17px; stroke-width:2; }
 .recorrido-cerrar:hover{ color:#fff; background:var(--acento); border-color:var(--acento); }
@@ -564,37 +587,39 @@ body.con-recorrido .controles{ opacity:0; pointer-events:none; }
   scroll-snap-type:y proximity; scroll-behavior:smooth;
   padding:0;
   display:flex; flex-direction:column; align-items:center;
-  gap:8px;
-  scrollbar-width:thin; scrollbar-color:rgba(22,35,45,.22) transparent;
+  gap:0;
+  /* Sin barra de desplazamiento visible: esos píxeles son de la imagen. */
+  scrollbar-width:none; -ms-overflow-style:none;
 }
-.recorrido-cuerpo::-webkit-scrollbar{ width:9px; }
-.recorrido-cuerpo::-webkit-scrollbar-thumb{ background:rgba(22,35,45,.18); border-radius:5px; }
+.recorrido-cuerpo::-webkit-scrollbar{ width:0; height:0; }
 
-/* Cada lámina reserva su pantalla aunque la imagen aún no haya cargado:
+/* Cada lámina ocupa una pantalla entera aunque la imagen aún no haya cargado:
    sin esa altura no habría scroll y la carga diferida nunca se dispararía. */
 .recorrido-lamina{
   margin:0; width:100%; flex:0 0 auto;
-  min-height:calc(100vh - 60px);
+  height:100vh; height:100dvh;
   display:flex; align-items:center; justify-content:center;
   scroll-snap-align:center; cursor:zoom-in;
 }
+/* La captura llena la pantalla hasta donde su proporción lo permite:
+   object-fit:contain la agranda o la reduce sin deformarla nunca. */
 .recorrido-lamina img,
 .recorrido-lamina video{
-  display:block; max-width:100%; height:auto;
-  max-height:calc(100vh - 60px);
-  width:auto; object-fit:contain; background:#fff;
-  box-shadow:0 10px 30px -20px rgba(22,35,45,.5);
-  transition:box-shadow var(--t-rapido);
+  display:block; width:100%; height:100%; object-fit:contain;
+  transition:filter var(--t-rapido);
 }
-.recorrido-lamina:hover img{ box-shadow:0 14px 40px -18px rgba(22,35,45,.6); }
+.recorrido-lamina:hover img{ filter:brightness(1.02); }
 .recorrido-vacio{
   margin:auto; color:var(--tinta-tenue); font-size:13px;
   letter-spacing:.05em; text-align:center;
 }
 
+/* En pantallas estrechas una captura apaisada dentro de una lámina de alto
+   completo quedaría en una franja diminuta: allí manda el ancho. */
 @media (max-width:760px){
+  .recorrido-lamina{ height:auto; min-height:55vh; }
   .recorrido-lamina img,
-  .recorrido-lamina video{ max-height:none; }
+  .recorrido-lamina video{ height:auto; max-height:none; }
 }
 
 /* -------------------------------------------------- MODO PRESENTACIÓN -- */
