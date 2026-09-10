@@ -143,15 +143,15 @@ window.ESM_CONTENIDO = {
          imágenes repartidas por cada área del tablero.
          ------------------------------------------------------------------ */
       recorrido: [
-        { archivo: "medios/imagenes/pa-01.png"   },
-        { archivo: "medios/imagenes/pa-02.png"   },
-        { archivo: "medios/imagenes/pa-03.png"   },
+        { archivo: "medios/imagenes/pa-01.png"   },   /*  1 · Leads                  */
+        { archivo: "medios/imagenes/pa-06.png"   },   /*  2 · Commercial Tools       */
+        { archivo: "medios/imagenes/pa-02.png"   },   /*  3 · Main Board             */
+        { archivo: "medios/imagenes/pa-04-1.png" },   /*  4 · Assign Engineer        */
+        { archivo: "medios/imagenes/pa-03.png"   },   /*  5 · Quote · Costs          */
         { archivo: "medios/videos/pa-04.mp4",
-          portada: "medios/imagenes/pa-04-portada.jpg" },   /* 4 · video */
-        { archivo: "medios/imagenes/pa-04-1.png" },   /* 4.1 · va justo después del video */
-        { archivo: "medios/imagenes/pa-05.png"   },
-        { archivo: "medios/imagenes/pa-06.png"   },
-        { archivo: "medios/imagenes/pa-07.png"   },
+          portada: "medios/imagenes/pa-04-portada.jpg" },   /*  6 · video · Edit Item */
+        { archivo: "medios/imagenes/pa-05.png"   },   /*  7 · Quote · Versions       */
+        { archivo: "medios/imagenes/pa-07.png"   },   /*  8 · Statistics             */
         { archivo: "medios/imagenes/pa-08.png"   },
         { archivo: "medios/imagenes/pa-09.png"   },
         { archivo: "medios/imagenes/pa-10.png"   },
