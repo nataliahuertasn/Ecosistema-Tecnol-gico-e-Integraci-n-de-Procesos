@@ -227,7 +227,7 @@
   function orbitaSVG() {
     // rc: radio del núcleo. Manda el tamaño del logo central de ES-METALS,
     // que se dibuja dentro de él (ver más abajo).
-    var cx = 200, cy = 200, R = 150, rn = 30, rc = 84;
+    var cx = 200, cy = 200, R = 158, rn = 30, rc = 96;
     var n = Math.max(SOFTWARES.length, 1);
     var lineas = '', nodos = '';
 
@@ -274,10 +274,10 @@
         '<circle class="orbita-nucleo" cx="200" cy="200" r="' + rc + '"/>' +
         '<image class="orbita-nucleo-logo"' +
           ' href="' + esc(marca.logo || '') + '" xlink:href="' + esc(marca.logo || '') + '"' +
-          ' data-cx="' + cx + '" data-cy="' + (cy - 10) + '" data-alto="58" data-ancho="132"' +
-          ' x="' + (cx - 62) + '" y="' + (cy - 39) + '" width="124" height="58"' +
+          ' data-cx="' + cx + '" data-cy="' + (cy - 12) + '" data-alto="74" data-ancho="176"' +
+          ' x="' + (cx - 80) + '" y="' + (cy - 49) + '" width="160" height="74"' +
           ' preserveAspectRatio="xMidYMid meet"/>' +
-        '<text class="orbita-centro" x="' + cx + '" y="' + (cy + 42) + '">' +
+        '<text class="orbita-centro" x="' + cx + '" y="' + (cy + 50) + '">' +
           esc((C.portada || {}).nucleo || 'Ecosistema') + '</text>' +
         nodos +
       '</svg>';
