@@ -29,12 +29,15 @@ que estén vacíos, para que la vista quede limpia frente a la gerencia.
 
 | Acción | Resultado |
 |---|---|
-| Clic sobre la cadena de valor de un sistema | Lo enfoca y atenúa los demás |
-| **Pasar el cursor** sobre una barra transversal (Gestión de Proyectos, Operaciones) | Abre una vista previa lateral de ese frente. Se cierra sola al retirar el cursor |
-| **Clic** sobre cualquier caja o barra | Abre el detalle **a pantalla completa**, en dos columnas: texto a la izquierda, evidencia visual a la derecha |
-| Botones *Anterior / Siguiente* al pie del detalle | Recorren todas las áreas del mapa sin cerrar: de Ventas & Mercadeo a Gestión de Proyectos, a Operaciones, y de ahí a los procesos de ES-Sigma. El mapa de fondo va enfocando el sistema correspondiente |
-| Teclas `←` `→` con el detalle abierto | Lo mismo que Anterior / Siguiente |
-| `Esc` o la X | Cierra el detalle |
+| **Clic sobre cualquier área** (una caja, una barra transversal o el logo del sistema) | Abre el **recorrido completo de ese sistema**: todas sus capturas, en el orden de la cadena de valor, a pantalla casi completa |
+| Scroll dentro del recorrido | Avanza por las pantallas del software, una tras otra |
+| Teclas `↓` `↑`, `AvPág` `RePág`, `Inicio` `Fin` | Recorren las pantallas sin usar el ratón |
+| La **X** arriba a la derecha, o `Esc` | Cierra el recorrido y vuelve al mapa |
+| Menú superior (Portada, Vista general, Project Agenda…) | Enfoca un sistema y atenúa los demás |
+
+> El área sobre la que se hace clic es **solo el punto de entrada**: sin importar
+> cuál se elija, se abre el mismo recorrido completo del sistema. No hay una ficha
+> por área ni hay que cerrar una vista para pasar a otra parte del mismo software.
 
 ---
 

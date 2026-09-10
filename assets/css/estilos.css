@@ -478,7 +478,6 @@ img{ max-width:100%; }
 
 /* Panel abierto al pasar el cursor: cajón lateral, deja ver el mapa */
 .panel.al-vuelo{ box-shadow:-30px 0 70px -40px rgba(22,35,45,.34); }
-.panel.al-vuelo .panel-nav{ display:none; }
 
 /* -------------------------------------- PANEL A PANTALLA COMPLETA -------
    Al abrirlo con clic ocupa toda la pantalla, en dos columnas.            */
@@ -503,37 +502,93 @@ img{ max-width:100%; }
 .panel:not(.al-vuelo) .panel-descripcion{ font-size:clamp(15px,1.2vw,17.5px); }
 .panel:not(.al-vuelo) .panel-col--medios .panel-seccion{ margin-bottom:0; }
 
-/* Barra de recorrido: pasar de un área a otra sin cerrar */
-.panel-nav{
-  flex:0 0 auto; display:flex; align-items:stretch; gap:12px;
-  border-top:1px solid var(--linea); background:var(--papel-2);
-  padding:12px clamp(20px,4vw,72px);
-}
-.panel-nav:empty{ display:none; }
-.panel-nav-boton{
-  flex:1 1 0; min-width:0; display:flex; align-items:center; gap:12px; cursor:pointer;
-  font-family:inherit; text-align:left; color:var(--tinta-media);
-  border:1px solid var(--linea-med); background:#fff; border-radius:var(--r-m);
-  padding:10px 16px; transition:all var(--t-rapido);
-}
-.panel-nav-boton--sig{ justify-content:flex-end; text-align:right; }
-.panel-nav-boton svg{ width:18px; height:18px; flex:0 0 auto; }
-.panel-nav-boton span{ min-width:0; display:block; font-size:13.5px; font-weight:600;
-  color:var(--tinta); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-.panel-nav-boton i{ display:block; font-style:normal; font-size:9.5px; font-weight:600;
-  letter-spacing:.16em; text-transform:uppercase; color:var(--tinta-tenue); margin-bottom:3px; }
-.panel-nav-boton:hover:not(:disabled){ border-color:var(--acento); background:#fff;
-  box-shadow:var(--sombra-m); transform:translateY(-1px); }
-.panel-nav-boton:disabled{ opacity:.4; cursor:default; }
-.panel-nav-contador{ align-self:center; flex:0 0 auto; font-size:11.5px; color:var(--tinta-tenue);
-  letter-spacing:.1em; font-variant-numeric:tabular-nums; }
-
 .comentario{ border-left:3px solid var(--acento); padding:2px 0 2px 16px;
   font-size:13.5px; line-height:1.6; color:var(--tinta-media); font-style:italic; margin:0; }
 
 /* En la portada el logo grande sustituye al de la barra */
 body.en-portada .barra{ background:transparent; border-bottom-color:transparent; }
 body.en-portada .barra-marca{ opacity:0; pointer-events:none; transition:opacity var(--t-medio); }
+
+/* ================== RECORRIDO VISUAL DEL SOFTWARE ======================
+   Vista de pantalla completa con todas las capturas del sistema, en orden
+   y con scroll vertical. Sin textos: la imagen es la protagonista.      */
+.recorrido{
+  --acento: var(--azul);
+  position:fixed; inset:0; z-index:90;
+  display:flex; flex-direction:column;
+  background:linear-gradient(180deg,#EEF2F5 0%, #E7ECF1 100%);
+  opacity:0; visibility:hidden; transform:scale(.99);
+  transition:opacity var(--t-medio), transform var(--t-medio), visibility var(--t-medio);
+}
+.recorrido.abierto{ opacity:1; visibility:visible; transform:none; }
+body.con-recorrido .controles{ opacity:0; pointer-events:none; }
+
+/* Barra mínima: logo, contador y la X */
+.recorrido-barra{
+  flex:0 0 auto; position:relative; z-index:2;
+  display:flex; align-items:center; gap:18px;
+  padding:10px clamp(14px,2vw,26px);
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--linea);
+}
+.recorrido-barra::before{
+  content:""; position:absolute; inset:0 0 auto 0; height:3px; background:var(--acento);
+}
+.recorrido-marca{ display:flex; align-items:center; min-width:0; }
+.recorrido-marca img{ height:22px; width:auto; display:block; }
+.recorrido-marca b{ font-size:14px; font-weight:600; color:var(--tinta); }
+.recorrido-contador{
+  margin-left:auto; font-size:11.5px; letter-spacing:.12em; color:var(--tinta-tenue);
+  font-variant-numeric:tabular-nums; white-space:nowrap;
+}
+.recorrido-cerrar{
+  flex:0 0 auto; width:38px; height:38px; display:grid; place-items:center; cursor:pointer;
+  border-radius:10px; border:1px solid var(--linea-med); background:#fff;
+  color:var(--tinta-media); transition:all var(--t-rapido);
+}
+.recorrido-cerrar svg{ width:17px; height:17px; stroke-width:2; }
+.recorrido-cerrar:hover{ color:#fff; background:var(--acento); border-color:var(--acento); }
+.recorrido-cerrar:focus-visible{ outline:2px solid var(--acento); outline-offset:3px; }
+
+/* Las láminas ocupan casi toda la pantalla, sin deformar la captura */
+.recorrido-cuerpo{
+  flex:1 1 auto; min-height:0; overflow-y:auto; overflow-x:hidden;
+  scroll-snap-type:y proximity; scroll-behavior:smooth;
+  padding:clamp(10px,1.6vh,20px) clamp(10px,1.6vw,26px);
+  display:flex; flex-direction:column; align-items:center;
+  gap:clamp(10px,1.6vh,20px);
+  scrollbar-width:thin; scrollbar-color:rgba(22,35,45,.22) transparent;
+}
+.recorrido-cuerpo::-webkit-scrollbar{ width:10px; }
+.recorrido-cuerpo::-webkit-scrollbar-thumb{ background:rgba(22,35,45,.18); border-radius:5px; }
+
+/* Cada lámina reserva su pantalla aunque la imagen aún no haya cargado:
+   sin esa altura no habría scroll y la carga diferida nunca se dispararía. */
+.recorrido-lamina{
+  margin:0; width:100%; flex:0 0 auto;
+  min-height:calc(100vh - 132px);
+  display:flex; align-items:center; justify-content:center;
+  scroll-snap-align:center;
+}
+.recorrido-lamina img,
+.recorrido-lamina video{
+  display:block; max-width:100%; height:auto;
+  max-height:calc(100vh - 118px);      /* barra + respiro */
+  width:auto; object-fit:contain;
+  border-radius:var(--r-m); background:#fff;
+  border:1px solid rgba(22,35,45,.10);
+  box-shadow:0 18px 44px -24px rgba(22,35,45,.45);
+}
+.recorrido-vacio{
+  margin:auto; color:var(--tinta-tenue); font-size:13px;
+  letter-spacing:.05em; text-align:center;
+}
+
+@media (max-width:760px){
+  .recorrido-lamina img,
+  .recorrido-lamina video{ max-height:none; }
+}
 
 /* -------------------------------------------------- MODO PRESENTACIÓN -- */
 body.presentacion .barra-nav{ opacity:0; pointer-events:none; }

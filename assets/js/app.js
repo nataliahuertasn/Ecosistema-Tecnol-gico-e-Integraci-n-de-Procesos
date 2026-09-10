@@ -665,7 +665,6 @@
     panel.setAttribute('aria-hidden', 'false');
     // Al pasar el cursor no se oscurece el mapa: sigue visible detrás
     velo.classList.toggle('visible', panelFijado);
-    pintarNavPanel();
     if (panelFijado) $('#panel-cerrar').focus();
   }
 
@@ -675,165 +674,127 @@
     panel.setAttribute('aria-hidden', 'true');
     velo.classList.remove('visible');
     panelFijado = false;
-    detalleActual = -1;
   }
 
   $('#panel-cerrar').addEventListener('click', cerrarPanel);
   velo.addEventListener('click', cerrarPanel);
 
-  /* ------------------------------------------- RECORRIDO POR ÁREAS -------
-     Secuencia de detalles del mapa: la caja de entrada de cada sistema,
-     cada frente consolidado y, en los sistemas sin frentes, cada proceso.
-     Permite pasar de un área a otra sin cerrar el panel.                   */
-  var DETALLES = [];
-  var detalleActual = -1;
+  /* ================== RECORRIDO VISUAL DEL SOFTWARE ======================
+     Al hacer clic en CUALQUIER área del mapa se abre el recorrido completo
+     del sistema al que pertenece esa área: todas sus capturas, en el orden
+     de la cadena de valor, a pantalla casi completa y con scroll vertical.
+     El área es solo el punto de entrada; no abre una ficha propia.        */
 
-  SOFTWARES.forEach(function (sw) {
-    // Ficha del sistema completo, si la tiene: primera parada de su recorrido
-    if (sw.detalle) {
-      DETALLES.push({ sw: sw, tipo: 'sistema', nombre: sw.nombre });
+  /* Todas las capturas de un sistema, en el orden del tablero */
+  function mediosDe(sw) {
+    var out = [];
+    function agregar(o) {
+      if (!o) return;
+      galeriaDe(o).forEach(function (m) { out.push({ archivo: m.archivo, tipo: 'imagen' }); });
+      if (lleno(o.imagen))  out.push({ archivo: o.imagen,  tipo: 'imagen' });
+      if (lleno(o.captura)) out.push({ archivo: o.captura, tipo: 'imagen' });
+      if (lleno(o.video))   out.push({ archivo: o.video,   tipo: 'video'  });
     }
-    elementosDe(sw).forEach(function (g, gi) {
-      if (g.tipo === 'caja') {
-        DETALLES.push({ sw: sw, tipo: 'proceso', clave: 'caja-' + gi, nombre: g.nombre });
-        return;
-      }
-      if (esConsolidado(g) && g.transversal) {
-        DETALLES.push({ sw: sw, tipo: 'consolidado', gi: gi, nombre: g.transversal.nombre });
-        return;
-      }
-      if (g.transversal) {
-        DETALLES.push({ sw: sw, tipo: 'proceso', clave: 'transversal-' + gi, nombre: g.transversal.nombre });
-      }
-      lista(g.procesos).forEach(function (p, i) {
-        DETALLES.push({ sw: sw, tipo: 'proceso', clave: 'proceso-' + gi + '-' + i, nombre: p.nombre });
+    procesosDe(sw).forEach(function (t) { agregar(t.p); });
+    return out;
+  }
+
+  var recorrido = crear(
+    '<div class="recorrido" id="recorrido" aria-hidden="true" role="dialog" aria-modal="true">' +
+      '<header class="recorrido-barra">' +
+        '<span class="recorrido-marca"></span>' +
+        '<span class="recorrido-contador"></span>' +
+        '<button class="recorrido-cerrar" aria-label="Cerrar el recorrido">' +
+          '<svg viewBox="0 0 24 24"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg>' +
+        '</button>' +
+      '</header>' +
+      '<div class="recorrido-cuerpo"></div>' +
+    '</div>'
+  );
+  document.body.appendChild(recorrido);
+
+  var recCuerpo  = recorrido.querySelector('.recorrido-cuerpo');
+  var recIndice  = 0;
+  var recObs     = null;
+
+  function abrirRecorrido(sw) {
+    var medios = mediosDe(sw);
+    recorrido.style.setProperty('--acento', sw.color || '#268DC2');
+
+    recorrido.querySelector('.recorrido-marca').innerHTML = lleno(sw.logo)
+      ? '<img src="' + esc(conVersion(sw.logo)) + '" alt="' + esc(sw.nombre) + '">'
+      : '<b>' + esc(sw.nombre) + '</b>';
+
+    recCuerpo.innerHTML = medios.length
+      ? medios.map(function (m, i) {
+          var cuerpo = m.tipo === 'video'
+            ? '<video src="' + esc(conVersion(m.archivo)) + '" controls preload="metadata"></video>'
+            : '<img src="' + esc(conVersion(m.archivo)) + '"' +
+              ' alt="' + esc(sw.nombre) + ' · pantalla ' + (i + 1) + '"' +
+              (i < 2 ? '' : ' loading="lazy"') + '>';
+          return '<figure class="recorrido-lamina" data-i="' + i + '">' + cuerpo + '</figure>';
+        }).join('')
+      : '<p class="recorrido-vacio">Este sistema todavía no tiene capturas cargadas.</p>';
+
+    recCuerpo.scrollTop = 0;
+    recIndice = 0;
+    recorrido.classList.add('abierto');
+    recorrido.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('con-recorrido');
+    seguirRecorrido(medios.length);
+    recorrido.querySelector('.recorrido-cerrar').focus();
+  }
+
+  /* El contador sigue a la lámina que domina la pantalla */
+  function seguirRecorrido(total) {
+    var etiqueta = recorrido.querySelector('.recorrido-contador');
+    if (recObs) { recObs.disconnect(); recObs = null; }
+    if (!total) { etiqueta.textContent = ''; return; }
+    etiqueta.textContent = '1 / ' + total;
+    if (!window.IntersectionObserver) return;
+
+    recObs = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        recIndice = +e.target.dataset.i;
+        etiqueta.textContent = (recIndice + 1) + ' / ' + total;
       });
-      if (g.transversalInferior) {
-        DETALLES.push({ sw: sw, tipo: 'proceso', clave: 'inferior-' + gi, nombre: g.transversalInferior.nombre });
-      }
-    });
-  });
+    }, { root: recCuerpo, threshold: 0.55 });
 
-  function indiceDetalle(swId, tipo, ref) {
-    var idx = -1;
-    DETALLES.forEach(function (d, i) {
-      if (d.sw.id !== swId || d.tipo !== tipo) return;
-      if (tipo === 'sistema') { idx = i; return; }
-      if (tipo === 'consolidado' ? d.gi === ref : d.clave === ref) idx = i;
-    });
-    return idx;
-  }
-
-  /* Ficha del sistema completo (los módulos del aplicativo) */
-  function abrirSistema(sw) {
-    var d = sw.detalle || {};
-    abrirPanel({
-      origen:      sw.categoria || 'Sistema',
-      titulo:      d.titulo || sw.nombre,
-      ruta:        d.ruta || sw.resumen || '',
-      descripcion: d.descripcion,
-      beneficios:  d.beneficios,
-      areas:       d.areas,
-      imagenes:    d.imagenes,
-      imagen:      d.imagen,
-      captura:     d.captura,
-      video:       d.video,
-      comentarios: d.comentarios,
-      multimedia:  true,
-      color:       sw.color
+    Array.prototype.forEach.call(recCuerpo.querySelectorAll('.recorrido-lamina'), function (el) {
+      recObs.observe(el);
     });
   }
 
-  function abrirDetalle(i) {
-    if (i < 0 || i >= DETALLES.length) return;
-    var d = DETALLES[i];
-    // Enfoca en el mapa el sistema al que pertenece el área.
-    // irA() cierra el panel, así que el índice se fija después.
+  function moverRecorrido(delta) {
+    var laminas = recCuerpo.querySelectorAll('.recorrido-lamina');
+    if (!laminas.length) return;
+    var i = Math.max(0, Math.min(laminas.length - 1, recIndice + delta));
+    laminas[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function cerrarRecorrido() {
+    recorrido.classList.remove('abierto');
+    recorrido.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('con-recorrido');
+    if (recObs) { recObs.disconnect(); recObs = null; }
+    recCuerpo.innerHTML = '';
+  }
+
+  recorrido.querySelector('.recorrido-cerrar').addEventListener('click', cerrarRecorrido);
+
+  /* Punto de entrada: enfoca el sistema en el mapa y abre su recorrido */
+  function entrarASoftware(sw) {
+    if (!sw) return;
     var destino = -1;
-    pasos.forEach(function (paso, k) { if (paso.foco === d.sw.id) destino = k; });
+    pasos.forEach(function (paso, k) { if (paso.foco === sw.id) destino = k; });
     if (destino >= 0 && destino !== actual) {
-      var fijado = panelFijado;
       irA(destino);
-      panelFijado = fijado;
+      setTimeout(function () { abrirRecorrido(sw); }, 260);
+    } else {
+      abrirRecorrido(sw);
     }
-    detalleActual = i;
-    if (d.tipo === 'sistema')          abrirSistema(d.sw);
-    else if (d.tipo === 'consolidado') abrirConsolidado(d.sw, d.gi);
-    else                               abrirProceso(d.sw, procesoPorClave(d.sw, d.clave), d.clave);
   }
-
-  function moverDetalle(paso) {
-    if (detalleActual < 0) return;
-    var i = detalleActual + paso;
-    if (i < 0 || i >= DETALLES.length) return;
-    abrirDetalle(i);
-  }
-
-  function pintarNavPanel() {
-    var nav = $('#panel-nav');
-    if (detalleActual < 0 || DETALLES.length < 2) { nav.innerHTML = ''; return; }
-    var ant = DETALLES[detalleActual - 1];
-    var sig = DETALLES[detalleActual + 1];
-    nav.innerHTML =
-      '<button class="panel-nav-boton" data-paso="-1"' + (ant ? '' : ' disabled') + '>' +
-        '<svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>' +
-        '<span><i>Anterior</i>' + esc(ant ? ant.nombre : '—') + '</span>' +
-      '</button>' +
-      '<span class="panel-nav-contador">' + (detalleActual + 1) + ' / ' + DETALLES.length + '</span>' +
-      '<button class="panel-nav-boton panel-nav-boton--sig" data-paso="1"' + (sig ? '' : ' disabled') + '>' +
-        '<span><i>Siguiente</i>' + esc(sig ? sig.nombre : '—') + '</span>' +
-        '<svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>' +
-      '</button>';
-  }
-
-  $('#panel-nav').addEventListener('click', function (ev) {
-    var b = ev.target.closest('.panel-nav-boton');
-    if (!b || b.disabled) return;
-    moverDetalle(parseInt(b.dataset.paso, 10));
-  });
-
-  /* ------------------------------------ APERTURA POR CURSOR ---------------
-     El detalle consolidado de un frente se activa al pasar el cursor sobre
-     su barra superior. Si se abrió con clic queda fijo y no se cierra solo. */
-  var temporizadorAbrir, temporizadorCerrar;
-
-  function cancelarTemporizadores() {
-    clearTimeout(temporizadorAbrir);
-    clearTimeout(temporizadorCerrar);
-  }
-
-  Array.prototype.forEach.call(mapa.querySelectorAll('.caja--transversal[data-consolidado]'), function (barra) {
-    var sw = SOFTWARES.filter(function (x) { return x.id === barra.dataset.sw; })[0];
-    var gi = grupoDeClave(barra.dataset.clave);
-    if (!sw || gi < 0) return;
-
-    barra.addEventListener('mouseenter', function () {
-      cancelarTemporizadores();
-      temporizadorAbrir = setTimeout(function () {
-        panelFijado = false;
-        var i = indiceDetalle(sw.id, 'consolidado', gi);
-        if (i >= 0) { detalleActual = i; }
-        abrirConsolidado(sw, gi);
-      }, 320);
-    });
-
-    barra.addEventListener('mouseleave', function () {
-      clearTimeout(temporizadorAbrir);
-      programarCierre();
-    });
-  });
-
-  function programarCierre() {
-    if (panelFijado) return;
-    clearTimeout(temporizadorCerrar);
-    temporizadorCerrar = setTimeout(function () {
-      if (!panelFijado) cerrarPanel();
-    }, 420);
-  }
-
-  // Si el cursor entra al panel, se mantiene abierto
-  panel.addEventListener('mouseenter', cancelarTemporizadores);
-  panel.addEventListener('mouseleave', programarCierre);
 
   /* ---------------------------------------------------------- VISOR ------
      Las capturas de pantalla se amplían a pantalla completa al hacer clic. */
@@ -943,59 +904,26 @@
       return;
     }
 
-    // Clic en el logo del sistema: abre la ficha del aplicativo completo
+    // Clic en el logo del sistema: abre su recorrido completo
     var logoSw = ev.target.closest('[data-sistema]');
     if (logoSw) {
       ev.stopPropagation();
-      var swLogo = SOFTWARES.filter(function (s) { return s.id === logoSw.dataset.sistema; })[0];
-      if (!swLogo) return;
-      var iSw = indiceDetalle(swLogo.id, 'sistema');
-      if (iSw < 0) return;
-      panelFijado = true;
-      var destSw = -1;
-      pasos.forEach(function (paso, k) { if (paso.foco === swLogo.id) destSw = k; });
-      if (destSw >= 0 && destSw !== actual) {
-        irA(destSw);
-        panelFijado = true;
-        setTimeout(function () { abrirDetalle(iSw); }, 280);
-      } else {
-        abrirDetalle(iSw);
-      }
+      entrarASoftware(SOFTWARES.filter(function (s) { return s.id === logoSw.dataset.sistema; })[0]);
       return;
     }
 
+    // Clic en cualquier área: es solo el punto de entrada al recorrido
+    // completo del sistema al que pertenece
     var cajaEl = ev.target.closest('.caja');
     if (cajaEl) {
       ev.stopPropagation();
-      var sw = SOFTWARES.filter(function (s) { return s.id === cajaEl.dataset.sw; })[0];
-      if (!sw) return;
-      var clave = cajaEl.dataset.clave;
-      var gi = grupoDeClave(clave);
-      var grupo = gi >= 0 ? elementosDe(sw)[gi] : null;
-      var p = procesoPorClave(sw, clave);
-      if (!p && !esConsolidado(grupo)) return;
-
-      // En un frente consolidado, cualquier caja del grupo abre el mismo detalle
-      var i = esConsolidado(grupo)
-        ? indiceDetalle(sw.id, 'consolidado', gi)
-        : indiceDetalle(sw.id, 'proceso', clave);
-      if (i < 0) return;
-
-      panelFijado = true;
-      var destino = -1;
-      pasos.forEach(function (paso, k) { if (paso.foco === sw.id) destino = k; });
-      if (destino >= 0 && destino !== actual) {
-        irA(destino);
-        panelFijado = true;
-        setTimeout(function () { abrirDetalle(i); }, 280);
-      } else {
-        abrirDetalle(i);
-      }
+      entrarASoftware(SOFTWARES.filter(function (s) { return s.id === cajaEl.dataset.sw; })[0]);
       return;
     }
 
     var corp = ev.target.closest('[data-tipo="corp"]');
     if (corp) {
+      panelFijado = true;
       var grupo = lista((C.cadenaCorporativa || {})[corp.dataset.grupo]);
       var a = grupo[parseInt(corp.dataset.i, 10)];
       if (!a) return;
@@ -1020,66 +948,6 @@
       if (destino2 >= 0) irA(destino2);
     }
   });
-
-  /* Detalle consolidado de un frente transversal: reúne el contenido de la
-     barra y el de todos los procesos que cubre (descripciones e imágenes). */
-  function abrirConsolidado(sw, gi) {
-    var g = elementosDe(sw)[gi];
-    if (!g || g.tipo === 'caja' || !g.transversal) return;
-    var t = g.transversal;
-    var procesos = lista(g.procesos).slice();
-    if (g.transversalInferior) procesos.push(g.transversalInferior);
-
-    // La galería suma las imágenes de la barra y las de cada proceso
-    var imgs = galeriaDe(t).slice();
-    procesos.forEach(function (p) {
-      galeriaDe(p).forEach(function (m) {
-        imgs.push({ archivo: m.archivo, titulo: m.titulo || p.nombre });
-      });
-    });
-
-    abrirPanel({
-      origen:      sw.nombre,
-      titulo:      t.nombre,
-      ruta:        'Frente transversal  ·  ' + procesos.length + ' procesos',
-      descripcion: t.descripcion,
-      beneficios:  t.beneficios,
-      areas:       t.areas,
-      imagenes:    imgs,
-      imagen:      t.imagen,
-      captura:     t.captura,
-      video:       t.video,
-      comentarios: t.comentarios,
-      procesos:    procesos,
-      multimedia:  true,
-      color:       sw.color
-    });
-  }
-
-  function abrirProceso(sw, p, clave) {
-    var todos = procesosDe(sw);
-    var idx = 0;
-    todos.forEach(function (t, k) { if (t.clave === clave) idx = k; });
-    var etiqueta = clave.indexOf('transversal') === 0 ? 'Proceso transversal'
-                 : clave === 'destacado'             ? 'Proceso de entrada'
-                 : 'Proceso ' + (idx + 1) + ' de ' + todos.length;
-
-    abrirPanel({
-      origen: sw.nombre,
-      titulo: p.nombre,
-      ruta: etiqueta + '  ·  ' + (sw.categoria || ''),
-      descripcion: p.descripcion,
-      beneficios: p.beneficios,
-      areas: p.areas,
-      imagenes: p.imagenes,
-      imagen: p.imagen,
-      captura: p.captura,
-      video: p.video,
-      comentarios: p.comentarios,
-      multimedia: true,
-      color: sw.color
-    });
-  }
 
   // Los nodos del diagrama también responden al teclado
   escenario.addEventListener('keydown', function (ev) {
@@ -1123,9 +991,25 @@
   /* ------------------------------------------------------------- TECLADO */
   document.addEventListener('keydown', function (ev) {
     if (ev.key === 'Escape') {
+      if (recorrido.classList.contains('abierto')) { cerrarRecorrido(); return; }
       if (visor.classList.contains('abierto')) { cerrarVisor(); return; }
       if (panel.classList.contains('abierto')) { cerrarPanel(); return; }
       if (document.body.classList.contains('presentacion')) { modoPresentacion(false); return; }
+    }
+
+    // Con el recorrido abierto, el teclado recorre sus pantallas
+    if (recorrido.classList.contains('abierto')) {
+      switch (ev.key) {
+        case 'ArrowDown': case 'ArrowRight': case 'PageDown': case ' ':
+          ev.preventDefault(); moverRecorrido(1); break;
+        case 'ArrowUp': case 'ArrowLeft': case 'PageUp':
+          ev.preventDefault(); moverRecorrido(-1); break;
+        case 'Home':
+          ev.preventDefault(); recCuerpo.scrollTo({ top: 0, behavior: 'smooth' }); break;
+        case 'End':
+          ev.preventDefault(); recCuerpo.scrollTo({ top: recCuerpo.scrollHeight, behavior: 'smooth' }); break;
+      }
+      return;
     }
 
     // Con el visor abierto, las flechas recorren las imágenes de la sección
@@ -1134,12 +1018,7 @@
       if (ev.key === 'ArrowLeft')                    { ev.preventDefault(); moverVisor(-1); }
       return;
     }
-    // Con el panel abierto, las flechas recorren las áreas del mapa
-    if (panel.classList.contains('abierto')) {
-      if (ev.key === 'ArrowRight' || ev.key === ' ') { ev.preventDefault(); moverDetalle(1);  }
-      if (ev.key === 'ArrowLeft')                    { ev.preventDefault(); moverDetalle(-1); }
-      return;
-    }
+    if (panel.classList.contains('abierto')) return;
 
     switch (ev.key) {
       case 'ArrowRight': case 'ArrowDown': case 'PageDown': case ' ':

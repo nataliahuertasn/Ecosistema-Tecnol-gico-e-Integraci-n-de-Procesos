@@ -95,7 +95,7 @@ window.ESM_CONTENIDO = {
     etiqueta:    "Vista general",
     titulo:      "Ecosistema tecnológico ES-METALS",
     subtitulo:   "Cada sistema soporta un tramo de la cadena de valor. Juntos garantizan trazabilidad de punta a punta.",
-    instruccion: "Pase el cursor sobre una barra transversal para ver su detalle  ·  seleccione un sistema para enfocarlo  ·  haga clic en cualquier proceso para ampliar"
+    instruccion: "Haga clic en cualquier área para ver el recorrido completo del sistema  ·  use el menú superior para enfocar un sistema"
   },
 
   /* ----------------------------------------------------------------------
@@ -167,15 +167,33 @@ window.ESM_CONTENIDO = {
 
       {
         tipo:        "caja",
-        nombre:      "Mercadeo & Ventas",
-        icono:       "comercial",
-        descripcion: "Punto de entrada de la cadena de valor: generación de demanda, captura de la oportunidad comercial, cotización, negociación y cierre del negocio que da origen al proyecto.",
+        nombre:      "Mercadeo",
+        icono:       "mercadeo",
+        descripcion: "Punto de entrada de la cadena de valor: posicionamiento de marca, generación de demanda y captación de los leads que dan origen a la oportunidad comercial.",
         beneficios: [
-          "Leads, oportunidades y cotizaciones en un solo lugar",
+          "Leads registrados desde su origen",
+          "Visibilidad de la demanda que entra a la operación",
+          "Traspaso ordenado del lead a la gestión comercial"
+        ],
+        areas:       ["Mercadeo", "Comercial"],
+        imagenes:    [],
+        imagen:      "",
+        video:       "",
+        captura:     "",
+        comentarios: ""
+      },
+
+      {
+        tipo:        "caja",
+        nombre:      "Ventas",
+        icono:       "comercial",
+        descripcion: "Gestión de la oportunidad comercial: cotización, versiones de la propuesta, negociación y cierre del negocio que da origen al proyecto.",
+        beneficios: [
+          "Oportunidades y cotizaciones en un solo lugar",
           "Visibilidad de las oportunidades comerciales en curso",
           "Traspaso ordenado de la venta al proyecto"
         ],
-        areas:       ["Comercial", "Mercadeo", "Gestión de Proyectos"],
+        areas:       ["Comercial", "Gestión de Proyectos"],
 
         /* Galería: se muestran en este mismo orden dentro del panel de detalle.
            Para agregar otra, copie una línea y cambie el archivo y el título. */
