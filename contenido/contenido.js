@@ -26,7 +26,7 @@ window.ESM_CONTENIDO = {
      conservando el mismo nombre de archivo. Obliga a los navegadores a
      descargar la versión nueva en vez de mostrar la que tenían guardada.
      ---------------------------------------------------------------------- */
-  version: "2026-09-10b",
+  version: "2026-09-10c",
 
   /* ----------------------------------------------------------------------
      1. MARCA
@@ -429,6 +429,33 @@ window.ESM_CONTENIDO = {
       columnas:    3,
       categoria:   "Procesos de apoyo",
       resumen:     "Centraliza los procesos de apoyo: investigación y desarrollo, infraestructura y administración.",
+
+      /* ------------------------------------------------------------------
+         RECORRIDO DEL SISTEMA
+         Las pantallas siguen el orden de la cadena de valor de ES-Sigma:
+           Investigación & Desarrollo
+           Infraestructura   ->  T.I  ·  Mantenimiento  ·  Gestión Ambiental
+           Administración    ->  RRHH ·  SST            ·  SGC
+         Para cambiar el orden, mueva las líneas de esta lista.
+         ------------------------------------------------------------------ */
+      recorrido: [
+        /* Investigación & Desarrollo */
+        { archivo: "medios/imagenes/sigma-id-01-matrices-extrusion.png" },
+        { archivo: "medios/imagenes/sigma-id-02-fijaciones.png" },
+        /* Infraestructura · T.I */
+        { archivo: "medios/imagenes/sigma-ti-01-mesa-servicio.png" },
+        { archivo: "medios/imagenes/sigma-ti-02-solicitud-desarrollo.png" },
+        { archivo: "medios/imagenes/sigma-ti-03-cronograma-desarrollo.png" },
+        /* Infraestructura · Mantenimiento */
+        { archivo: "medios/imagenes/sigma-mantenimiento-01-maquinaria.png" },
+        { archivo: "medios/imagenes/sigma-mantenimiento-02-locativo.png" },
+        /* Administración · RRHH */
+        { archivo: "medios/imagenes/sigma-rh-01-ficha-empleado.png" },
+        { archivo: "medios/imagenes/sigma-rh-02-desempeno.png" },
+        /* Administración · SST */
+        { archivo: "medios/imagenes/sigma-sst-01-entrega-epp.png" },
+        { archivo: "medios/imagenes/sigma-sst-02-entrega-dotacion.png" }
+      ],
       descripcion: "ES-Sigma es el sistema que centraliza la gestión de los procesos de apoyo de la compañía. Cubre la investigación y el desarrollo de producto, la infraestructura —tecnología, mantenimiento y gestión ambiental— y la administración —talento humano, seguridad y calidad—, estandarizando su forma de trabajar y dejando registro de la información que soporta el cumplimiento y el control interno.",
       valor: [
         "Una única fuente de información para las áreas transversales",
