@@ -12,10 +12,10 @@
   if (!C) {
     document.body.innerHTML =
       '<div style="font-family:Segoe UI,sans-serif;padding:60px;max-width:760px">' +
-      '<h1 style="font-weight:600">No se pudo cargar el contenido</h1>' +
-      '<p style="color:#55677A;line-height:1.6">Revise el archivo <code>contenido/contenido.js</code>. ' +
-      'Es probable que falte una coma, una comilla o una llave. Abra la consola del navegador (tecla F12) ' +
-      'para ver la línea exacta del error.</p></div>';
+      '<h1 style="font-weight:600">The content could not be loaded</h1>' +
+      '<p style="color:#55677A;line-height:1.6">Check the file <code>contenido/contenido.js</code>. ' +
+      'A comma, a quote or a brace is probably missing. Open the browser console (F12 key) ' +
+      'to see the exact line of the error.</p></div>';
     return;
   }
 
@@ -257,14 +257,14 @@
       nodos +=
         '<g class="orbita-nodo" data-orbita-sw="' + esc(s.id) + '"' +
            ' data-cx="' + x + '" data-cy="' + y + '"' +
-           ' tabindex="0" role="button" aria-label="Ver ' + esc(s.nombre || '') + '">' +
+           ' tabindex="0" role="button" aria-label="View ' + esc(s.nombre || '') + '">' +
           '<rect class="orbita-toque" x="' + (x - lw / 2 - 8) + '" y="' + (y - lh / 2 - 10) + '"' +
             ' width="' + (lw + 16) + '" height="' + (lh + 20) + '" rx="12"/>' +
           etiqueta +
         '</g>';
     });
 
-    return '<svg viewBox="0 0 400 400" role="img" aria-label="Ecosistema tecnológico ES-METALS">' +
+    return '<svg viewBox="0 0 400 400" role="img" aria-label="ES-METALS technology ecosystem">' +
         '<circle class="orbita-anillo" cx="200" cy="200" r="176"/>' +
         '<g class="orbita-giro">' +
           '<circle class="orbita-anillo orbita-anillo--punteado" cx="200" cy="200" r="' + R + '"/>' +
@@ -406,7 +406,7 @@
     // Si el sistema tiene ficha propia, su logo abre el detalle del sistema
     var logo = s.detalle
       ? '<button class="bloque-logo bloque-logo--activo" data-sistema="' + esc(s.id) + '"' +
-          ' title="Ver ' + esc(s.nombre) + '">' + marca +
+          ' title="View ' + esc(s.nombre) + '">' + marca +
           '<span class="bloque-logo-mas">' + svg('lupa') + '</span></button>'
       : '<div class="bloque-logo">' + marca + '</div>';
 
@@ -433,7 +433,7 @@
       '<section class="lamina" data-lamina="mapa">' +
         '<div class="lamina-interior">' +
           '<header class="lamina-cabecera">' +
-            '<p class="rotulo" id="mapa-rotulo">' + esc(e.etiqueta || 'Vista general') + '</p>' +
+            '<p class="rotulo" id="mapa-rotulo">' + esc(e.etiqueta || 'Overview') + '</p>' +
             '<h2 class="titulo" id="mapa-titulo">' + esc(e.titulo || '') + '</h2>' +
             '<p class="subtitulo" id="mapa-subtitulo">' + esc(e.subtitulo || '') + '</p>' +
           '</header>' +
@@ -473,7 +473,7 @@
   escenario.appendChild(laminaPortada());
   ajustarLogosOrbita(escenario);
   ajustarLogoNucleo(escenario);
-  pasos.push({ lamina: 'portada', nombre: 'Portada', color: marca.colorPrimario });
+  pasos.push({ lamina: 'portada', nombre: 'Cover', color: marca.colorPrimario });
 
   if ((C.cadenaCorporativa || {}).activa !== false) {
     escenario.appendChild(laminaCadena());
@@ -481,14 +481,14 @@
   }
 
   escenario.appendChild(laminaMapa());
-  pasos.push({ lamina: 'mapa', foco: null, nombre: (C.mapa || {}).etiqueta || 'Vista general', color: marca.colorPrimario });
+  pasos.push({ lamina: 'mapa', foco: null, nombre: (C.mapa || {}).etiqueta || 'Overview', color: marca.colorPrimario });
   SOFTWARES.forEach(function (s) {
     pasos.push({ lamina: 'mapa', foco: s.id, nombre: s.nombre, color: s.color, sw: s });
   });
 
   if ((C.cierre || {}).activa !== false) {
     escenario.appendChild(laminaCierre());
-    pasos.push({ lamina: 'cierre', nombre: 'Cierre', color: marca.colorPrimario });
+    pasos.push({ lamina: 'cierre', nombre: 'Closing', color: marca.colorPrimario });
   }
 
   var mapa = $('#mapa');
@@ -556,7 +556,7 @@
     var e = C.mapa || {};
     var datos = paso.sw
       ? { r: paso.sw.categoria || 'Sistema', t: paso.sw.nombre, s: paso.sw.resumen || '' }
-      : { r: e.etiqueta || 'Vista general', t: e.titulo || '', s: e.subtitulo || '' };
+      : { r: e.etiqueta || 'Overview', t: e.titulo || '', s: e.subtitulo || '' };
 
     var cab = laminas.mapa.querySelector('.lamina-cabecera');
     cab.style.setProperty('--acento', paso.color || '#268DC2');
@@ -617,8 +617,8 @@
   function medioVacio(titulo, tipo) {
     var carpeta = tipo === 'video' ? 'medios/videos/' : 'medios/imagenes/';
     return '<div class="medio medio-vacio">' + svg(tipo === 'video' ? 'video' : 'imagen') +
-           '<b>Espacio disponible para ' + esc(titulo.toLowerCase()) + '</b>' +
-           '<code>' + esc(carpeta) + 'archivo' + (tipo === 'video' ? '.mp4' : '.jpg') + '</code></div>';
+           '<b>Space available for ' + esc(titulo.toLowerCase()) + '</b>' +
+           '<code>' + esc(carpeta) + 'file' + (tipo === 'video' ? '.mp4' : '.jpg') + '</code></div>';
   }
 
   function abrirPanel(d) {
@@ -638,14 +638,14 @@
 
     var beneficios = lista(d.beneficios).filter(lleno);
     if (beneficios.length) {
-      texto += '<div class="panel-seccion"><h3>Beneficios</h3><ul class="lista-beneficios">' +
+      texto += '<div class="panel-seccion"><h3>Benefits</h3><ul class="lista-beneficios">' +
         beneficios.map(function (b) { return '<li>' + svg('check') + '<span>' + esc(b) + '</span></li>'; }).join('') +
         '</ul></div>';
     }
 
     var areas = lista(d.areas).filter(lleno);
     if (areas.length) {
-      texto += '<div class="panel-seccion"><h3>Áreas involucradas</h3><div class="fichas">' +
+      texto += '<div class="panel-seccion"><h3>Areas involved</h3><div class="fichas">' +
         areas.map(function (a) { return '<span class="ficha">' + esc(a) + '</span>'; }).join('') +
         '</div></div>';
     }
@@ -746,7 +746,7 @@
         if (!m || !lleno(m.archivo)) return;
         var tipo = m.tipo === 'video' || /\.(mp4|webm|ogv|mov)$/i.test(m.archivo)
           ? 'video' : 'imagen';
-        out.push({ archivo: m.archivo, tipo: tipo });
+        out.push({ archivo: m.archivo, tipo: tipo, portada: m.portada || '' });
       });
       return out;
     }
@@ -760,7 +760,7 @@
       '<header class="recorrido-barra">' +
         '<span class="recorrido-marca"></span>' +
         '<span class="recorrido-contador"></span>' +
-        '<button class="recorrido-cerrar" aria-label="Cerrar el recorrido">' +
+        '<button class="recorrido-cerrar" aria-label="Close the tour">' +
           '<svg viewBox="0 0 24 24"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg>' +
         '</button>' +
       '</header>' +
@@ -784,13 +784,15 @@
     recCuerpo.innerHTML = medios.length
       ? medios.map(function (m, i) {
           var cuerpo = m.tipo === 'video'
-            ? '<video src="' + esc(conVersion(m.archivo)) + '" controls preload="metadata"></video>'
+            ? '<video src="' + esc(conVersion(m.archivo)) + '" controls preload="metadata" playsinline' +
+              (lleno(m.portada) ? ' poster="' + esc(conVersion(m.portada)) + '"' : '') +
+              '></video>'
             : '<img src="' + esc(conVersion(m.archivo)) + '"' +
-              ' alt="' + esc(sw.nombre) + ' · pantalla ' + (i + 1) + '"' +
+              ' alt="' + esc(sw.nombre) + ' · screen ' + (i + 1) + '"' +
               (i < 2 ? '' : ' loading="lazy"') + '>';
           return '<figure class="recorrido-lamina" data-i="' + i + '">' + cuerpo + '</figure>';
         }).join('')
-      : '<p class="recorrido-vacio">Este sistema todavía no tiene capturas cargadas.</p>';
+      : '<p class="recorrido-vacio">This system has no screenshots loaded yet.</p>';
 
     recCuerpo.scrollTop = 0;
     recIndice = 0;
@@ -905,13 +907,13 @@
      Las capturas de pantalla se amplían a pantalla completa al hacer clic. */
   var visor = crear(
     '<div class="visor" id="visor" aria-hidden="true">' +
-      '<button class="visor-cerrar" aria-label="Cerrar">' +
+      '<button class="visor-cerrar" aria-label="Close">' +
         '<svg viewBox="0 0 24 24"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg>' +
       '</button>' +
-      '<button class="visor-nav visor-nav--ant" aria-label="Imagen anterior">' +
+      '<button class="visor-nav visor-nav--ant" aria-label="Previous image">' +
         '<svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>' +
       '</button>' +
-      '<button class="visor-nav visor-nav--sig" aria-label="Imagen siguiente">' +
+      '<button class="visor-nav visor-nav--sig" aria-label="Next image">' +
         '<svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>' +
       '</button>' +
       '<figure>' +
@@ -994,7 +996,7 @@
     puntos.innerHTML = hayVarias
       ? visorLista.map(function (x, i) {
           return '<button class="visor-punto' + (i === visorIndice ? ' activo' : '') +
-                 '" data-i="' + i + '" aria-label="Imagen ' + (i + 1) + '"></button>';
+                 '" data-i="' + i + '" aria-label="Image ' + (i + 1) + '"></button>';
         }).join('')
       : '';
   }

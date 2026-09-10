@@ -34,7 +34,7 @@ window.ESM_CONTENIDO = {
   marca: {
     empresa:         "ES-METALS",
     razonSocial:     "ES-METALS S.A.S.",
-    grupo:           "Compañía del Grupo Tecnoglass",
+    grupo:           "A Tecnoglass Group company",
     logo:            "assets/img/logo-esmetals.png",
     colorPrimario:   "#268DC2",
     colorSecundario: "#C7C6C6"
@@ -62,30 +62,30 @@ window.ESM_CONTENIDO = {
      ---------------------------------------------------------------------- */
   cadenaCorporativa: {
     activa:    false,
-    etiqueta:  "Punto de partida",
-    titulo:    "Cadena de Valor ES-METALS",
-    subtitulo: "El mapa de procesos sobre el que se despliega el ecosistema tecnológico.",
-    tituloPrimarias: "Procesos primarios",
-    tituloApoyo:     "Procesos de apoyo",
+    etiqueta:  "Starting point",
+    titulo:    "ES-METALS Value Chain",
+    subtitulo: "The process map on which the technology ecosystem is deployed.",
+    tituloPrimarias: "Primary processes",
+    tituloApoyo:     "Support processes",
     primarias: [
-      { nombre: "Ventas & Mercadeo",        icono: "comercial",   descripcion: "Generación de demanda, captura de la oportunidad comercial, cotización y cierre del negocio." },
-      { nombre: "Ingeniería",               icono: "ingenieria",  descripcion: "Ingeniería de detalle, planos de taller y gestión de aprobaciones técnicas." },
-      { nombre: "Diseño",                   icono: "ingenieria",  descripcion: "Diseño de los sistemas metálicos y de sus detalles constructivos." },
-      { nombre: "Compras",                  icono: "compras",     descripcion: "Abastecimiento de los materiales del proyecto derivado de la ingeniería aprobada." },
-      { nombre: "Inventario",               icono: "inventario",  descripcion: "Recepción, custodia y control de los materiales, con sus reservas." },
-      { nombre: "Producción & Fabricación", icono: "produccion",  descripcion: "Programación y ejecución de la manufactura de los sistemas metálicos." },
-      { nombre: "Logística",                icono: "comercio",    descripcion: "Programación de despachos en el calendario de contenedores." },
-      { nombre: "Instalación",              icono: "instalacion", descripcion: "Montaje en obra, con control de avance y entrega al cliente final." }
+      { nombre: "Sales & Marketing",        icono: "comercial",   descripcion: "Demand generation, capture of the commercial opportunity, quoting and closing of the deal." },
+      { nombre: "Engineering",              icono: "ingenieria",  descripcion: "Detail engineering, shop drawings and management of technical approvals." },
+      { nombre: "Design",                   icono: "ingenieria",  descripcion: "Design of the metal systems and of their construction details." },
+      { nombre: "Purchasing",               icono: "compras",     descripcion: "Sourcing of the project materials derived from the approved engineering." },
+      { nombre: "Inventory",                icono: "inventario",  descripcion: "Receipt, custody and control of materials, together with their reservations." },
+      { nombre: "Production & Manufacturing", icono: "produccion", descripcion: "Scheduling and execution of the manufacturing of the metal systems." },
+      { nombre: "Logistics",                icono: "comercio",    descripcion: "Scheduling of shipments in the container calendar." },
+      { nombre: "Installation",             icono: "instalacion", descripcion: "On-site assembly, with progress control and handover to the end client." }
     ],
     apoyo: [
-      { nombre: "Financiero",          icono: "finanzas",      descripcion: "Contabilidad, costos, tesorería y control financiero." },
-      { nombre: "R.H",                 icono: "rrhh",          descripcion: "Selección, desarrollo, nómina y bienestar del talento humano." },
-      { nombre: "T.I",                 icono: "ti",            descripcion: "Infraestructura, sistemas de información, datos y ciberseguridad." },
-      { nombre: "Mantenimiento",       icono: "mantenimiento", descripcion: "Disponibilidad y confiabilidad de máquinas e instalaciones." },
-      { nombre: "Compras y Almacén",   icono: "compras",       descripcion: "Abastecimiento, negociación con proveedores y control de inventarios." },
-      { nombre: "Comercio Exterior",   icono: "comercio",      descripcion: "Importaciones, exportaciones y trámites aduaneros." },
-      { nombre: "SST",                 icono: "sst",           descripcion: "Seguridad y salud en el trabajo." },
-      { nombre: "Gestión Ambiental",   icono: "ambiental",     descripcion: "Cumplimiento ambiental y manejo responsable de residuos." }
+      { nombre: "Finance",             icono: "finanzas",      descripcion: "Accounting, costing, treasury and financial control." },
+      { nombre: "HR",                  icono: "rrhh",          descripcion: "Recruitment, development, payroll and wellbeing of the workforce." },
+      { nombre: "IT",                  icono: "ti",            descripcion: "Infrastructure, information systems, data and cybersecurity." },
+      { nombre: "Maintenance",         icono: "mantenimiento", descripcion: "Availability and reliability of machines and facilities." },
+      { nombre: "Purchasing & Warehouse", icono: "compras",    descripcion: "Sourcing, supplier negotiation and inventory control." },
+      { nombre: "Foreign Trade",       icono: "comercio",      descripcion: "Imports, exports and customs procedures." },
+      { nombre: "HSE",                 icono: "sst",           descripcion: "Occupational health and safety." },
+      { nombre: "Environmental",       icono: "ambiental",     descripcion: "Environmental compliance and responsible waste management." }
     ]
   },
 
@@ -93,10 +93,10 @@ window.ESM_CONTENIDO = {
      4. TEXTOS DEL MAPA DEL ECOSISTEMA
      ---------------------------------------------------------------------- */
   mapa: {
-    etiqueta:    "Vista general",
-    titulo:      "Ecosistema tecnológico ES-METALS",
-    subtitulo:   "Cada sistema soporta un tramo de la cadena de valor. Juntos garantizan trazabilidad de punta a punta.",
-    instruccion: "Haga clic en cualquier área para ver el recorrido completo del sistema  ·  use el menú superior para enfocar un sistema"
+    etiqueta:    "Overview",
+    titulo:      "ES-METALS technology ecosystem",
+    subtitulo:   "Each system supports one stretch of the value chain. Together they guarantee end-to-end traceability.",
+    instruccion: "Click any area to see the full tour of that system  ·  use the top menu to focus on a system"
   },
 
   /* ----------------------------------------------------------------------
@@ -126,8 +126,8 @@ window.ESM_CONTENIDO = {
       banda:       1,
       peso:        1,
       columnas:    3,
-      categoria:   "Gestión de proyectos",
-      resumen:     "Centraliza la gestión comercial, técnica y operativa: del lead a la entrega en obra, sobre una única fuente de información.",
+      categoria:   "Project management",
+      resumen:     "Centralizes commercial, technical and operational management: from the lead to on-site delivery, on a single source of information.",
 
       /* ------------------------------------------------------------------
          RECORRIDO DEL SISTEMA
@@ -146,7 +146,8 @@ window.ESM_CONTENIDO = {
         { archivo: "medios/imagenes/pa-01.png"   },
         { archivo: "medios/imagenes/pa-02.png"   },
         { archivo: "medios/imagenes/pa-03.png"   },
-        { archivo: "medios/videos/pa-04.mp4"     },   /* 4 · video */
+        { archivo: "medios/videos/pa-04.mp4",
+          portada: "medios/imagenes/pa-04-portada.jpg" },   /* 4 · video */
         { archivo: "medios/imagenes/pa-04-1.png" },   /* 4.1 · va justo después del video */
         { archivo: "medios/imagenes/pa-05.png"   },
         { archivo: "medios/imagenes/pa-06.png"   },
@@ -172,19 +173,19 @@ window.ESM_CONTENIDO = {
          ------------------------------------------------------------------ */
       detalle: {
         titulo:      "Project Agenda",
-        ruta:        "Módulos del aplicativo",
-        descripcion: "Project Agenda se organiza en seis módulos que cubren el ciclo completo del proyecto. Cada área trabaja en el suyo, sobre la misma información: lo que se registra en Sales alimenta a Engineering, Projects y Operations sin volver a capturarlo.",
+        ruta:        "Application modules",
+        descripcion: "Project Agenda is organized into six modules that cover the full project cycle. Each area works in its own module, on the same information: what is recorded in Sales feeds Engineering, Projects and Operations without being captured again.",
         beneficios: [
-          "Un módulo por área, sobre una misma base de datos",
-          "La información fluye entre módulos sin recaptura",
-          "Permisos y visibilidad según el rol de cada usuario"
+          "One module per area, on a single database",
+          "Information flows between modules without re-entry",
+          "Permissions and visibility based on each user role"
         ],
         areas: [
           "Sales", "Engineering", "Projects", "Operations", "Tasks", "Settings"
         ],
         imagenes: [
           { archivo: "medios/imagenes/pa-modulos.png",
-            titulo:  "Módulos de Project Agenda · Sales, Engineering, Projects, Operations, Tasks y Settings" }
+            titulo:  "Project Agenda modules · Sales, Engineering, Projects, Operations, Tasks and Settings" }
         ],
         imagen:      "",
         video:       "",
@@ -204,15 +205,15 @@ window.ESM_CONTENIDO = {
 
       {
         tipo:        "caja",
-        nombre:      "Mercadeo",
+        nombre:      "Marketing",
         icono:       "mercadeo",
-        descripcion: "Punto de entrada de la cadena de valor: posicionamiento de marca, generación de demanda y captación de los leads que dan origen a la oportunidad comercial.",
+        descripcion: "Entry point of the value chain: brand positioning, demand generation and capture of the leads that give rise to the commercial opportunity.",
         beneficios: [
-          "Leads registrados desde su origen",
-          "Visibilidad de la demanda que entra a la operación",
-          "Traspaso ordenado del lead a la gestión comercial"
+          "Leads recorded from their origin",
+          "Visibility of the demand entering the operation",
+          "Orderly handover of the lead to sales"
         ],
-        areas:       ["Mercadeo", "Comercial"],
+        areas:       ["Marketing", "Sales"],
         imagenes:    [],
         imagen:      "",
         video:       "",
@@ -222,15 +223,15 @@ window.ESM_CONTENIDO = {
 
       {
         tipo:        "caja",
-        nombre:      "Ventas",
+        nombre:      "Sales",
         icono:       "comercial",
-        descripcion: "Gestión de la oportunidad comercial: cotización, versiones de la propuesta, negociación y cierre del negocio que da origen al proyecto.",
+        descripcion: "Management of the commercial opportunity: quoting, proposal versions, negotiation and closing of the deal that gives rise to the project.",
         beneficios: [
-          "Oportunidades y cotizaciones en un solo lugar",
-          "Visibilidad de las oportunidades comerciales en curso",
-          "Traspaso ordenado de la venta al proyecto"
+          "Opportunities and quotes in a single place",
+          "Visibility of the commercial opportunities in progress",
+          "Orderly handover from the sale to the project"
         ],
-        areas:       ["Comercial", "Gestión de Proyectos"],
+        areas:       ["Sales", "Project Management"],
 
         /* Galería: se muestran en este mismo orden dentro del panel de detalle.
            Para agregar otra, copie una línea y cambie el archivo y el título. */
@@ -251,16 +252,16 @@ window.ESM_CONTENIDO = {
           detalleConsolidado: true,
 
           transversal: {
-            nombre:      "Gestión de Proyectos",
+            nombre:      "Project Management",
             icono:       "proyectos",
-            descripcion: "Frente transversal que cubre Ingeniería, Diseño y Compras. Planea, controla y hace seguimiento al proyecto durante todo su ciclo de vida —hitos, tareas y avance—, e integra el abastecimiento, la facturación y el seguimiento financiero de cada proyecto.",
+            descripcion: "Cross-functional front covering Engineering, Design and Purchasing. It plans, controls and tracks the project throughout its life cycle —milestones, tasks and progress— and integrates sourcing, billing and the financial tracking of each project.",
             beneficios: [
-              "Planeación y control unificados del proyecto",
-              "Seguimiento de hitos y compromisos con el cliente",
-              "Abastecimiento atado al avance del proyecto",
-              "Alertas tempranas de desviación en fechas"
+              "Unified project planning and control",
+              "Tracking of milestones and client commitments",
+              "Sourcing tied to project progress",
+              "Early alerts on schedule deviations"
             ],
-            areas:       ["Gestión de Proyectos", "Ingeniería & Diseño", "Compras"],
+            areas:       ["Project Management", "Engineering & Design", "Purchasing"],
 
             /* Imágenes de todo el frente, en orden de presentación.
                Para agregar otra: copie un bloque { archivo, titulo } y ponga
@@ -274,45 +275,45 @@ window.ESM_CONTENIDO = {
           },
           procesos: [
             {
-              nombre:      "Ingeniería",
+              nombre:      "Engineering",
               icono:       "ingenieria",
-              descripcion: "Ingeniería de detalle y planos de taller, con asignación de pendientes por ingeniero y gestión de las aprobaciones técnicas con el cliente.",
+              descripcion: "Detail engineering and shop drawings, with assignment of pending work per engineer and management of technical approvals with the client.",
               beneficios: [
-                "Carga de trabajo visible por ingeniero",
-                "Control de versiones de planos y entregables",
-                "Seguimiento a las aprobaciones del cliente"
+                "Workload visible per engineer",
+                "Version control of drawings and deliverables",
+                "Follow-up on client approvals"
               ],
-              areas:       ["Ingeniería & Diseño", "Gestión de Proyectos"],
+              areas:       ["Engineering & Design", "Project Management"],
               imagen:      "",
               video:       "",
               captura:     "",
               comentarios: ""
             },
             {
-              nombre:      "Diseño",
+              nombre:      "Design",
               icono:       "ingenieria",
-              descripcion: "Desarrollo del diseño de los sistemas metálicos y de sus detalles constructivos, como base para la ingeniería de detalle y la fabricación.",
+              descripcion: "Development of the design of the metal systems and their construction details, as the basis for detail engineering and manufacturing.",
               beneficios: [
-                "Diseño y sus revisiones en el mismo sistema",
-                "Menor reproceso por información desactualizada",
-                "Continuidad entre diseño, ingeniería y producción"
+                "Design and its revisions in the same system",
+                "Less rework caused by outdated information",
+                "Continuity between design, engineering and production"
               ],
-              areas:       ["Ingeniería & Diseño", "Gestión de Proyectos"],
+              areas:       ["Engineering & Design", "Project Management"],
               imagen:      "",
               video:       "",
               captura:     "",
               comentarios: ""
             },
             {
-              nombre:      "Compras",
+              nombre:      "Purchasing",
               icono:       "compras",
-              descripcion: "Abastecimiento de los materiales del proyecto derivado de la ingeniería aprobada: solicitudes, cotización, aprobación, compra, tránsito y recepción, con seguimiento a los insumos críticos.",
+              descripcion: "Sourcing of the project materials derived from the approved engineering: requests, quoting, approval, purchase, transit and receipt, with follow-up on critical supplies.",
               beneficios: [
-                "Requerimientos de material atados al proyecto",
-                "Ciclo de la solicitud trazable de punta a punta",
-                "Alerta sobre materiales críticos en riesgo"
+                "Material requirements tied to the project",
+                "Request cycle traceable end to end",
+                "Alerts on critical materials at risk"
               ],
-              areas:       ["Compras y Almacén", "Comercio Exterior", "Ingeniería & Diseño"],
+              areas:       ["Purchasing & Warehouse", "Foreign Trade", "Engineering & Design"],
               imagen:      "",
               video:       "",
               captura:     "",
@@ -326,16 +327,16 @@ window.ESM_CONTENIDO = {
           detalleConsolidado: true,
 
           transversal: {
-            nombre:      "Operaciones",
+            nombre:      "Operations",
             icono:       "produccion",
-            descripcion: "Frente transversal que cubre Almacén, Fabricación y Logística. Ejecuta el proyecto desde la reserva del material hasta el despacho: el almacén controla existencias y reservas, las Work Orders almacenan los planos y los detalles de fabricación de cada pieza, y el calendario de contenedores organiza los envíos.",
+            descripcion: "Cross-functional front covering Warehouse, Manufacturing and Logistics. It executes the project from material reservation to shipment: the warehouse controls stock and reservations, the Work Orders store the drawings and manufacturing details of each part, and the container calendar organizes the shipments.",
             beneficios: [
-              "Existencias y reservas de material controladas",
-              "Planos y detalles de fabricación almacenados en el sistema",
-              "Estado de las Work Orders en tiempo real",
-              "Despachos organizados en un calendario de contenedores"
+              "Material stock and reservations under control",
+              "Drawings and manufacturing details stored in the system",
+              "Work Order status in real time",
+              "Shipments organized in a container calendar"
             ],
-            areas:       ["Operaciones", "Compras y Almacén", "Instalación", "Mantenimiento"],
+            areas:       ["Operations", "Purchasing & Warehouse", "Installation", "Maintenance"],
 
             /* Imágenes de todo el frente, en orden de presentación. */
             imagenes: [],
@@ -347,45 +348,45 @@ window.ESM_CONTENIDO = {
           },
           procesos: [
             {
-              nombre:      "Almacén",
+              nombre:      "Warehouse",
               icono:       "inventario",
-              descripcion: "Recepción, custodia y control de los materiales, con visibilidad de lo disponible y lo reservado, y gestión de las solicitudes de reserva para producción.",
+              descripcion: "Receipt, custody and control of materials, with visibility of what is available and what is reserved, and management of reservation requests for production.",
               beneficios: [
-                "Disponible y reservado visibles por código",
-                "Solicitudes de reserva trazables",
-                "Menor riesgo de faltantes en planta"
+                "Available and reserved visible by item code",
+                "Traceable reservation requests",
+                "Lower risk of shortages on the shop floor"
               ],
-              areas:       ["Compras y Almacén", "Operaciones"],
+              areas:       ["Purchasing & Warehouse", "Operations"],
               imagen:      "",
               video:       "",
               captura:     "",
               comentarios: ""
             },
             {
-              nombre:      "Fabricación",
+              nombre:      "Manufacturing",
               icono:       "produccion",
-              descripcion: "Programación y ejecución de la manufactura a partir de las Work Orders, que almacenan los planos y los detalles de fabricación de cada pieza. Cada proyecto reporta su avance contra el plan.",
+              descripcion: "Scheduling and execution of manufacturing from the Work Orders, which store the drawings and manufacturing details of each part. Every project reports its progress against the plan.",
               beneficios: [
-                "Planos y detalles de fabricación en el mismo sistema",
-                "Avance real de producción por proyecto",
-                "Detección temprana de cuellos de botella"
+                "Drawings and manufacturing details in the same system",
+                "Actual production progress per project",
+                "Early detection of bottlenecks"
               ],
-              areas:       ["Operaciones", "Mantenimiento", "Gestión de Proyectos"],
+              areas:       ["Operations", "Maintenance", "Project Management"],
               imagen:      "",
               video:       "",
               captura:     "",
               comentarios: ""
             },
             {
-              nombre:      "Logística",
+              nombre:      "Logistics",
               icono:       "comercio",
-              descripcion: "Programación de los despachos en un calendario de contenedores, con su packing list, sus work orders y el país de destino.",
+              descripcion: "Scheduling of shipments in a container calendar, with their packing list, their work orders and the destination country.",
               beneficios: [
-                "Despachos programados y visibles por semana",
-                "Contenedor trazable hasta la work order",
-                "Coordinación entre planta y destino"
+                "Shipments scheduled and visible by week",
+                "Container traceable down to the work order",
+                "Coordination between plant and destination"
               ],
-              areas:       ["Instalación", "Comercio Exterior", "Gestión de Proyectos"],
+              areas:       ["Installation", "Foreign Trade", "Project Management"],
               imagen:      "",
               video:       "",
               captura:     "",
@@ -397,15 +398,15 @@ window.ESM_CONTENIDO = {
 
       {
         tipo:        "caja",
-        nombre:      "Instalación",
+        nombre:      "Installation",
         icono:       "instalacion",
-        descripcion: "Montaje en obra de los sistemas despachados, con control de avance e hitos de entrega al cliente. Cierra el ciclo del proyecto.",
+        descripcion: "On-site assembly of the shipped systems, with progress control and client delivery milestones. It closes the project cycle.",
         beneficios: [
-          "Control de hitos contractuales en obra",
-          "Avance de montaje visible por proyecto",
-          "Soporte documental para actas de entrega"
+          "Control of contractual milestones on site",
+          "Assembly progress visible per project",
+          "Documentary support for handover certificates"
         ],
-        areas:       ["Instalación", "Gestión de Proyectos", "SST"],
+        areas:       ["Installation", "Project Management", "HSE"],
         imagenes:    [],
         imagen:      "",
         video:       "",
@@ -427,8 +428,8 @@ window.ESM_CONTENIDO = {
       banda:       2,
       peso:        2.05,
       columnas:    3,
-      categoria:   "Procesos de apoyo",
-      resumen:     "Centraliza los procesos de apoyo: investigación y desarrollo, infraestructura y administración.",
+      categoria:   "Support processes",
+      resumen:     "Centralizes the support processes: research and development, infrastructure and administration.",
 
       /* ------------------------------------------------------------------
          RECORRIDO DEL SISTEMA
@@ -456,15 +457,15 @@ window.ESM_CONTENIDO = {
         { archivo: "medios/imagenes/sigma-sst-01-entrega-epp.png" },
         { archivo: "medios/imagenes/sigma-sst-02-entrega-dotacion.png" }
       ],
-      descripcion: "ES-Sigma es el sistema que centraliza la gestión de los procesos de apoyo de la compañía. Cubre la investigación y el desarrollo de producto, la infraestructura —tecnología, mantenimiento y gestión ambiental— y la administración —talento humano, seguridad y calidad—, estandarizando su forma de trabajar y dejando registro de la información que soporta el cumplimiento y el control interno.",
+      descripcion: "ES-Sigma is the system that centralizes the management of the company support processes. It covers product research and development, infrastructure —technology, maintenance and environmental management— and administration —human talent, safety and quality—, standardizing the way they work and keeping a record of the information that supports compliance and internal control.",
       valor: [
-        "Una única fuente de información para las áreas transversales",
-        "Procesos de apoyo estandarizados y trazables",
-        "Soporte al cumplimiento normativo y al control interno"
+        "A single source of information for the cross-functional areas",
+        "Standardized and traceable support processes",
+        "Support for regulatory compliance and internal control"
       ],
       indicadores: [
-        { valor: "7", etiqueta: "Procesos soportados" },
-        { valor: "2", etiqueta: "Frentes transversales" }
+        { valor: "7", etiqueta: "Processes supported" },
+        { valor: "2", etiqueta: "Cross-functional fronts" }
       ],
 
       /* Las barras y la caja de I+D llevan color propio (gris azulado);
@@ -473,22 +474,22 @@ window.ESM_CONTENIDO = {
 
       {
         tipo:        "caja",
-        nombre:      "Investigación & Desarrollo",
+        nombre:      "Research & Development",
         icono:       "calidad",
         color:       "#8FA6BA",
         colorSuave:  "#CBD6DF",
-        descripcion: "Biblioteca técnica del producto: matrices de extrusión y elementos de fijación, con sus medidas, sistema al que pertenecen y los archivos de cada referencia (DWG, IPT, PDF y PNG).",
+        descripcion: "Technical library of the product: extrusion dies and fastening elements, with their dimensions, the system they belong to and the files of each reference (DWG, IPT, PDF and PNG).",
         beneficios: [
-          "Catálogo técnico consultable por medidas y sistema",
-          "Planos y archivos de cada referencia en un solo lugar",
-          "Base común para ingeniería, diseño y producción"
+          "Technical catalog searchable by dimensions and system",
+          "Drawings and files of each reference in a single place",
+          "Common baseline for engineering, design and production"
         ],
-        areas:       ["Investigación & Desarrollo", "Ingeniería & Diseño"],
+        areas:       ["Research & Development", "Engineering & Design"],
         imagenes: [
           { archivo: "medios/imagenes/sigma-id-01-matrices-extrusion.png",
-            titulo:  "Biblioteca técnica · matrices de extrusión con su forma, categoría, medidas, sistema y archivos asociados" },
+            titulo:  "Technical library · extrusion dies with their shape, category, dimensions, system and associated files" },
           { archivo: "medios/imagenes/sigma-id-02-fijaciones.png",
-            titulo:  "Biblioteca técnica · elementos de fijación con su código, tipo de cabeza, diámetro, longitud y archivos" }
+            titulo:  "Technical library · fastening elements with their code, head type, diameter, length and files" }
         ],
         imagen: "", video: "", captura: "", comentarios: ""
       },
@@ -496,54 +497,54 @@ window.ESM_CONTENIDO = {
       {
         tipo: "grupo",
         transversal: {
-          nombre:      "Infraestructura",
+          nombre:      "Infrastructure",
           icono:       "ti",
           color:       "#8FA6BA",
           colorSuave:  "#CBD6DF",
-          descripcion: "Frente que agrupa los servicios que sostienen la operación físicamente y tecnológicamente: T.I, Mantenimiento y Gestión Ambiental.",
+          descripcion: "Front that brings together the services supporting the operation physically and technologically: IT, Maintenance and Environmental Management.",
           beneficios: [
-            "Solicitudes de servicio con un mismo flujo",
-            "Trazabilidad de la atención y su evidencia",
-            "Disponibilidad de equipos e instalaciones"
+            "Service requests following one single flow",
+            "Traceability of the response and its evidence",
+            "Availability of equipment and facilities"
           ],
-          areas:       ["Tecnología (T.I.)", "Mantenimiento", "Gestión Ambiental"],
+          areas:       ["Technology (IT)", "Maintenance", "Environmental Management"],
           imagenes:    [],
           imagen: "", video: "", captura: "", comentarios: ""
         },
         procesos: [
         {
-          nombre: "T.I", icono: "ti",
-          descripcion: "Gestión de los servicios de tecnología: mesa de servicio para el soporte del día a día y el ciclo de las solicitudes de desarrollo de software.",
-          beneficios: ["Solicitudes de soporte trazables y calificadas", "Desarrollos con flujo formal hasta producción", "Planeación visible de las solicitudes"],
-          areas: ["Tecnología (T.I.)"],
+          nombre: "IT", icono: "ti",
+          descripcion: "Management of technology services: a service desk for day-to-day support and the life cycle of software development requests.",
+          beneficios: ["Traceable and rated support requests", "Developments with a formal flow through to production", "Visible planning of the requests"],
+          areas: ["Technology (IT)"],
           imagenes: [
             { archivo: "medios/imagenes/sigma-ti-01-mesa-servicio.png",
-              titulo:  "Mesa de servicio · ticket con su tipo, prioridad, asignación, tiempos de atención y evidencia" },
+              titulo:  "Service desk · ticket with its type, priority, assignment, response times and evidence" },
             { archivo: "medios/imagenes/sigma-ti-02-solicitud-desarrollo.png",
-              titulo:  "Solicitud de desarrollo · flujo desde la creación hasta producción: revisión técnica, definición ISO, desarrollo, pruebas UAT y despliegue" },
+              titulo:  "Development request · flow from creation to production: technical review, ISO definition, development, UAT testing and deployment" },
             { archivo: "medios/imagenes/sigma-ti-03-cronograma-desarrollo.png",
-              titulo:  "Cronograma de desarrollo · backlog y planeación semanal de las solicitudes por área y por fase" }
+              titulo:  "Development schedule · backlog and weekly planning of the requests by area and by phase" }
           ],
           imagen: "", video: "", captura: "", comentarios: ""
         },
         {
-          nombre: "Mantenimiento", icono: "mantenimiento",
-          descripcion: "Gestión del mantenimiento de máquinas e instalaciones para asegurar disponibilidad y confiabilidad, con mesa de servicio para maquinaria y para lo locativo.",
-          beneficios: ["Casos por activo, con causa raíz y evidencia", "Historial de intervenciones por equipo", "Menor tiempo de parada no planeada"],
-          areas: ["Mantenimiento", "Operaciones"],
+          nombre: "Maintenance", icono: "mantenimiento",
+          descripcion: "Management of the maintenance of machines and facilities to ensure availability and reliability, with a service desk for machinery and for the premises.",
+          beneficios: ["Cases per asset, with root cause and evidence", "History of interventions per piece of equipment", "Less unplanned downtime"],
+          areas: ["Maintenance", "Operations"],
           imagenes: [
             { archivo: "medios/imagenes/sigma-mantenimiento-01-maquinaria.png",
-              titulo:  "Mantenimiento de maquinaria · caso sobre un activo con sus hallazgos, prioridad, tiempos de atención y evidencia" },
+              titulo:  "Machinery maintenance · case on an asset with its findings, priority, response times and evidence" },
             { archivo: "medios/imagenes/sigma-mantenimiento-02-locativo.png",
-              titulo:  "Mantenimiento locativo · solicitudes sobre las instalaciones, con su seguimiento y la evidencia de la intervención" }
+              titulo:  "Premises maintenance · requests on the facilities, with their follow-up and the evidence of the intervention" }
           ],
           imagen: "", video: "", captura: "", comentarios: ""
         },
         {
-          nombre: "Gestión Ambiental", icono: "ambiental",
-          descripcion: "Gestión del cumplimiento ambiental y del manejo responsable de residuos de la operación.",
-          beneficios: ["Seguimiento a indicadores ambientales", "Control del manejo de residuos", "Soporte al cumplimiento normativo"],
-          areas: ["Gestión Ambiental", "Operaciones"],
+          nombre: "Environmental Management", icono: "ambiental",
+          descripcion: "Management of environmental compliance and of the responsible handling of the waste from the operation.",
+          beneficios: ["Follow-up on environmental indicators", "Control of waste handling", "Support for regulatory compliance"],
+          areas: ["Environmental Management", "Operations"],
           imagenes: [],
           imagen: "", video: "", captura: "", comentarios: ""
         }
@@ -553,52 +554,52 @@ window.ESM_CONTENIDO = {
       {
         tipo: "grupo",
         transversal: {
-          nombre:      "Administración",
+          nombre:      "Administration",
           icono:       "rrhh",
           color:       "#8FA6BA",
           colorSuave:  "#CBD6DF",
-          descripcion: "Frente que agrupa la gestión del personal y del cumplimiento: RRHH, SST y el Sistema de Gestión de Calidad.",
+          descripcion: "Front that brings together the management of people and of compliance: HR, HSE and the Quality Management System.",
           beneficios: [
-            "Información del personal y su desempeño en un solo lugar",
-            "Entregas de dotación y EPP controladas",
-            "Soporte documental para auditorías y certificaciones"
+            "Employee information and performance in a single place",
+            "Workwear and PPE issues under control",
+            "Documentary support for audits and certifications"
           ],
-          areas:       ["Recursos Humanos", "SST", "Calidad"],
+          areas:       ["Human Resources", "HSE", "Quality"],
           imagenes:    [],
           imagen: "", video: "", captura: "", comentarios: ""
         },
         procesos: [
         {
-          nombre: "RRHH", icono: "rrhh",
-          descripcion: "Gestión del talento humano: hoja de vida del empleado, documentos, dotación y evaluación de desempeño.",
-          beneficios: ["Información del personal centralizada", "Desempeño evaluado y con plan de acción", "Trazabilidad de los procesos de talento"],
-          areas: ["Recursos Humanos"],
+          nombre: "HR", icono: "rrhh",
+          descripcion: "Management of human talent: employee record, documents, workwear and performance appraisal.",
+          beneficios: ["Centralized employee information", "Performance appraised and with an action plan", "Traceability of the talent processes"],
+          areas: ["Human Resources"],
           imagenes: [
             { archivo: "medios/imagenes/sigma-rh-01-ficha-empleado.png",
-              titulo:  "Ficha del empleado · información general, familiar, documentos y parámetros de dotación" },
+              titulo:  "Employee record · general and family information, documents and workwear parameters" },
             { archivo: "medios/imagenes/sigma-rh-02-desempeno.png",
-              titulo:  "Desempeño · evaluación por colaborador con autoevaluación, líder y pares, y su plan de acción" }
+              titulo:  "Performance · appraisal per employee with self-assessment, leader and peers, and its action plan" }
           ],
           imagen: "", video: "", captura: "", comentarios: ""
         },
         {
-          nombre: "SST", icono: "sst",
-          descripcion: "Gestión de la seguridad y salud en el trabajo, con el control de la entrega de elementos de protección personal y de dotación por empleado.",
-          beneficios: ["Entregas de EPP registradas por empleado", "Control de pérdidas y reposiciones", "Soporte al cumplimiento normativo"],
-          areas: ["SST", "Recursos Humanos"],
+          nombre: "HSE", icono: "sst",
+          descripcion: "Management of occupational health and safety, with control over the issue of personal protective equipment and workwear per employee.",
+          beneficios: ["PPE issues recorded per employee", "Control of losses and replacements", "Support for regulatory compliance"],
+          areas: ["HSE", "Human Resources"],
           imagenes: [
             { archivo: "medios/imagenes/sigma-sst-01-entrega-epp.png",
-              titulo:  "Entrega de elementos de protección personal · total entregado, dotación, pérdidas y reposiciones por empleado y área" },
+              titulo:  "Personal protective equipment issue · total issued, workwear, losses and replacements per employee and area" },
             { archivo: "medios/imagenes/sigma-sst-02-entrega-dotacion.png",
-              titulo:  "Entrega de dotación · prendas entregadas por empleado, con cantidad y responsable de la entrega" }
+              titulo:  "Workwear issue · garments issued per employee, with quantity and the person responsible for the issue" }
           ],
           imagen: "", video: "", captura: "", comentarios: ""
         },
         {
-          nombre: "SGC", icono: "calidad",
-          descripcion: "Sistema de Gestión de Calidad: documentación de los procesos, control de los documentos y registros que soportan las auditorías y las certificaciones de la compañía.",
-          beneficios: ["Documentación de procesos controlada y vigente", "Registros disponibles para auditoría", "Soporte a las certificaciones de la compañía"],
-          areas: ["Calidad"],
+          nombre: "QMS", icono: "calidad",
+          descripcion: "Quality Management System: process documentation, control of the documents and records that support the company audits and certifications.",
+          beneficios: ["Process documentation controlled and current", "Records available for audit", "Support for the company certifications"],
+          areas: ["Quality"],
           imagenes: [],
           imagen: "", video: "", captura: "", comentarios: ""
         }
@@ -622,18 +623,18 @@ window.ESM_CONTENIDO = {
          filas desiguales: arriba dos cajas de 3 columnas cada una y abajo
          tres cajas de 2. El reparto lo define el "ancho" de cada proceso. */
       columnas:    6,
-      categoria:   "ERP corporativo",
-      resumen:     "Núcleo administrativo y financiero: abastecimiento, almacén, facturación, nómina y contabilidad.",
+      categoria:   "Corporate ERP",
+      resumen:     "Administrative and financial core: sourcing, warehouse, billing, payroll and accounting.",
       /* Orden de la cadena: Compras · Almacén / Facturación · Nómina · Contabilidad */
-      descripcion: "SAP es el ERP corporativo del grupo. Es el sistema transaccional donde se registra y controla la operación administrativa y financiera, y constituye la fuente oficial de la información contable y del inventario valorizado de la compañía.",
+      descripcion: "SAP is the corporate ERP of the group. It is the transactional system where the administrative and financial operation is recorded and controlled, and it is the official source of the company accounting information and valued inventory.",
       valor: [
-        "Información financiera única y auditable",
-        "Registro transaccional de la operación administrativa",
-        "Soporte al control interno y a la auditoría"
+        "Single, auditable financial information",
+        "Transactional record of the administrative operation",
+        "Support for internal control and audit"
       ],
       indicadores: [
-        { valor: "5",    etiqueta: "Procesos soportados" },
-        { valor: "24/7", etiqueta: "Disponibilidad" }
+        { valor: "5",    etiqueta: "Processes supported" },
+        { valor: "24/7", etiqueta: "Availability" }
       ],
       destacado:   null,
       transversal: null,
@@ -641,63 +642,63 @@ window.ESM_CONTENIDO = {
 
         /* --- Fila superior: dos cajas anchas (ancho 3 de 6 columnas) --- */
         {
-          nombre: "Compras", icono: "compras", ancho: 3,
-          descripcion: "Registro de las órdenes de compra y de la relación con proveedores, con los controles de aprobación definidos por la compañía.",
-          beneficios: ["Flujo de aprobación formal y trazable", "Historial de proveedores y precios", "Soporte a controles internos y auditoría"],
-          areas: ["Compras y Almacén", "Financiero"],
+          nombre: "Purchasing", icono: "compras", ancho: 3,
+          descripcion: "Recording of purchase orders and of the relationship with suppliers, with the approval controls defined by the company.",
+          beneficios: ["Formal and traceable approval flow", "History of suppliers and prices", "Support for internal controls and audit"],
+          areas: ["Purchasing & Warehouse", "Finance"],
           imagenes: [
             { archivo: "medios/imagenes/sap-compras-01-orden-materiales.png",
-              titulo:  "Orden de materiales · proveedor, materiales, cantidades, precio y condiciones de entrega" }
+              titulo:  "Material order · supplier, materials, quantities, price and delivery terms" }
           ],
           imagen: "", video: "", captura: "", comentarios: ""
         },
         {
-          nombre: "Almacén", icono: "almacen", ancho: 3,
-          descripcion: "Control de las existencias y de los movimientos de almacén, con la valorización del inventario de materia prima y producto terminado.",
-          beneficios: ["Inventario valorizado en el ERP", "Movimientos de almacén registrados", "Base para el costeo de la operación"],
-          areas: ["Compras y Almacén", "Financiero"],
+          nombre: "Warehouse", icono: "almacen", ancho: 3,
+          descripcion: "Control of stock and of warehouse movements, with the valuation of the raw material and finished goods inventory.",
+          beneficios: ["Inventory valued in the ERP", "Warehouse movements recorded", "Basis for costing the operation"],
+          areas: ["Purchasing & Warehouse", "Finance"],
           imagenes: [
             { archivo: "medios/imagenes/sap-almacen-01-menu-transacciones.png",
-              titulo:  "Transacciones de almacén · movimiento de mercancías, resumen y listado de stocks, documentos de material y reservas" },
+              titulo:  "Warehouse transactions · goods movement, stock overview and list, material documents and reservations" },
             { archivo: "medios/imagenes/sap-almacen-02-stocks-por-material.png",
-              titulo:  "Stocks en almacén por material · consulta por material, centro, almacén y lote, con stocks especiales" },
+              titulo:  "Warehouse stock by material · query by material, plant, storage location and batch, with special stock" },
             { archivo: "medios/imagenes/sap-almacen-03-entrada-mercancias.png",
-              titulo:  "Entrada de mercancías · recepción contra el pedido, con traspasos, devoluciones y liberación de stock bloqueado" }
+              titulo:  "Goods receipt · receipt against the order, with transfers, returns and release of blocked stock" }
           ],
           imagen: "", video: "", captura: "", comentarios: ""
         },
 
         /* --- Fila inferior: tres cajas (ancho 2 de 6 columnas) --- */
         {
-          nombre: "Facturación", icono: "facturacion", ancho: 2,
-          descripcion: "Emisión de la facturación oficial y su integración con cartera, cumpliendo los requisitos de facturación electrónica.",
-          beneficios: ["Facturación electrónica conforme a norma", "Integración directa con cartera", "Ciclo de cobro más corto"],
-          areas: ["Financiero", "Comercial"],
+          nombre: "Billing", icono: "facturacion", ancho: 2,
+          descripcion: "Issuing of the official invoicing and its integration with receivables, meeting the electronic invoicing requirements.",
+          beneficios: ["Electronic invoicing compliant with regulation", "Direct integration with receivables", "Shorter collection cycle"],
+          areas: ["Finance", "Sales"],
           imagenes: [
             { archivo: "medios/imagenes/sap-facturacion-01-factura-nacional.jpg",
-              titulo:  "Factura de venta · posiciones, cantidad facturada, valor neto, material e impuestos, con el pagador y la fecha" }
+              titulo:  "Sales invoice · line items, quantity invoiced, net value, material and taxes, with the payer and the date" }
           ],
           imagen: "", video: "", captura: "", comentarios: ""
         },
         {
-          nombre: "Nómina", icono: "rrhh", ancho: 2,
-          descripcion: "Administración de personal y liquidación de nómina sobre la estructura organizacional de la compañía, con su correspondiente registro contable.",
-          beneficios: ["Nómina liquidada y contabilizada", "Estructura organizacional y posiciones definidas", "Soporte al cumplimiento legal"],
-          areas: ["Recursos Humanos", "Financiero"],
+          nombre: "Payroll", icono: "rrhh", ancho: 2,
+          descripcion: "Personnel administration and payroll settlement on the company organizational structure, with its corresponding accounting entry.",
+          beneficios: ["Payroll settled and posted to accounting", "Organizational structure and positions defined", "Support for legal compliance"],
+          areas: ["Human Resources", "Finance"],
           imagenes: [
             { archivo: "medios/imagenes/sap-nomina-01-estructura-organizacional.png",
-              titulo:  "Organización y ocupación · estructura de la compañía por unidad organizativa: Sales, Project Management, Engineering, Design, R&D, Operations, Infraestructure, Administration y Warehouse" }
+              titulo:  "Organization and staffing · company structure by organizational unit: Sales, Project Management, Engineering, Design, R&D, Operations, Infrastructure, Administration and Warehouse" }
           ],
           imagen: "", video: "", captura: "", comentarios: ""
         },
         {
-          nombre: "Contabilidad", icono: "contabilidad", ancho: 2,
-          descripcion: "Registro contable de la operación, cierre de período y generación de la información financiera oficial de la compañía.",
-          beneficios: ["Cierres contables confiables", "Información financiera auditable", "Base para el control de costos"],
-          areas: ["Financiero"],
+          nombre: "Accounting", icono: "contabilidad", ancho: 2,
+          descripcion: "Accounting entry of the operation, period close and generation of the official financial information of the company.",
+          beneficios: ["Reliable accounting closes", "Auditable financial information", "Basis for cost control"],
+          areas: ["Finance"],
           imagenes: [
             { archivo: "medios/imagenes/sap-contabilidad-01-documento-factura.png",
-              titulo:  "Documento de factura · registro contable de la factura del proveedor con impuestos, retención, condiciones de pago y su referencia al pedido de compra" }
+              titulo:  "Invoice document · accounting entry of the supplier invoice with taxes, withholding, payment terms and its reference to the purchase order" }
           ],
           imagen: "", video: "", captura: "", comentarios: ""
         }
@@ -714,17 +715,19 @@ window.ESM_CONTENIDO = {
      6. CIERRE
      ---------------------------------------------------------------------- */
   cierre: {
-    activa:   true,
-    etiqueta: "Conclusión",
-    titulo:   "Un ecosistema conectado, una operación más eficiente",
-    mensaje:  "La integración de los sistemas de información no es un proyecto de tecnología: es la forma en que ES-METALS asegura trazabilidad, control y velocidad en toda su cadena de valor.",
+    /* Lámina de cierre RETIRADA de la presentación.
+       Ponga  activa: true  si desea volver a mostrarla. */
+    activa:   false,
+    etiqueta: "Conclusion",
+    titulo:   "A connected ecosystem, a more efficient operation",
+    mensaje:  "Integrating the information systems is not a technology project: it is how ES-METALS secures traceability, control and speed across its entire value chain.",
     puntos: [
-      { titulo: "Integración",   texto: "Los sistemas dejan de ser islas y comparten una misma información." },
-      { titulo: "Trazabilidad",  texto: "Cada proyecto puede seguirse desde el mercado hasta la entrega." },
-      { titulo: "Eficiencia",    texto: "Menos reprocesos, menos correos y decisiones más rápidas." },
-      { titulo: "Escalabilidad", texto: "La plataforma soporta el crecimiento de la operación sin rehacerla." }
+      { titulo: "Integration",   texto: "The systems stop being islands and share one and the same information." },
+      { titulo: "Traceability",  texto: "Every project can be followed from the market through to delivery." },
+      { titulo: "Efficiency",    texto: "Less rework, fewer emails and faster decisions." },
+      { titulo: "Scalability",   texto: "The platform supports the growth of the operation without being rebuilt." }
     ],
-    pie: "Gracias  ·  ES-METALS S.A.S.  ·  Grupo Tecnoglass"
+    pie: "Thank you  ·  ES-METALS S.A.S.  ·  Tecnoglass Group"
   }
 
 };

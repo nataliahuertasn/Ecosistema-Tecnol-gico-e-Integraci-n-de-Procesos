@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ES-METALS · Ecosistema Tecnológico</title>
-  <meta name="description" content="Cadena de valor de ES-METALS soportada por sistemas de información.">
+  <title>ES-METALS · Technology Ecosystem</title>
+  <meta name="description" content="ES-METALS value chain supported by information systems.">
   <link rel="icon" href="assets/img/logo-esmetals-vertical.png">
 
   <!-- El diseño, el motor y el contenido se piden siempre frescos, para que un
@@ -32,18 +32,18 @@
 
   <!-- Barra superior -->
   <header class="barra" id="barra">
-    <a class="barra-marca" href="#" id="ir-inicio" title="Volver a la portada">
+    <a class="barra-marca" href="#" id="ir-inicio" title="Back to the cover">
       <img id="barra-logo" src="assets/img/logo-esmetals.png" alt="ES-METALS">
       <span class="barra-grupo" id="barra-grupo"></span>
     </a>
 
-    <nav class="barra-nav" id="barra-nav" aria-label="Secciones"></nav>
+    <nav class="barra-nav" id="barra-nav" aria-label="Sections"></nav>
 
     <div class="barra-acciones">
-      <button class="boton-icono" id="btn-presentacion" title="Modo presentación (P)" aria-label="Modo presentación">
+      <button class="boton-icono" id="btn-presentacion" title="Presentation mode (P)" aria-label="Presentation mode">
         <svg viewBox="0 0 24 24"><path d="M3 5h18v11H3z"/><path d="M12 16v3"/><path d="M8.5 21h7"/></svg>
       </button>
-      <button class="boton-icono" id="btn-pantalla" title="Pantalla completa (F)" aria-label="Pantalla completa">
+      <button class="boton-icono" id="btn-pantalla" title="Full screen (F)" aria-label="Full screen">
         <svg viewBox="0 0 24 24"><path d="M4 9V4h5"/><path d="M20 9V4h-5"/><path d="M4 15v5h5"/><path d="M20 15v5h-5"/></svg>
       </button>
     </div>
@@ -53,13 +53,13 @@
   <main class="escenario" id="escenario"></main>
 
   <!-- Controles de navegación -->
-  <nav class="controles" id="controles" aria-label="Navegación de la presentación">
-    <button class="boton-nav" id="btn-anterior" aria-label="Anterior">
+  <nav class="controles" id="controles" aria-label="Presentation navigation">
+    <button class="boton-nav" id="btn-anterior" aria-label="Previous">
       <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
     </button>
     <div class="controles-puntos" id="controles-puntos"></div>
     <span class="controles-contador" id="controles-contador"></span>
-    <button class="boton-nav" id="btn-siguiente" aria-label="Siguiente">
+    <button class="boton-nav" id="btn-siguiente" aria-label="Next">
       <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
     </button>
   </nav>
@@ -67,14 +67,14 @@
   <!-- Panel lateral de detalle -->
   <div class="velo" id="velo"></div>
   <aside class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="panel-titulo" aria-hidden="true">
-    <button class="panel-cerrar" id="panel-cerrar" aria-label="Cerrar">
+    <button class="panel-cerrar" id="panel-cerrar" aria-label="Close">
       <svg viewBox="0 0 24 24"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg>
     </button>
     <div class="panel-cuerpo" id="panel-cuerpo"></div>
   </aside>
 
   <!-- Aviso si el contenido no carga -->
-  <noscript><p style="color:#fff;padding:40px">Esta presentación requiere JavaScript habilitado.</p></noscript>
+  <noscript><p style="color:#fff;padding:40px">This presentation requires JavaScript to be enabled.</p></noscript>
 
   <script>
     /* Se escriben en este orden, igual que etiquetas normales, de modo que
