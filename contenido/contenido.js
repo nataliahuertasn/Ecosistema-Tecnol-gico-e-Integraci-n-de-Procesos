@@ -233,11 +233,7 @@ window.ESM_CONTENIDO = {
           "Orderly handover from the sale to the project"
         ],
         areas:       ["Sales", "Project Management"],
-
-        /* Galería: se muestran en este mismo orden dentro del panel de detalle.
-           Para agregar otra, copie una línea y cambie el archivo y el título. */
-        imagenes: [],
-
+        imagenes:    [],
         imagen:      "",
         video:       "",
         captura:     "",
@@ -246,29 +242,23 @@ window.ESM_CONTENIDO = {
 
       {
           tipo: "grupo",
-          /* detalleConsolidado: todo el contenido del frente (fotos, videos y
-             comentarios) se carga en la barra "transversal" de abajo.
-             El detalle se abre al pasar el cursor sobre esa barra e incluye
-             además la descripción de cada proceso que cubre. */
+          /* La barra transversal cubre las seis cajas de abajo, en una sola
+             fila: por eso el grupo lleva columnas: 6. */
+          columnas: 6,
           detalleConsolidado: true,
 
           transversal: {
             nombre:      "Project Management",
             icono:       "proyectos",
-            descripcion: "Cross-functional front covering Engineering, Design and Purchasing. It plans, controls and tracks the project throughout its life cycle —milestones, tasks and progress— and integrates sourcing, billing and the financial tracking of each project.",
+            descripcion: "Cross-functional front covering Engineering, Design, Purchasing, Warehouse, Operations and Logistics. It plans, controls and tracks the project throughout its life cycle —milestones, tasks and progress— and connects engineering with sourcing, manufacturing and shipment, together with the billing and financial tracking of each project.",
             beneficios: [
               "Unified project planning and control",
               "Tracking of milestones and client commitments",
-              "Sourcing tied to project progress",
+              "Sourcing and manufacturing tied to project progress",
               "Early alerts on schedule deviations"
             ],
-            areas:       ["Project Management", "Engineering & Design", "Purchasing"],
-
-            /* Imágenes de todo el frente, en orden de presentación.
-               Para agregar otra: copie un bloque { archivo, titulo } y ponga
-               una coma al final del anterior. */
-            imagenes: [],
-
+            areas:       ["Project Management", "Engineering & Design", "Purchasing & Warehouse", "Operations"],
+            imagenes:    [],
             imagen:      "",
             video:       "",
             captura:     "",
@@ -319,35 +309,7 @@ window.ESM_CONTENIDO = {
               video:       "",
               captura:     "",
               comentarios: ""
-            }
-          ]
-        },
-
-      {
-          tipo: "grupo",
-          detalleConsolidado: true,
-
-          transversal: {
-            nombre:      "Operations",
-            icono:       "produccion",
-            descripcion: "Cross-functional front covering Warehouse, Manufacturing and Logistics. It executes the project from material reservation to shipment: the warehouse controls stock and reservations, the Work Orders store the drawings and manufacturing details of each part, and the container calendar organizes the shipments.",
-            beneficios: [
-              "Material stock and reservations under control",
-              "Drawings and manufacturing details stored in the system",
-              "Work Order status in real time",
-              "Shipments organized in a container calendar"
-            ],
-            areas:       ["Operations", "Purchasing & Warehouse", "Installation", "Maintenance"],
-
-            /* Imágenes de todo el frente, en orden de presentación. */
-            imagenes: [],
-
-            imagen:      "",
-            video:       "",
-            captura:     "",
-            comentarios: ""
-          },
-          procesos: [
+            },
             {
               nombre:      "Warehouse",
               icono:       "inventario",
@@ -364,11 +326,12 @@ window.ESM_CONTENIDO = {
               comentarios: ""
             },
             {
-              nombre:      "Manufacturing",
+              nombre:      "Operations",
               icono:       "produccion",
-              descripcion: "Scheduling and execution of manufacturing from the Work Orders, which store the drawings and manufacturing details of each part. Every project reports its progress against the plan.",
+              descripcion: "Scheduling and execution of manufacturing from the Work Orders, which store the drawings and manufacturing details of each part. Every project reports its progress against the plan, process by process.",
               beneficios: [
                 "Drawings and manufacturing details in the same system",
+                "Work Order status in real time",
                 "Actual production progress per project",
                 "Early detection of bottlenecks"
               ],
@@ -393,9 +356,8 @@ window.ESM_CONTENIDO = {
               captura:     "",
               comentarios: ""
             }
-          ],
-
-      },
+          ]
+        },
 
       {
         tipo:        "caja",
