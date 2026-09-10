@@ -425,13 +425,20 @@ img{ max-width:100%; }
 
 /* Visor a pantalla completa para las capturas */
 .visor{ position:fixed; inset:0; z-index:100; display:grid; place-items:center;
-  padding:clamp(24px,4vw,64px); background:rgba(10,20,28,.9); cursor:zoom-out;
+  padding:12px; background:rgba(10,20,28,.94); cursor:zoom-out;
   opacity:0; visibility:hidden; transition:opacity var(--t-medio), visibility var(--t-medio); }
 .visor.abierto{ opacity:1; visibility:visible; }
 .visor figure{ margin:0; max-width:100%; max-height:100%; display:flex;
-  flex-direction:column; gap:14px; align-items:center; cursor:default; }
-.visor img{ max-width:100%; max-height:78vh; object-fit:contain; display:block;
-  border-radius:var(--r-m); background:#fff; box-shadow:0 40px 90px -40px rgba(0,0,0,.8); }
+  flex-direction:column; gap:12px; align-items:center; cursor:default; }
+.visor img{ max-width:100%; max-height:calc(100vh - 96px); object-fit:contain; display:block;
+  background:#fff; box-shadow:0 40px 90px -40px rgba(0,0,0,.8); cursor:zoom-in; }
+
+/* Ampliada al tamaño real de la captura, con desplazamiento libre */
+.visor.zoom{ padding:0; place-items:start; overflow:auto; cursor:default; }
+.visor.zoom figure{ max-width:none; max-height:none; display:block; }
+.visor.zoom img{ max-width:none; max-height:none; width:auto; cursor:zoom-out; box-shadow:none; }
+.visor.zoom figcaption{ display:none; }
+.visor.zoom .visor-puntos{ display:none; }
 .visor figcaption{ color:rgba(255,255,255,.82); font-size:12px; letter-spacing:.14em;
   text-transform:uppercase; text-align:center;
   display:flex; align-items:center; gap:16px; justify-content:center; flex-wrap:wrap; }
@@ -551,35 +558,35 @@ body.con-recorrido .controles{ opacity:0; pointer-events:none; }
 .recorrido-cerrar:hover{ color:#fff; background:var(--acento); border-color:var(--acento); }
 .recorrido-cerrar:focus-visible{ outline:2px solid var(--acento); outline-offset:3px; }
 
-/* Las láminas ocupan casi toda la pantalla, sin deformar la captura */
+/* Las láminas ocupan la pantalla completa, sin deformar la captura */
 .recorrido-cuerpo{
   flex:1 1 auto; min-height:0; overflow-y:auto; overflow-x:hidden;
   scroll-snap-type:y proximity; scroll-behavior:smooth;
-  padding:clamp(10px,1.6vh,20px) clamp(10px,1.6vw,26px);
+  padding:0;
   display:flex; flex-direction:column; align-items:center;
-  gap:clamp(10px,1.6vh,20px);
+  gap:8px;
   scrollbar-width:thin; scrollbar-color:rgba(22,35,45,.22) transparent;
 }
-.recorrido-cuerpo::-webkit-scrollbar{ width:10px; }
+.recorrido-cuerpo::-webkit-scrollbar{ width:9px; }
 .recorrido-cuerpo::-webkit-scrollbar-thumb{ background:rgba(22,35,45,.18); border-radius:5px; }
 
 /* Cada lámina reserva su pantalla aunque la imagen aún no haya cargado:
    sin esa altura no habría scroll y la carga diferida nunca se dispararía. */
 .recorrido-lamina{
   margin:0; width:100%; flex:0 0 auto;
-  min-height:calc(100vh - 132px);
+  min-height:calc(100vh - 60px);
   display:flex; align-items:center; justify-content:center;
-  scroll-snap-align:center;
+  scroll-snap-align:center; cursor:zoom-in;
 }
 .recorrido-lamina img,
 .recorrido-lamina video{
   display:block; max-width:100%; height:auto;
-  max-height:calc(100vh - 118px);      /* barra + respiro */
-  width:auto; object-fit:contain;
-  border-radius:var(--r-m); background:#fff;
-  border:1px solid rgba(22,35,45,.10);
-  box-shadow:0 18px 44px -24px rgba(22,35,45,.45);
+  max-height:calc(100vh - 60px);
+  width:auto; object-fit:contain; background:#fff;
+  box-shadow:0 10px 30px -20px rgba(22,35,45,.5);
+  transition:box-shadow var(--t-rapido);
 }
+.recorrido-lamina:hover img{ box-shadow:0 14px 40px -18px rgba(22,35,45,.6); }
 .recorrido-vacio{
   margin:auto; color:var(--tinta-tenue); font-size:13px;
   letter-spacing:.05em; text-align:center;

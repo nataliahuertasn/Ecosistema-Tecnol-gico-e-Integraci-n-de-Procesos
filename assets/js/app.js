@@ -783,6 +783,18 @@
 
   recorrido.querySelector('.recorrido-cerrar').addEventListener('click', cerrarRecorrido);
 
+  /* Clic en una pantalla del recorrido: la abre a pantalla completa y desde
+     ahí se pasa de una a otra como en una presentación (y se puede ampliar
+     al tamaño real de la captura). */
+  recCuerpo.addEventListener('click', function (ev) {
+    var img = ev.target.closest('.recorrido-lamina img');
+    if (!img) return;
+    var todas = Array.prototype.slice.call(recCuerpo.querySelectorAll('.recorrido-lamina img'));
+    abrirVisor(todas.map(function (x) {
+      return { src: x.getAttribute('src'), titulo: '' };
+    }), todas.indexOf(img));
+  });
+
   /* Punto de entrada: enfoca el sistema en el mapa y abre su recorrido */
   function entrarASoftware(sw) {
     if (!sw) return;
@@ -831,6 +843,20 @@
     });
   }
 
+  /* Zoom: alterna entre ajustar a la pantalla y el tamaño real de la captura */
+  function alternarZoom(forzar) {
+    var activo = typeof forzar === 'boolean' ? forzar : !visor.classList.contains('zoom');
+    visor.classList.toggle('zoom', activo);
+    if (activo) {
+      var img = visor.querySelector('img');
+      // centra la vista al ampliar
+      visor.scrollLeft = Math.max(0, (img.naturalWidth  - visor.clientWidth)  / 2);
+      visor.scrollTop  = Math.max(0, (img.naturalHeight - visor.clientHeight) / 2);
+    } else {
+      visor.scrollTo(0, 0);
+    }
+  }
+
   function pintarVisor() {
     var m = visorLista[visorIndice];
     if (!m) return;
@@ -857,13 +883,16 @@
   function moverVisor(delta) {
     if (!visorLista.length) return;
     visorIndice = (visorIndice + delta + visorLista.length) % visorLista.length;
+    alternarZoom(false);
     pintarVisor();
   }
 
-  function abrirVisor(indice) {
-    visorLista = leerGaleria();
-    visorIndice = Math.max(0, indice);
+  /* lista: [{src, titulo}] · indice: por cuál empieza */
+  function abrirVisor(lista, indice) {
+    visorLista = lista || [];
+    visorIndice = Math.max(0, indice || 0);
     if (!visorLista.length) return;
+    alternarZoom(false);
     pintarVisor();
     visor.classList.add('abierto');
     visor.setAttribute('aria-hidden', 'false');
@@ -872,16 +901,18 @@
   function cerrarVisor() {
     visor.classList.remove('abierto');
     visor.setAttribute('aria-hidden', 'true');
+    alternarZoom(false);
     visor.querySelector('img').removeAttribute('src');
   }
 
   visor.addEventListener('click', function (ev) {
     var punto = ev.target.closest('.visor-punto');
-    if (punto) { visorIndice = +punto.dataset.i; pintarVisor(); return; }
+    if (punto) { visorIndice = +punto.dataset.i; alternarZoom(false); pintarVisor(); return; }
     if (ev.target.closest('.visor-nav--ant')) { moverVisor(-1); return; }
     if (ev.target.closest('.visor-nav--sig')) { moverVisor(1);  return; }
     if (ev.target.closest('.visor-cerrar'))   { cerrarVisor();  return; }
-    if (ev.target.closest('figure'))          { return; }  // clic sobre la imagen: no cierra
+    if (ev.target.tagName === 'IMG')          { alternarZoom(); return; }  // ampliar / ajustar
+    if (ev.target.closest('figure'))          { return; }
     cerrarVisor();
   });
 
@@ -889,7 +920,7 @@
     var img = ev.target.closest('img.ampliable');
     if (!img) return;
     var todas = Array.prototype.slice.call(cuerpo.querySelectorAll('img.ampliable'));
-    abrirVisor(todas.indexOf(img));
+    abrirVisor(leerGaleria(), todas.indexOf(img));
   });
 
   /* ------------------------------------------------------ INTERACCIONES --- */
@@ -991,10 +1022,24 @@
   /* ------------------------------------------------------------- TECLADO */
   document.addEventListener('keydown', function (ev) {
     if (ev.key === 'Escape') {
-      if (recorrido.classList.contains('abierto')) { cerrarRecorrido(); return; }
+      // el visor está por encima del recorrido: se cierra primero
       if (visor.classList.contains('abierto')) { cerrarVisor(); return; }
+      if (recorrido.classList.contains('abierto')) { cerrarRecorrido(); return; }
       if (panel.classList.contains('abierto')) { cerrarPanel(); return; }
       if (document.body.classList.contains('presentacion')) { modoPresentacion(false); return; }
+    }
+
+    // Con el visor abierto, las flechas pasan de una pantalla a otra
+    if (visor.classList.contains('abierto')) {
+      switch (ev.key) {
+        case 'ArrowRight': case 'ArrowDown': case 'PageDown': case ' ':
+          ev.preventDefault(); moverVisor(1); break;
+        case 'ArrowLeft': case 'ArrowUp': case 'PageUp':
+          ev.preventDefault(); moverVisor(-1); break;
+        case 'Enter': case 'z': case 'Z':
+          ev.preventDefault(); alternarZoom(); break;
+      }
+      return;
     }
 
     // Con el recorrido abierto, el teclado recorre sus pantallas
@@ -1012,12 +1057,6 @@
       return;
     }
 
-    // Con el visor abierto, las flechas recorren las imágenes de la sección
-    if (visor.classList.contains('abierto')) {
-      if (ev.key === 'ArrowRight' || ev.key === ' ') { ev.preventDefault(); moverVisor(1);  }
-      if (ev.key === 'ArrowLeft')                    { ev.preventDefault(); moverVisor(-1); }
-      return;
-    }
     if (panel.classList.contains('abierto')) return;
 
     switch (ev.key) {
