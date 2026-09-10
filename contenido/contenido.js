@@ -26,7 +26,7 @@ window.ESM_CONTENIDO = {
      conservando el mismo nombre de archivo. Obliga a los navegadores a
      descargar la versión nueva en vez de mostrar la que tenían guardada.
      ---------------------------------------------------------------------- */
-  version: "2026-09-10d",
+  version: "2026-09-10e",
 
   /* ----------------------------------------------------------------------
      1. MARCA
@@ -440,6 +440,8 @@ window.ESM_CONTENIDO = {
          Para cambiar el orden, mueva las líneas de esta lista.
          ------------------------------------------------------------------ */
       recorrido: [
+        /* Apertura: usuarios del sistema */
+        { archivo: "medios/imagenes/sigma-00-usuarios.png" },
         /* Investigación & Desarrollo */
         { archivo: "medios/imagenes/sigma-id-01-matrices-extrusion.png" },
         { archivo: "medios/imagenes/sigma-id-02-fijaciones.png" },
